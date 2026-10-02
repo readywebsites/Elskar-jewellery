@@ -1,0 +1,154 @@
+{% load static %}
+<!-- ==========================================================================
+     AZURE JEWELS - LUXURY NAVIGATION DRAWER
+     Single Source of Truth for Desktop & Mobile Hamburger Navigation
+     ========================================================================== -->
+<div class="azure-mobile-backdrop" id="azureMobileBackdrop" aria-hidden="true"></div>
+
+<aside class="azure-mobile-drawer" id="azureMobileDrawer" aria-label="Navigation Drawer" aria-hidden="true">
+  <!-- Drawer Header -->
+  <div class="azure-drawer-header">
+    <div class="azure-drawer-brand">
+      <img src="{% static 'assets/images/logo-clean.webp' %}" alt="Azure Jewels" class="azure-drawer-logo">
+    </div>
+    <button class="azure-drawer-close azure-mobile-close" id="azureMobileClose" aria-label="Close menu">&times;</button>
+  </div>
+
+  <!-- In-Drawer Quick Search -->
+  <div class="azure-drawer-search-box">
+    <form action="{% url 'shop' %}" method="get" class="azure-drawer-search-form">
+      <svg class="azure-drawer-search-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.8" fill="none">
+        <circle cx="11" cy="11" r="7.5"></circle>
+        <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+      </svg>
+      <input type="text" name="q" class="azure-drawer-search-input" placeholder="Search jewellery, categories..." autocomplete="off">
+    </form>
+  </div>
+
+  <!-- Navigation Categories (Accordion & Direct Links) -->
+  <div class="azure-mobile-body">
+    <ul class="azure-mobile-nav">
+      
+      <!-- 1. NEW ARRIVALS -->
+      <li class="azure-mobile-item">
+        <a href="{% url 'shop' %}?new=1" class="azure-mobile-link azure-fw-600">
+          <span>NEW ARRIVALS</span>
+          <span class="azure-nav-pill-new ms-2">NEW</span>
+        </a>
+      </li>
+
+      <!-- DYNAMIC MAIN CATEGORIES IN MOBILE DRAWER ACCORDION -->
+      {% for cat in global_categories %}
+      <li class="azure-mobile-item azure-mobile-accordion">
+        <div class="azure-accordion-header">
+          <a href="{{ cat.get_absolute_url }}" class="azure-mobile-link">{{ cat.name|upper }}</a>
+          <button type="button" class="azure-accordion-toggle" aria-expanded="false" aria-label="Toggle {{ cat.name }} menu">+</button>
+        </div>
+        <div class="azure-accordion-collapse">
+          <div class="azure-accordion-inner">
+            {% if cat.mega_groups %}
+              {% for group_name, sub_list in cat.mega_groups %}
+              <span class="azure-mobile-subheading {% if not forloop.first %}mt-2{% endif %}">{{ group_name }}</span>
+              {% for sub in sub_list %}
+              <a href="{{ sub.get_absolute_url }}">{{ sub.name }}</a>
+              {% endfor %}
+              {% endfor %}
+            {% else %}
+              <span class="azure-mobile-subheading">Shop by Style</span>
+              {% for sub in cat.active_subcategories %}
+              <a href="{{ sub.get_absolute_url }}">{{ sub.name }}</a>
+              {% empty %}
+              <a href="{{ cat.get_absolute_url }}">All {{ cat.name }}</a>
+              {% endfor %}
+            {% endif %}
+
+            <span class="azure-mobile-subheading mt-2">Curated Edits</span>
+            <a href="{% url 'shop' %}?category={{ cat.slug }}&new=1">New Arrivals in {{ cat.name }}</a>
+            <a href="{% url 'shop' %}?category={{ cat.slug }}&best=1">Best Selling {{ cat.name }}</a>
+            <a href="{{ cat.get_absolute_url }}" class="azure-view-all-link">View All {{ cat.name }} &rarr;</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+
+      <!-- 9. BEST SELLERS -->
+      <li class="azure-mobile-item">
+        <a href="{% url 'shop' %}?best=1" class="azure-mobile-link">
+          <span>BEST SELLERS</span>
+        </a>
+      </li>
+
+      <!-- 10. SALE -->
+      <li class="azure-mobile-item">
+        <a href="{% url 'shop' %}?sale=1" class="azure-mobile-link azure-sale-link">
+          <span>SALE</span>
+          <span class="azure-nav-pill-sale ms-2">HOT</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Drawer Footer Links (Source of Truth from Django Authentication) -->
+  <div class="azure-drawer-footer">
+    <div class="azure-drawer-footer-links">
+      {% if user.is_authenticated %}
+      <a href="{% url 'account_dashboard' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-person-check me-2"></i> <span>Namaste, {{ user.first_name|default:user.username }}</span>
+      </a>
+      <a href="{% url 'account_orders' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-box-seam me-2"></i> <span>My Orders</span>
+      </a>
+      <a href="{% url 'account_addresses' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-geo-alt me-2"></i> <span>Saved Addresses</span>
+      </a>
+      <a href="{% url 'wishlist' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-heart me-2"></i> <span>Wishlist (<span class="wishlist-count">{{ wishlist_count|default:"0" }}</span>)</span>
+      </a>
+      <div class="azure-drawer-divider my-2" style="border-top: 1px solid var(--border-light); opacity: 0.6;"></div>
+      <a href="{% url 'store_locator' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-geo-alt me-2"></i> <span>Store Locator</span>
+      </a>
+      <a href="{% url 'track_package' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-truck me-2"></i> <span>Track Package</span>
+      </a>
+      <a href="{% url 'returns' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-arrow-repeat me-2"></i> <span>Return &amp; Exchange</span>
+      </a>
+      <a href="{% url 'contact' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-envelope me-2"></i> <span>Contact Us</span>
+      </a>
+      <div class="azure-drawer-divider my-2" style="border-top: 1px solid var(--border-light); opacity: 0.6;"></div>
+      <a href="{% url 'logout' %}" class="azure-drawer-foot-item text-danger">
+        <i class="bi bi-box-arrow-right me-2"></i> <span>Sign Out</span>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-box-arrow-in-right me-2"></i> <span>Sign In</span>
+      </a>
+      <a href="{% url 'register' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-person-plus me-2"></i> <span>Create Account</span>
+      </a>
+      <a href="{% url 'wishlist' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-heart me-2"></i> <span>Wishlist (<span class="wishlist-count">{{ wishlist_count|default:"0" }}</span>)</span>
+      </a>
+      <div class="azure-drawer-divider my-2" style="border-top: 1px solid var(--border-light); opacity: 0.6;"></div>
+      <a href="{% url 'store_locator' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-geo-alt me-2"></i> <span>Store Locator</span>
+      </a>
+      <a href="{% url 'track_package' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-truck me-2"></i> <span>Track Package</span>
+      </a>
+      <a href="{% url 'returns' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-arrow-repeat me-2"></i> <span>Return &amp; Exchange</span>
+      </a>
+      <a href="{% url 'contact' %}" class="azure-drawer-foot-item">
+        <i class="bi bi-envelope me-2"></i> <span>Contact Us</span>
+      </a>
+      {% endif %}
+    </div>
+    <div class="azure-drawer-help">
+      <small>Need Assistance? Call <a href="tel:+919876543210">+91 98765 43210</a></small>
+    </div>
+  </div>
+</aside>

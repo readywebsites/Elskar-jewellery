@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terms &amp; Conditions of Service | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Terms &amp; Conditions</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Terms &amp; Conditions</h1>
+    <p class="text-muted small mb-0">Client Service Agreement &amp; Boutique Usage Terms | Last Updated: September 2026</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1000px; font-size: 14.5px; line-height: 1.8; color: var(--text-dark);">
+    
+    <div class="p-4 rounded-1 mb-5" style="background-color: var(--off-white); border-left: 3px solid var(--primary-navy);">
+      <p class="mb-0 fw-medium" style="color: var(--primary-navy);">
+        Welcome to Azure Jewels. By browsing our digital salon, placing commissions, or purchasing fine jewellery creations via azurejewels.com, you agree to comply with and be bound by the following terms, conditions, and atelier protocols.
+      </p>
+    </div>
+
+    <!-- 1. General Terms -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">1. General Terms of Service</h2>
+      <p>
+        These Terms govern the use of the Azure Jewels boutique platform operated by Azure Jewels Private Limited. You represent that you are at least 18 years of age or possess legal parental/guardian consent to enter into binding purchase agreements. We reserve the right to decline service, terminate user accounts, or cancel orders at our sole discretion for violations of these terms.
+      </p>
+    </div>
+
+    <!-- 2. Products & Specifications -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">2. Products, Hallmarking &amp; Authenticity</h2>
+      <p>
+        All Azure Jewels pieces are crafted in adherence to strict hallmarking standards. Because our creations involve natural gemstones, hand-cut polki, cultured pearls, and artisanal metal chasing, subtle variations in hue, matrix, and dimensions are natural hallmarks of authentic Indian jewellery craftsmanship and do not constitute defects.
+      </p>
+    </div>
+
+    <!-- 3. Pricing & Currency -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">3. Pricing, Taxes &amp; Currency</h2>
+      <p>
+        All prices displayed on our boutique are listed in Indian Rupees (INR) and are inclusive of applicable Goods and Services Tax (GST) unless explicitly noted. While we endeavor to ensure all pricing information is accurate, in the event of an inadvertent technical pricing discrepancy, Azure Jewels reserves the right to notify you and cancel the order prior to dispatch with a full refund.
+      </p>
+    </div>
+
+    <!-- 4. Orders & Acceptance -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">4. Orders &amp; Order Acceptance</h2>
+      <p>
+        Receipt of an electronic order confirmation does not constitute our final acceptance of your order. An order is deemed formally accepted only when the piece undergoes security inspection and a dispatch Air Waybill (AWB) tracking number is generated. You may cancel standard orders within <strong>4 hours of submission</strong> by contacting concierge.
+      </p>
+    </div>
+
+    <!-- 5. Payments -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">5. Secure Payment Terms</h2>
+      <p>
+        We accept Visa, MasterCard, American Express, RuPay, Net Banking, UPI (Google Pay, PhonePe, Paytm), and Cash on Delivery (on eligible domestic pin codes). Transactions are secured by industry-standard encryption protocols.
+      </p>
+    </div>
+
+    <!-- 6. Shipping & Transit Risk -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">6. Insured Shipping &amp; Delivery</h2>
+      <p>
+        Title and risk of loss pass to the patron only upon physical delivery with OTP verification. All shipments are governed by our <a href="{% url 'shipping_policy' %}" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">Shipping &amp; Delivery Policy</a>.
+      </p>
+    </div>
+
+    <!-- 7. Returns & Exchanges -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">7. Returns, Refunds &amp; Cancellations</h2>
+      <p>
+        Qualifying creations are eligible for our 15-Day Luxury Guarantee. Bespoke creations, customized sizes, and items with detached security tags are non-returnable. Full conditions are set forth in our <a href="{% url 'returns' %}" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">Returns &amp; Refunds Policy</a>.
+      </p>
+    </div>
+
+    <!-- 8. User Accounts & Confidentiality -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">8. User Accounts &amp; Password Security</h2>
+      <p>
+        Patrons creating an account are responsible for maintaining the confidentiality of their credentials and restricting unauthorized access to their devices. You agree to notify Azure Jewels immediately of any unauthorized use of your account.
+      </p>
+    </div>
+
+    <!-- 9. Intellectual Property -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">9. Intellectual Property &amp; Trademarks</h2>
+      <p>
+        All content, including jewellery designs, photographs, graphics, editorial copy, trademarks, logos, and digital code, is the exclusive intellectual property of Azure Jewels Private Limited and protected by Indian and international copyright and design patent laws. Unauthorized reproduction is strictly prohibited.
+      </p>
+    </div>
+
+    <!-- 10. Limitation of Liability -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">10. Limitation of Atelier Liability</h2>
+      <p>
+        To the fullest extent permitted by law, Azure Jewels shall not be liable for indirect, punitive, or consequential damages resulting from website use or delayed courier transit. Our maximum aggregate liability shall never exceed the total purchase price paid for the specific item giving rise to the claim.
+      </p>
+    </div>
+
+    <!-- 11. Changes to Terms -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">11. Modifications to Terms</h2>
+      <p>
+        We reserve the right to revise or update these Terms at any time without prior individual notice. Your continued engagement with our salon following posted revisions constitutes acceptance of the amended terms.
+      </p>
+    </div>
+
+    <!-- 12. Contact & Dispute Resolution -->
+    <div>
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">12. Legal Concierge &amp; Jurisdiction</h2>
+      <p>
+        These terms shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the competent courts in Mumbai, Maharashtra.
+      </p>
+      <div class="p-4 rounded-1 border" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+        <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Azure Jewels Legal Counsel</h3>
+        <p class="mb-1"><i class="bi bi-envelope me-2" style="color: var(--primary-navy);"></i> Email: <a href="mailto:legal@azurejewels.com" style="color: var(--primary-navy); font-weight: 500;">legal@azurejewels.com</a></p>
+        <p class="mb-0"><i class="bi bi-geo-alt me-2" style="color: var(--primary-navy);"></i> Registered Office: Level 3, The Heritage Galleria, Linking Road, Bandra West, Mumbai 400050</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

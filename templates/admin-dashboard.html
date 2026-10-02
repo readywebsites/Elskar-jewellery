@@ -1,0 +1,2629 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Azure Jewels — Atelier Executive Administration</title>
+  <link rel="icon" href="{% static 'assets/images/favicon-32x32.webp' %}" type="image/webp">
+
+  <!-- Google Fonts: Inter & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    /* ========================================================================
+       AZURE JEWELS STRICT NAVY & WHITE DESIGN SYSTEM (ZERO GOLD)
+       ======================================================================== */
+    :root {
+      --primary-navy: #071A2D;
+      --secondary-navy: #0B2A45;
+      --accent-navy: #123B5D;
+      --white: #FFFFFF;
+      --soft-white: #F6F8FA;
+      --border-color: #D9E3EC;
+      --text-color: #071A2D;
+      --muted-color: #5F7182;
+      --header-height: 60px;
+      --sidebar-width: 240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--soft-white);
+      color: var(--text-color);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Top Admin Header */
+    .admin-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background-color: var(--primary-navy);
+      border-bottom: 1px solid var(--accent-navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 1040;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .admin-brand-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+
+    .admin-brand-badge {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #D9E3EC;
+      border-left: 1px solid var(--accent-navy);
+      padding-left: 10px;
+      margin-left: 2px;
+      font-weight: 500;
+    }
+
+    .admin-header-center {
+      color: #D9E3EC;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .admin-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-user-pill {
+      background: var(--secondary-navy);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--accent-navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .admin-link-btn {
+      color: #D9E3EC;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+    }
+
+    .admin-link-btn:hover {
+      color: var(--white);
+      background: var(--secondary-navy);
+      border-color: var(--accent-navy);
+    }
+
+    .admin-btn-logout {
+      color: #FFFFFF;
+      background: var(--accent-navy);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .admin-btn-logout:hover {
+      background: #842029;
+      color: #FFFFFF;
+      border-color: #842029;
+    }
+
+    /* Sidebar Navigation */
+    .admin-sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background-color: var(--primary-navy);
+      border-right: 1px solid var(--secondary-navy);
+      overflow-y: auto;
+      z-index: 1030;
+      transition: transform 0.3s ease;
+      padding: 16px 0;
+    }
+
+    .admin-nav-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #5F7182;
+      padding: 12px 22px 6px;
+      font-weight: 700;
+    }
+
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #D9E3EC;
+      text-decoration: none;
+      padding: 12px 22px;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .admin-nav-item i {
+      font-size: 16px;
+      width: 22px;
+      color: #A0B2C6;
+    }
+
+    .admin-nav-item:hover {
+      background-color: var(--secondary-navy);
+      color: var(--white);
+    }
+
+    .admin-nav-item:hover i {
+      color: var(--white);
+    }
+
+    .admin-nav-item.active {
+      background-color: var(--accent-navy);
+      color: var(--white);
+      border-left-color: var(--white);
+      font-weight: 600;
+    }
+
+    .admin-nav-item.active i {
+      color: var(--white);
+    }
+
+    .admin-nav-badge {
+      background: var(--secondary-navy);
+      color: #D9E3EC;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 600;
+      border: 1px solid var(--accent-navy);
+    }
+
+    .admin-nav-item.active .admin-nav-badge {
+      background: var(--primary-navy);
+      color: var(--white);
+    }
+
+    /* Main Content Wrapper — 100% AVAILABLE WIDTH */
+    .admin-main {
+      margin-top: var(--header-height);
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+      min-height: calc(100vh - var(--header-height));
+      padding: 28px 36px 60px;
+      background-color: var(--soft-white);
+      transition: margin-left 0.3s ease, width 0.3s ease;
+    }
+
+    /* Page Titles */
+    .admin-page-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      margin: 0;
+    }
+
+    .admin-page-sub {
+      color: var(--muted-color);
+      font-size: 13.5px;
+      margin: 4px 0 0 0;
+    }
+
+    /* Metric KPI Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 22px 24px;
+      box-shadow: 0 1px 3px rgba(7, 26, 45, 0.04);
+      border-top: 3px solid var(--primary-navy);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(7, 26, 45, 0.06);
+    }
+
+    .kpi-card.secondary {
+      border-top-color: var(--accent-navy);
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-color);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .kpi-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .kpi-subtext {
+      font-size: 12px;
+      color: var(--muted-color);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Content Layout Grids (65% / 35%) */
+    .content-grid-65-35 {
+      display: grid;
+      grid-template-columns: 65% calc(35% - 24px);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* Panels & Tables */
+    .admin-panel {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(7, 26, 45, 0.03);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .admin-panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--white);
+    }
+
+    .admin-panel-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-panel-body {
+      padding: 24px;
+    }
+
+    /* Full Width Admin Table */
+    .admin-table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0;
+      font-size: 13.5px;
+    }
+
+    .admin-table th {
+      background-color: var(--soft-white);
+      color: var(--primary-navy);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 700;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .admin-table td {
+      padding: 14px 18px;
+      vertical-align: middle;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+
+    .admin-table tbody tr:hover td {
+      background-color: #F8FAFC;
+    }
+
+    /* Subtle Navy / Neutral Status Badges (NO RANDOM BRIGHT COLORS) */
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-pending { background: #EBF2F7; color: var(--primary-navy); border: 1px solid var(--border-color); }
+    .status-confirmed { background: #D9E5F0; color: var(--primary-navy); border: 1px solid #B8CEE2; }
+    .status-processing { background: var(--accent-navy); color: var(--white); }
+    .status-shipped { background: var(--secondary-navy); color: var(--white); }
+    .status-out_for_delivery { background: #334E68; color: var(--white); }
+    .status-delivered { background: var(--primary-navy); color: var(--white); }
+    .status-cancelled { background: #F1F4F7; color: var(--muted-color); border: 1px solid var(--border-color); }
+
+    /* Clean Navy Buttons */
+    .btn-navy {
+      background-color: var(--primary-navy);
+      color: var(--white) !important;
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid var(--primary-navy);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-navy:hover {
+      background-color: var(--secondary-navy);
+      border-color: var(--secondary-navy);
+      color: var(--white);
+    }
+
+    .btn-navy-outline {
+      background-color: transparent;
+      color: var(--primary-navy) !important;
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid var(--border-color);
+      padding: 7px 15px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-navy-outline:hover {
+      background-color: var(--soft-white);
+      border-color: var(--primary-navy);
+      color: var(--primary-navy);
+    }
+
+    /* Product Thumbnail */
+    .table-thumb {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--white);
+    }
+
+    /* Stock Pill */
+    .stock-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    .stock-ok { background: #EBF2F7; color: var(--primary-navy); border: 1px solid var(--border-color); }
+    .stock-low { background: #FDE8E8; color: #9B1C1C; border: 1px solid #F8B4B4; }
+
+    /* Image Upload & Preview Suite (Strictly Navy & White) */
+    .upload-dropzone {
+      border: 2px dashed var(--border-color);
+      border-radius: 8px;
+      background-color: var(--white);
+      padding: 18px 12px;
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .upload-dropzone:hover {
+      border-color: var(--primary-navy);
+      background-color: #F8FAFC;
+    }
+    .upload-dropzone.has-files {
+      border-style: solid;
+      background-color: var(--white);
+    }
+    .main-image-preview-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px;
+      background: var(--soft-white);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .main-image-preview-thumb {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+      flex-shrink: 0;
+    }
+    .gallery-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 2px;
+    }
+    .gallery-preview-item {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+    }
+    .gallery-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-remove-btn {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(7, 26, 45, 0.85);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.15s;
+    }
+    .gallery-remove-btn:hover {
+      background: #9B1C1C;
+    }
+    .existing-gallery-badge {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      font-size: 9px;
+      background: var(--primary-navy);
+      color: #FFFFFF;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* Mobile Hamburger & Backdrop */
+    .admin-mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-size: 22px;
+      cursor: pointer;
+      margin-right: 12px;
+      padding: 0;
+    }
+
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(7, 26, 45, 0.6);
+      z-index: 1025;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1200px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .content-grid-65-35 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .admin-mobile-toggle {
+        display: block;
+      }
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+      .admin-sidebar.show {
+        transform: translateX(0);
+      }
+      .sidebar-backdrop.show {
+        display: block;
+      }
+      .admin-main {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .admin-brand-badge {
+        display: none;
+      }
+      .admin-header-center {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP HEADER (56-64px, Deep Navy #071A2D)
+       ======================================================================== -->
+  <header class="admin-header">
+    <div class="d-flex align-items-center">
+      <button class="admin-mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle Navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <a href="{% url 'admin_dashboard' %}" class="admin-brand">
+        <span class="admin-brand-title">AZURE JEWELS</span>
+        <span class="admin-brand-badge">Atelier Admin</span>
+      </a>
+    </div>
+
+    <div class="admin-header-center d-none d-md-block">
+      Store Management &amp; Executive Command
+    </div>
+
+    <div class="admin-header-actions">
+      {% if user.is_authenticated and is_authorized %}
+      <span class="admin-user-pill">
+        <i class="bi bi-person-fill"></i> {{ user.username }}
+      </span>
+      {% endif %}
+      <a href="{% url 'home' %}" target="_blank" class="admin-link-btn">
+        <i class="bi bi-box-arrow-up-right"></i> View Store
+      </a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="admin-link-btn admin-btn-logout">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Mobile Backdrop -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- ========================================================================
+       SIDEBAR NAVIGATION (240px, Deep Navy #071A2D)
+       ======================================================================== -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-nav-section-title">Navigation</div>
+    <a class="admin-nav-item {% if active_tab == 'overview' %}active{% endif %}" onclick="switchTab('overview')">
+      <span><i class="bi bi-grid-1x2"></i> Dashboard</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'products' %}active{% endif %}" onclick="switchTab('products')">
+      <span><i class="bi bi-gem"></i> Products</span>
+      <span class="admin-nav-badge">{{ total_products }}</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'categories' %}active{% endif %}" onclick="switchTab('categories')">
+      <span><i class="bi bi-tags"></i> Categories</span>
+      <span class="admin-nav-badge">{{ categories.count }}</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'orders' %}active{% endif %}" onclick="switchTab('orders')">
+      <span><i class="bi bi-box-seam"></i> Orders</span>
+      <span class="admin-nav-badge">{{ total_orders }}</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'customers' %}active{% endif %}" onclick="switchTab('customers')">
+      <span><i class="bi bi-people"></i> Customers</span>
+      <span class="admin-nav-badge">{{ total_customers }}</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'carts' %}active{% endif %}" onclick="switchTab('carts')">
+      <span><i class="bi bi-cart3"></i> Cart</span>
+      <span class="admin-nav-badge">{{ carts.count }}</span>
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'wishlists' %}active{% endif %}" onclick="switchTab('wishlists')">
+      <span><i class="bi bi-heart"></i> Wishlist</span>
+      <span class="admin-nav-badge">{{ wishlists.count }}</span>
+    </a>
+
+    <div class="admin-nav-section-title mt-3">Communications</div>
+    <a class="admin-nav-item {% if active_tab == 'inquiries' %}active{% endif %}" onclick="switchTab('inquiries')">
+      <span><i class="bi bi-chat-left-dots"></i> Contact Inquiries</span>
+      {% if unresolved_inquiries > 0 %}
+      <span class="admin-nav-badge text-white" style="background:#123B5D;">{{ unresolved_inquiries }}</span>
+      {% endif %}
+    </a>
+    <a class="admin-nav-item {% if active_tab == 'subscribers' %}active{% endif %}" onclick="switchTab('subscribers')">
+      <span><i class="bi bi-envelope-paper"></i> Newsletter</span>
+      <span class="admin-nav-badge">{{ total_subscribers }}</span>
+    </a>
+
+    <div class="admin-nav-section-title mt-3">Shortcuts</div>
+    <a href="{% url 'home' %}" target="_blank" class="admin-nav-item">
+      <span><i class="bi bi-shop-window"></i> Storefront</span>
+      <i class="bi bi-arrow-up-right small"></i>
+    </a>
+  </aside>
+
+  <!-- ========================================================================
+       MAIN CONTENT (FULL WIDTH, NO GOLD, #F6F8FA)
+       ======================================================================== -->
+  <main class="admin-main">
+    
+    {% if not is_authorized %}
+    <!-- Admin Login Gate -->
+    <div class="row justify-content-center pt-5">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="admin-panel p-4">
+          <div class="text-center mb-4">
+            <h1 class="admin-page-title fs-3">Atelier Admin Sign In</h1>
+            <p class="admin-page-sub">Enter staff credentials to access store management.</p>
+          </div>
+
+          {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-danger py-2 small mb-3">{{ m }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="post" action="{% url 'admin_dashboard' %}">
+            {% csrf_token %}
+            <input type="hidden" name="admin_login_submit" value="1">
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-uppercase" style="color: var(--primary-navy); font-size: 11px;">Username or Email</label>
+              <input type="text" name="username" class="form-control" placeholder="admin" required autofocus>
+            </div>
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-uppercase" style="color: var(--primary-navy); font-size: 11px;">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-navy w-100 justify-content-center py-2">
+              Sign In to Management
+            </button>
+          </form>
+          <div class="text-center mt-3 pt-3 border-top">
+            <a href="{% url 'home' %}" class="text-muted small text-decoration-none">&larr; Return to Storefront</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+
+    <!-- Flash Messages Container -->
+    {% if messages %}
+    <div class="mb-3">
+      {% for m in messages %}
+      <div class="alert alert-{{ m.tags|default:'info' }} alert-dismissible fade show small py-2 px-3 mb-2" role="alert">
+        {{ m }}
+        <button type="button" class="btn-close py-2" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ======================================================================
+         TAB 1: DASHBOARD OVERVIEW
+         ====================================================================== -->
+    <div id="tab-overview" class="admin-tab-pane {% if active_tab != 'overview' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Executive Dashboard</h1>
+          <p class="admin-page-sub">Real-time overview of revenue, consignment orders, and inventory health.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn-navy" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
+            <i class="bi bi-plus-lg"></i> Add Product
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Cards (Row 1: 4 Cards) -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>Total Revenue</span>
+            <i class="bi bi-currency-rupee text-muted"></i>
+          </div>
+          <div class="kpi-number">₹{{ gross_revenue|floatformat:0 }}</div>
+          <div class="kpi-subtext">Active and fulfilled orders</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>Total Orders</span>
+            <i class="bi bi-box-seam text-muted"></i>
+          </div>
+          <div class="kpi-number">{{ total_orders }}</div>
+          <div class="kpi-subtext">{{ active_orders_count }} in pipeline / transit</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>Products</span>
+            <i class="bi bi-gem text-muted"></i>
+          </div>
+          <div class="kpi-number">{{ total_products }}</div>
+          <div class="kpi-subtext">{{ active_products }} live in boutique catalog</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>Customers</span>
+            <i class="bi bi-people text-muted"></i>
+          </div>
+          <div class="kpi-number">{{ total_customers }}</div>
+          <div class="kpi-subtext">{{ total_subscribers }} newsletter subscribers</div>
+        </div>
+      </div>
+
+      <!-- Secondary KPI Cards Row -->
+      <div class="kpi-grid mb-4">
+        <div class="kpi-card secondary">
+          <div class="kpi-label">Pending Orders</div>
+          <div class="kpi-number fs-3">{{ orders_pending }}</div>
+          <div class="kpi-subtext">Requires consignment review</div>
+        </div>
+        <div class="kpi-card secondary">
+          <div class="kpi-label">Low Stock Alerts</div>
+          <div class="kpi-number fs-3">{{ low_stock_products }}</div>
+          <div class="kpi-subtext">Items with &le; 5 units</div>
+        </div>
+        <div class="kpi-card secondary">
+          <div class="kpi-label">Contact Inquiries</div>
+          <div class="kpi-number fs-3">{{ unresolved_inquiries }}</div>
+          <div class="kpi-subtext">Pending concierge triage</div>
+        </div>
+        <div class="kpi-card secondary">
+          <div class="kpi-label">Newsletter Patrons</div>
+          <div class="kpi-number fs-3">{{ total_subscribers }}</div>
+          <div class="kpi-subtext">Private privilege subscribers</div>
+        </div>
+      </div>
+
+      <!-- Dashboard Content Grid (65% / 35%) -->
+      <div class="content-grid-65-35">
+        
+        <!-- Left: Recent Orders (65%) -->
+        <div class="admin-panel mb-0">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title">Recent Consignment Orders</h2>
+            <button class="btn-navy-outline" onclick="switchTab('orders')">
+              View All Orders &rarr;
+            </button>
+          </div>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th class="text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for o in recent_orders %}
+                <tr>
+                  <td class="fw-bold">{{ o.order_number }}</td>
+                  <td>
+                    <div class="fw-semibold">{{ o.full_name }}</div>
+                    <small class="text-muted">{{ o.phone|default:o.email }}</small>
+                  </td>
+                  <td>{{ o.created_at|date:"d M Y, H:i" }}</td>
+                  <td class="fw-bold">₹{{ o.total|floatformat:0 }}</td>
+                  <td>
+                    <span>{{ o.payment_method }}</span>
+                  </td>
+                  <td>
+                    <span class="status-badge status-{{ o.status }}">{{ o.get_status_display }}</span>
+                  </td>
+                  <td class="text-end">
+                    <button class="btn-navy-outline py-1 px-2" onclick="inspectOrder({{ o.id }})" style="font-size: 12px;">
+                      Inspect
+                    </button>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="7" class="text-center py-4 text-muted">No consignment orders recorded.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right: Low Stock & Inquiries (35%) -->
+        <div>
+          <!-- Low Stock Watchlist -->
+          <div class="admin-panel mb-4">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title fs-6">Low Stock Inventory</h2>
+              <button class="btn-navy-outline py-1 px-2" style="font-size: 12px;" onclick="switchTab('products')">Catalog</button>
+            </div>
+            <div class="p-3">
+              {% if low_stock_watchlist %}
+                {% for p in low_stock_watchlist %}
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                  <div class="d-flex align-items-center gap-2">
+                    {% if p.image %}
+                    <img src="{{ p.image.url }}" class="table-thumb" style="width: 38px; height: 38px;">
+                    {% else %}
+                    <div class="table-thumb d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                      <i class="bi bi-gem text-muted"></i>
+                    </div>
+                    {% endif %}
+                    <div>
+                      <span class="fw-semibold d-block text-truncate" style="max-width: 140px; font-size: 12.5px;">{{ p.name }}</span>
+                      <small class="text-muted">SKU: {{ p.sku|default:"—" }}</small>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="stock-pill {% if p.stock == 0 %}stock-low{% else %}stock-ok{% endif %}">
+                      {{ p.stock }} left
+                    </span>
+                    <button class="btn-navy-outline py-0 px-2" style="font-size: 11px;" onclick="quickStockAdd({{ p.id }}, 5)">
+                      +5
+                    </button>
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+              <div class="text-center py-3 text-muted small">All creations have adequate inventory.</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Pending Inquiries -->
+          <div class="admin-panel mb-0">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title fs-6">Pending Inquiries</h2>
+              <button class="btn-navy-outline py-1 px-2" style="font-size: 12px;" onclick="switchTab('inquiries')">View</button>
+            </div>
+            <div class="p-3">
+              {% if recent_inquiries %}
+                {% for inq in recent_inquiries %}
+                <div class="py-2 border-bottom">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold small">{{ inq.name }}</span>
+                    <small class="text-muted" style="font-size: 11px;">{{ inq.created_at|date:"d M" }}</small>
+                  </div>
+                  <small class="text-muted d-block text-truncate">{{ inq.subject }}</small>
+                </div>
+                {% endfor %}
+              {% else %}
+              <div class="text-center py-3 text-muted small">No pending client inquiries.</div>
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 2: PRODUCTS SECTION
+         ====================================================================== -->
+    <div id="tab-products" class="admin-tab-pane {% if active_tab != 'products' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Creations Catalog</h1>
+          <p class="admin-page-sub">Manage product listings, pricing, stock levels, and gallery imagery.</p>
+        </div>
+        <button class="btn-navy" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
+          <i class="bi bi-plus-lg"></i> Add New Product
+        </button>
+      </div>
+
+      <div class="admin-panel">
+        <!-- Search & Filter Controls -->
+        <div class="p-3 border-bottom bg-white">
+          <form method="get" action="{% url 'admin_dashboard' %}" class="row g-2 align-items-center">
+            <input type="hidden" name="tab" value="products">
+            <div class="col-12 col-md-3">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                <input type="text" name="prod_q" value="{{ current_prod_search }}" class="form-control border-start-0" placeholder="Search by name, SKU, metal...">
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <select name="prod_cat" class="form-select">
+                <option value="">All Categories</option>
+                {% for c in categories %}
+                <option value="{{ c.slug }}" {% if current_prod_cat == c.slug %}selected{% endif %}>{{ c.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-6 col-md-2">
+              <select name="prod_stock" class="form-select">
+                <option value="">All Stock Levels</option>
+                <option value="low" {% if current_prod_stock == 'low' %}selected{% endif %}>Low Stock (&le; 5)</option>
+                <option value="out" {% if current_prod_stock == 'out' %}selected{% endif %}>Out of Stock (0)</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-2">
+              <select name="prod_status" class="form-select">
+                <option value="">All Status</option>
+                <option value="active" {% if current_prod_status == 'active' %}selected{% endif %}>Active Only</option>
+                <option value="hidden" {% if current_prod_status == 'hidden' %}selected{% endif %}>Hidden Only</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-2 d-flex gap-1">
+              <button type="submit" class="btn-navy w-100 justify-content-center">Filter</button>
+              <a href="{% url 'admin_dashboard' %}?tab=products" class="btn-navy-outline">Reset</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Products Table -->
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in products %}
+              <tr>
+                <td>
+                  {% if p.image %}
+                  <img src="{{ p.image.url }}" alt="{{ p.name }}" class="table-thumb">
+                  {% else %}
+                  <div class="table-thumb d-flex align-items-center justify-content-center">
+                    <i class="bi bi-gem text-muted"></i>
+                  </div>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="{{ p.get_absolute_url }}" target="_blank" class="fw-bold text-decoration-none" style="color: var(--primary-navy);">
+                    {{ p.name }}
+                  </a>
+                  <div class="d-flex gap-1 mt-1">
+                    {% if p.featured %}<span class="badge bg-light text-dark border" style="font-size:10px;">Featured</span>{% endif %}
+                    {% if p.best_seller %}<span class="badge bg-light text-dark border" style="font-size:10px;">Best Seller</span>{% endif %}
+                    {% if p.new_arrival %}<span class="badge bg-light text-dark border" style="font-size:10px;">New</span>{% endif %}
+                  </div>
+                <td><code>{{ p.sku|default:"—" }}</code></td>
+                <td>
+                  <div class="fw-semibold">{{ p.category.name|default:"Unassigned" }}</div>
+                  {% if p.subcategory %}
+                  <small class="text-muted"><i class="bi bi-arrow-return-right"></i> {{ p.subcategory.name }}</small>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="fw-semibold">₹{{ p.price|floatformat:0 }}</span>
+                  {% if p.sale_price %}
+                  <small class="d-block text-muted">Sale: ₹{{ p.sale_price|floatformat:0 }}</small>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="stock-pill {% if p.stock == 0 %}stock-low{% elif p.stock <= 5 %}stock-low{% else %}stock-ok{% endif %}" id="prod-stock-{{ p.id }}">
+                    {{ p.stock }}
+                  </span>
+                </td>
+                <td>
+                  <span class="status-badge {% if p.active %}status-confirmed{% else %}status-cancelled{% endif %}" id="prod-status-badge-{{ p.id }}">
+                    {% if p.active %}Active{% else %}Hidden{% endif %}
+                  </span>
+                </td>
+                <td class="text-end">
+                  <div class="d-inline-flex gap-1">
+                    <a href="{{ p.get_absolute_url }}" target="_blank" class="btn-navy-outline py-1 px-2" style="font-size: 11px;">
+                      View
+                    </a>
+                    <button class="btn-navy-outline py-1 px-2" onclick="editProductModal({{ p.id }})" style="font-size: 11px;">
+                      Edit
+                    </button>
+                    <button type="button" class="btn-navy-outline py-1 px-2" id="btn-toggle-{{ p.id }}" onclick="toggleProductActive({{ p.id }})" style="font-size: 11px;" title="{% if p.active %}Deactivate product from storefront{% else %}Activate product on storefront{% endif %}">
+                      {% if p.active %}Deactivate{% else %}Activate{% endif %}
+                    </button>
+                    <form method="post" action="{% url 'admin_product_delete' p.id %}" class="d-inline" onsubmit="return confirm('Remove product \'{{ p.name|escapejs }}\' permanently?');">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-navy-outline py-1 px-2 text-danger" style="font-size: 11px;">
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" class="text-center py-5 text-muted">No products found matching query.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 3: CATEGORY MANAGEMENT
+         ====================================================================== -->
+    <div id="tab-categories" class="admin-tab-pane {% if active_tab != 'categories' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Category Management</h1>
+          <p class="admin-page-sub">Manage jewelry collections and category hierarchies.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Add Category Form -->
+        <div class="col-12 col-lg-4">
+          <div class="admin-panel p-4">
+            <h2 class="admin-panel-title mb-3 fs-5">Add New Category</h2>
+            <form method="post" action="{% url 'admin_category_create' %}" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Category Name *</label>
+                <input type="text" name="name" class="form-control" placeholder="e.g. Vintage Rings" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Parent Category (Optional)</label>
+                <select name="parent_id" class="form-select">
+                  <option value="">None (Top-Level Category)</option>
+                  {% for mc in main_categories %}
+                  <option value="{{ mc.id }}">{{ mc.name }}</option>
+                  {% endfor %}
+                </select>
+                <small class="text-muted d-block mt-1" style="font-size:11px;">Leave empty for a Main Category (e.g. Rings), or choose a parent to create a Subcategory (e.g. Vintage Rings).</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Menu Group (for Mega Menu)</label>
+                <input type="text" name="menu_group" class="form-control" placeholder="e.g. SHOP BY STYLE, OCCASION &amp; METAL, FEATURED" value="SHOP BY STYLE">
+                <small class="text-muted d-block mt-1" style="font-size:11px;">Column heading under which this subcategory appears in the mega menu.</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Description</label>
+                <textarea name="description" class="form-control" rows="2" placeholder="Category description..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Category Cover Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+              </div>
+              <div class="form-check mb-4">
+                <input type="checkbox" name="active" value="1" class="form-check-input" id="checkCatActive" checked>
+                <label class="form-check-label small" for="checkCatActive">Active in Store Navigation</label>
+              </div>
+              <button type="submit" class="btn-navy w-100 justify-content-center">Create Category</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Categories Table -->
+        <div class="col-12 col-lg-8">
+          <div class="admin-panel">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Existing Categories</h2>
+              <span class="text-muted small">{{ categories.count }} total</span>
+            </div>
+            <div class="admin-table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name / Hierarchy</th>
+                    <th>Slug</th>
+                    <th>Product Count</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for c in categories %}
+                  <tr>
+                    <td>
+                      {% if c.image %}
+                      <img src="{{ c.image.url }}" class="table-thumb" style="width: 44px; height: 44px;">
+                      {% else %}
+                      <div class="table-thumb d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                        <i class="bi bi-tag text-muted"></i>
+                      </div>
+                      {% endif %}
+                    </td>
+                    <td class="fw-bold">
+                      {% if c.parent %}
+                        <span class="text-muted small fw-normal">{{ c.parent.name }} &rsaquo;</span> {{ c.name }}
+                        {% if c.menu_group %}<span class="badge bg-light text-dark border ms-1" style="font-size:10px;">{{ c.menu_group }}</span>{% endif %}
+                      {% else %}
+                        <span class="badge text-white me-1" style="background-color: var(--primary-navy); font-size:10px;">MAIN</span> {{ c.name }}
+                      {% endif %}
+                    </td>
+                    <td><code>{{ c.slug }}</code></td>
+                    <td>
+                      <span class="badge bg-light text-dark border">{{ c.product_count }} products</span>
+                    </td>
+                    <td>
+                      {% if c.active %}
+                      <span class="status-badge status-confirmed">Active</span>
+                      {% else %}
+                      <span class="status-badge status-cancelled">Hidden</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-end">
+                      <form method="post" action="{% url 'admin_category_delete' c.id %}" class="d-inline" onsubmit="return confirm('Delete category \'{{ c.name|escapejs }}\'?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-navy-outline py-1 px-2 text-danger" style="font-size: 11px;">
+                          Delete
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="6" class="text-center py-4 text-muted">No categories created yet.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 4: ORDERS MANAGEMENT
+         ====================================================================== -->
+    <div id="tab-orders" class="admin-tab-pane {% if active_tab != 'orders' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Orders Management</h1>
+          <p class="admin-page-sub">Manage customer orders, track consignments, and inspect purchase manifests.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <!-- Search & Filter Controls -->
+        <div class="p-3 border-bottom bg-white">
+          <form method="get" action="{% url 'admin_dashboard' %}" class="row g-2 align-items-center">
+            <input type="hidden" name="tab" value="orders">
+            <div class="col-12 col-md-5">
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                <input type="text" name="order_q" value="{{ current_order_search }}" class="form-control border-start-0" placeholder="Search by Order #, Customer Name, Email, Phone...">
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <select name="order_status" class="form-select">
+                <option value="">All Fulfillment Statuses</option>
+                {% for val, label in order_status_choices %}
+                <option value="{{ val }}" {% if current_order_status == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-6 col-md-3 d-flex gap-1">
+              <button type="submit" class="btn-navy w-100 justify-content-center">Filter</button>
+              <a href="{% url 'admin_dashboard' %}?tab=orders" class="btn-navy-outline">Reset</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Quick Status</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for o in orders %}
+              <tr>
+                <td class="fw-bold">{{ o.order_number }}</td>
+                <td>
+                  <div class="fw-semibold">{{ o.full_name }}</div>
+                  <small class="text-muted d-block">{{ o.phone }}</small>
+                  <small class="text-muted">{{ o.city }}, {{ o.state }}</small>
+                </td>
+                <td>{{ o.created_at|date:"d M Y, H:i" }}</td>
+                <td class="fw-bold">₹{{ o.total|floatformat:0 }}</td>
+                <td>
+                  <span>{{ o.payment_method }}</span>
+                  <small class="d-block text-muted">Status: {{ o.payment_status }}</small>
+                </td>
+                <td>
+                  <span class="status-badge status-{{ o.status }}" id="order-status-badge-{{ o.id }}">{{ o.get_status_display }}</span>
+                </td>
+                <td>
+                  <form method="post" action="{% url 'admin_order_update_status' o.id %}" class="d-flex align-items-center gap-1" onsubmit="return handleQuickStatus(event, {{ o.id }})">
+                    {% csrf_token %}
+                    <select name="status" class="form-select form-select-sm py-0" style="font-size: 12px; width: 130px;">
+                      {% for val, label in order_status_choices %}
+                      <option value="{{ val }}" {% if o.status == val %}selected{% endif %}>{{ label }}</option>
+                      {% endfor %}
+                    </select>
+                    <button type="submit" class="btn-navy-outline py-0 px-2" style="font-size: 11px;">Save</button>
+                  </form>
+                </td>
+                <td class="text-end">
+                  <button class="btn-navy py-1 px-2" onclick="inspectOrder({{ o.id }})" style="font-size: 12px;">
+                    Inspect
+                  </button>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" class="text-center py-5 text-muted">No orders found matching query.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 5: CUSTOMERS
+         ====================================================================== -->
+    <div id="tab-customers" class="admin-tab-pane {% if active_tab != 'customers' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Registered Customers</h1>
+          <p class="admin-page-sub">View client accounts and order histories.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Date Joined</th>
+                <th>Orders Count</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in customers %}
+              <tr>
+                <td class="fw-bold">{{ u.username }}</td>
+                <td>{{ u.get_full_name|default:"—" }}</td>
+                <td><a href="mailto:{{ u.email }}" class="text-decoration-none" style="color: var(--primary-navy);">{{ u.email }}</a></td>
+                <td>{{ u.date_joined|date:"d M Y, H:i" }}</td>
+                <td><span class="badge bg-light text-dark border">{{ u.orders_count }} order(s)</span></td>
+                <td class="text-end">
+                  <a href="mailto:{{ u.email }}" class="btn-navy-outline py-1 px-2" style="font-size: 11px;">
+                    <i class="bi bi-envelope"></i> Email Patron
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6" class="text-center py-4 text-muted">No registered customer accounts found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 6: ACTIVE CARTS
+         ====================================================================== -->
+    <div id="tab-carts" class="admin-tab-pane {% if active_tab != 'carts' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Active Shopping Carts</h1>
+          <p class="admin-page-sub">Real-time inspection of active customer shopping sessions.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Cart Ref</th>
+                <th>User / Session</th>
+                <th>Items Count</th>
+                <th>Subtotal</th>
+                <th>Last Updated</th>
+                <th class="text-end">Items Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in carts %}
+              <tr>
+                <td class="fw-bold">Cart #{{ c.id }}</td>
+                <td>{{ c.user.username|default:c.session_key|default:"Guest" }}</td>
+                <td><span class="badge bg-light text-dark border">{{ c.total_items }} items</span></td>
+                <td class="fw-bold">₹{{ c.subtotal|floatformat:0 }}</td>
+                <td>{{ c.updated_at|date:"d M Y, H:i" }}</td>
+                <td class="text-end small text-muted">
+                  {% for it in c.items.all|slice:":2" %}
+                  <div>{{ it.quantity }}x {{ it.product.name }}</div>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6" class="text-center py-4 text-muted">No active shopping carts found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 7: WISHLISTS
+         ====================================================================== -->
+    <div id="tab-wishlists" class="admin-tab-pane {% if active_tab != 'wishlists' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Patron Wishlists</h1>
+          <p class="admin-page-sub">Creations bookmarked by registered clientele.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Patron</th>
+                <th>Creation Name</th>
+                <th>Product Price</th>
+                <th>Date Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for w in wishlists %}
+              <tr>
+                <td class="fw-bold">{{ w.user.username }}</td>
+                <td>
+                  <a href="{{ w.product.get_absolute_url }}" target="_blank" class="text-decoration-none" style="color: var(--primary-navy);">
+                    {{ w.product.name }}
+                  </a>
+                </td>
+                <td class="fw-semibold">₹{{ w.product.price|floatformat:0 }}</td>
+                <td>{{ w.created_at|date:"d M Y, H:i" }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" class="text-center py-4 text-muted">No wishlisted items found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 8: CONTACT INQUIRIES
+         ====================================================================== -->
+    <div id="tab-inquiries" class="admin-tab-pane {% if active_tab != 'inquiries' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Contact Inquiries</h1>
+          <p class="admin-page-sub">Client communications submitted through the boutique contact suite.</p>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Patron</th>
+                <th>Contact</th>
+                <th>Subject</th>
+                <th>Message Content</th>
+                <th>Status</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for inq in inquiries %}
+              <tr>
+                <td>{{ inq.created_at|date:"d M Y, H:i" }}</td>
+                <td class="fw-bold">{{ inq.name }}</td>
+                <td>
+                  <a href="mailto:{{ inq.email }}" class="text-decoration-none" style="color: var(--primary-navy);">{{ inq.email }}</a>
+                  <small class="d-block text-muted">{{ inq.phone }}</small>
+                </td>
+                <td class="fw-semibold">{{ inq.subject }}</td>
+                <td style="max-width: 320px;">
+                  <span class="d-inline-block text-truncate" style="max-width: 300px;" title="{{ inq.message }}">{{ inq.message }}</span>
+                </td>
+                <td>
+                  {% if inq.is_resolved %}
+                  <span class="status-badge status-confirmed">Resolved</span>
+                  {% else %}
+                  <span class="status-badge status-processing">Pending</span>
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  <form method="post" action="{% url 'admin_inquiry_toggle' inq.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-navy-outline py-1 px-2" style="font-size: 11px;">
+                      {% if inq.is_resolved %}Mark Pending{% else %}Mark Resolved{% endif %}
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="7" class="text-center py-4 text-muted">No client inquiries found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================
+         TAB 9: NEWSLETTER SUBSCRIBERS
+         ====================================================================== -->
+    <div id="tab-subscribers" class="admin-tab-pane {% if active_tab != 'subscribers' %}d-none{% endif %}">
+      
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+          <h1 class="admin-page-title">Newsletter Subscribers</h1>
+          <p class="admin-page-sub">Patrons registered for Private Privileges invitations.</p>
+        </div>
+        <button class="btn-navy-outline" onclick="copyAllSubscriberEmails()">
+          <i class="bi bi-clipboard"></i> Copy All Email Addresses
+        </button>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Email Address</th>
+                <th>Subscribed Timestamp</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in subscribers %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="fw-bold">{{ s.email }}</td>
+                <td>{{ s.subscribed_at|date:"d M Y, H:i" }}</td>
+                <td class="text-end">
+                  <a href="mailto:{{ s.email }}" class="btn-navy-outline py-1 px-2" style="font-size: 11px;">
+                    <i class="bi bi-envelope"></i> Send Note
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" class="text-center py-4 text-muted">No newsletter subscribers recorded.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    {% endif %}
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL: ADD NEW PRODUCT (CLEAN 2-COLUMN PROFESSIONAL LAYOUT)
+       ======================================================================== -->
+  <div class="modal fade" id="modalAddProduct" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header" style="background-color: var(--primary-navy); color: var(--white);">
+          <h5 class="modal-title font-serif" style="font-family: 'Playfair Display', Georgia, serif;">
+            Add New Product
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form method="post" action="{% url 'admin_product_create' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="modal-body p-4">
+            
+            <!-- 2-Column Row 1: Name | SKU -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Product Name *</label>
+                <input type="text" name="name" class="form-control" placeholder="e.g. Royal Nizam Emerald Choker" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">SKU Code</label>
+                <input type="text" name="sku" class="form-control" placeholder="Leave blank to auto-generate">
+              </div>
+            </div>
+
+            <!-- 2-Column Row 2: Category & Subcategory -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Main Category</label>
+                <select name="category_id" id="add-category" class="form-select" onchange="filterSubcategories('add')">
+                  <option value="">Select Main Category</option>
+                  {% for mc in main_categories %}
+                  <option value="{{ mc.id }}">{{ mc.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Subcategory</label>
+                <select name="subcategory_id" id="add-subcategory" class="form-select">
+                  <option value="">Select Subcategory (Optional)</option>
+                  {% for sc in subcategories %}
+                  <option value="{{ sc.id }}" data-parent="{{ sc.parent_id }}">{{ sc.parent.name }} &rsaquo; {{ sc.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Material & Precious Metals -->
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Material &amp; Precious Metals</label>
+              <input type="text" name="material" class="form-control" value="22K Gold Plated Brass, Cubic Zirconia">
+            </div>
+
+            <!-- 2-Column Row 3: Price | Sale Price -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Regular Price (₹) *</label>
+                <input type="number" step="0.01" name="price" class="form-control" placeholder="49999" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Sale Price (₹, Optional)</label>
+                <input type="number" step="0.01" name="sale_price" class="form-control" placeholder="Optional discounted price">
+              </div>
+            </div>
+
+            <!-- 2-Column Row 4: Stock | Status -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Stock Quantity *</label>
+                <input type="number" name="stock" class="form-control" value="10" min="0" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold d-block">Status</label>
+                <div class="form-check mt-2">
+                  <input type="checkbox" name="active" value="1" class="form-check-input" id="addCheckActive" checked>
+                  <label class="form-check-label small" for="addCheckActive">Active in Boutique Catalog</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Width: Description -->
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Product Description</label>
+              <textarea name="description" class="form-control" rows="3" placeholder="Artisanal narrative, hallmark credentials, and silhouette styling notes..."></textarea>
+            </div>
+
+            <!-- Full Width: Care Instructions -->
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Care Instructions</label>
+              <input type="text" name="care_instructions" class="form-control" value="Keep away from moisture, perfume, and harsh chemicals. Store in a cool, dry place.">
+            </div>
+
+            <!-- Images: Main Image & Gallery Images Upload Zones with Previews -->
+            <div class="row g-3 mb-3">
+              <!-- Main Image Upload Zone -->
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Main Product Image</label>
+                <div class="upload-dropzone" id="addMainDropzone" onclick="document.getElementById('addMainImageInput').click()">
+                  <div id="addMainEmptyState">
+                    <i class="bi bi-cloud-arrow-up fs-3 text-muted d-block mb-1"></i>
+                    <div class="fw-semibold text-dark mb-1" style="font-size: 13px;">Upload Main Image</div>
+                    <small class="text-muted d-block" style="font-size: 11px;">Click to select from computer (JPG, PNG, WEBP)</small>
+                  </div>
+                  <input type="file" name="image" id="addMainImageInput" class="d-none" accept=".jpg,.jpeg,.png,.webp,image/*" onchange="previewMainImage(this, 'add')">
+                </div>
+                
+                <div id="addMainPreviewBox" class="main-image-preview-box d-none">
+                  <img id="addMainPreviewImg" src="" alt="Main Preview" class="main-image-preview-thumb">
+                  <div class="flex-grow-1 overflow-hidden">
+                    <div id="addMainPreviewName" class="fw-semibold text-truncate small">filename.jpg</div>
+                    <small id="addMainPreviewSize" class="text-muted d-block" style="font-size: 11px;">1.2 MB</small>
+                    <div class="d-flex gap-2 mt-1">
+                      <button type="button" class="btn-navy-outline py-0 px-2" style="font-size: 11px;" onclick="document.getElementById('addMainImageInput').click()">
+                        <i class="bi bi-arrow-repeat"></i> Replace
+                      </button>
+                      <button type="button" class="btn-navy-outline text-danger py-0 px-2" style="font-size: 11px;" onclick="clearMainImage('add')">
+                        <i class="bi bi-trash"></i> Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gallery Images Upload Zone -->
+              <div class="col-12 col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label class="form-label small fw-bold mb-0">Gallery Images (Multiple)</label>
+                  <small class="text-muted" id="addGalleryCountBadge" style="font-size: 11px;">0 selected</small>
+                </div>
+                <div class="upload-dropzone" id="addGalleryDropzone" onclick="document.getElementById('addGalleryImagesInput').click()">
+                  <i class="bi bi-images fs-3 text-muted d-block mb-1"></i>
+                  <div class="fw-semibold text-dark mb-1" style="font-size: 13px;">Upload Gallery Images</div>
+                  <small class="text-muted d-block" style="font-size: 11px;">Select multiple angles/details from computer</small>
+                  <input type="file" name="gallery_images" id="addGalleryImagesInput" class="d-none" accept=".jpg,.jpeg,.png,.webp,image/*" multiple onchange="previewGalleryImages(this, 'add')">
+                </div>
+
+                <!-- Gallery Previews Grid -->
+                <div id="addGalleryPreviewGrid" class="gallery-preview-grid"></div>
+              </div>
+            </div>
+
+            <!-- Feature Toggles -->
+            <div class="mb-2">
+              <label class="form-label small fw-bold d-block mb-1">Feature Toggles</label>
+              <div class="d-flex gap-4 flex-wrap">
+                <div class="form-check">
+                  <input type="checkbox" name="featured" value="1" class="form-check-input" id="addCheckFeatured">
+                  <label class="form-check-label small" for="addCheckFeatured">Featured</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" name="best_seller" value="1" class="form-check-input" id="addCheckBest">
+                  <label class="form-check-label small" for="addCheckBest">Best Seller</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" name="new_arrival" value="1" class="form-check-input" id="addCheckNew" checked>
+                  <label class="form-check-label small" for="addCheckNew">New Arrival</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn-navy-outline" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn-navy">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: EDIT PRODUCT (2-COLUMN PROFESSIONAL LAYOUT)
+       ======================================================================== -->
+  <div class="modal fade" id="modalEditProduct" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header" style="background-color: var(--primary-navy); color: var(--white);">
+          <h5 class="modal-title font-serif" style="font-family: 'Playfair Display', Georgia, serif;">
+            Edit Product
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="formEditProduct" method="post" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="modal-body p-4">
+            
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Product Name *</label>
+                <input type="text" name="name" id="edit-name" class="form-control" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">SKU Code</label>
+                <input type="text" name="sku" id="edit-sku" class="form-control">
+              </div>
+            </div>
+
+            <!-- 2-Column Row 2: Category & Subcategory -->
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Main Category</label>
+                <select name="category_id" id="edit-category" class="form-select" onchange="filterSubcategories('edit')">
+                  <option value="">Select Main Category</option>
+                  {% for mc in main_categories %}
+                  <option value="{{ mc.id }}">{{ mc.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Subcategory</label>
+                <select name="subcategory_id" id="edit-subcategory" class="form-select">
+                  <option value="">Select Subcategory (Optional)</option>
+                  {% for sc in subcategories %}
+                  <option value="{{ sc.id }}" data-parent="{{ sc.parent_id }}">{{ sc.parent.name }} &rsaquo; {{ sc.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Material -->
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Material &amp; Precious Metals</label>
+              <input type="text" name="material" id="edit-material" class="form-control">
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Price (₹) *</label>
+                <input type="number" step="0.01" name="price" id="edit-price" class="form-control" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Sale Price (₹)</label>
+                <input type="number" step="0.01" name="sale_price" id="edit-sale-price" class="form-control">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Stock Quantity *</label>
+                <input type="number" name="stock" id="edit-stock" class="form-control" min="0" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold d-block">Status</label>
+                <div class="form-check mt-2">
+                  <input type="checkbox" name="active" value="1" class="form-check-input" id="edit-active">
+                  <label class="form-check-label small" for="edit-active">Active</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Description</label>
+              <textarea name="description" id="edit-description" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Care Instructions</label>
+              <input type="text" name="care_instructions" id="edit-care" class="form-control">
+            </div>
+
+            <!-- Images: Main Image & Gallery Images Management in Edit Modal -->
+            <div class="row g-3 mb-3">
+              <!-- Main Image: Current Display & Replacement Dropzone -->
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold">Main Product Image</label>
+                
+                <!-- Current Main Image Display -->
+                <div id="editMainCurrentBox" class="main-image-preview-box mb-2 d-none">
+                  <img id="editMainCurrentImg" src="" alt="Current Image" class="main-image-preview-thumb">
+                  <div class="flex-grow-1 overflow-hidden">
+                    <span class="badge bg-light text-dark border mb-1" style="font-size: 10px;">Current Main Image</span>
+                    <div class="d-flex gap-2 mt-1">
+                      <button type="button" class="btn-navy-outline py-0 px-2" style="font-size: 11px;" onclick="document.getElementById('editMainImageInput').click()">
+                        <i class="bi bi-arrow-repeat"></i> Replace
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropzone to select replacement image -->
+                <div class="upload-dropzone" id="editMainDropzone" onclick="document.getElementById('editMainImageInput').click()">
+                  <div id="editMainEmptyState">
+                    <i class="bi bi-cloud-arrow-up fs-3 text-muted d-block mb-1"></i>
+                    <div class="fw-semibold text-dark mb-1" style="font-size: 13px;">Replace Main Image</div>
+                    <small class="text-muted d-block" style="font-size: 11px;">Click to select new image (JPG, PNG, WEBP)</small>
+                  </div>
+                  <input type="file" name="image" id="editMainImageInput" class="d-none" accept=".jpg,.jpeg,.png,.webp,image/*" onchange="previewMainImage(this, 'edit')">
+                </div>
+
+                <!-- Replacement Preview Box -->
+                <div id="editMainPreviewBox" class="main-image-preview-box d-none" style="border-color: var(--primary-navy);">
+                  <img id="editMainPreviewImg" src="" alt="New Replacement" class="main-image-preview-thumb">
+                  <div class="flex-grow-1 overflow-hidden">
+                    <span class="badge text-white mb-1" style="background: var(--primary-navy); font-size: 10px;">New Replacement</span>
+                    <div id="editMainPreviewName" class="fw-semibold text-truncate small">filename.jpg</div>
+                    <small id="editMainPreviewSize" class="text-muted d-block" style="font-size: 11px;">1.2 MB</small>
+                    <div class="d-flex gap-2 mt-1">
+                      <button type="button" class="btn-navy-outline text-danger py-0 px-2" style="font-size: 11px;" onclick="cancelMainImageReplacement()">
+                        <i class="bi bi-x-circle"></i> Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gallery Images: Existing list with Delete + Add New Dropzone -->
+              <div class="col-12 col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label class="form-label small fw-bold mb-0">Gallery Images</label>
+                  <small class="text-muted" id="editGalleryCountBadge" style="font-size: 11px;">0 saved</small>
+                </div>
+                
+                <!-- Existing Saved Gallery Images (with instant delete) -->
+                <div id="editExistingGallerySection" class="mb-2 d-none">
+                  <small class="text-muted d-block mb-1" style="font-size: 11px;">Saved Gallery (click &times; to delete):</small>
+                  <div id="editExistingGalleryGrid" class="gallery-preview-grid mb-2"></div>
+                </div>
+
+                <!-- Add More Gallery Images Dropzone -->
+                <div class="upload-dropzone" id="editGalleryDropzone" onclick="document.getElementById('editGalleryImagesInput').click()">
+                  <i class="bi bi-plus-circle fs-3 text-muted d-block mb-1"></i>
+                  <div class="fw-semibold text-dark mb-1" style="font-size: 13px;">Add More Gallery Images</div>
+                  <small class="text-muted d-block" style="font-size: 11px;">Select multiple images from computer</small>
+                  <input type="file" name="gallery_images" id="editGalleryImagesInput" class="d-none" accept=".jpg,.jpeg,.png,.webp,image/*" multiple onchange="previewGalleryImages(this, 'edit')">
+                </div>
+
+                <!-- Newly Selected Gallery Images Previews Grid -->
+                <div id="editGalleryPreviewGrid" class="gallery-preview-grid"></div>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label small fw-bold d-block mb-1">Feature Toggles</label>
+              <div class="d-flex gap-4 flex-wrap">
+                <div class="form-check">
+                  <input type="checkbox" name="featured" value="1" class="form-check-input" id="edit-featured">
+                  <label class="form-check-label small" for="edit-featured">Featured</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" name="best_seller" value="1" class="form-check-input" id="edit-best">
+                  <label class="form-check-label small" for="edit-best">Best Seller</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" name="new_arrival" value="1" class="form-check-input" id="edit-new">
+                  <label class="form-check-label small" for="edit-new">New Arrival</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn-navy-outline" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn-navy">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: INSPECT ORDER DETAILS
+       ======================================================================== -->
+  <div class="modal fade" id="modalOrderDetails" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header" style="background-color: var(--primary-navy); color: var(--white);">
+          <div>
+            <h5 class="modal-title font-serif" id="orderModalTitle" style="font-family: 'Playfair Display', Georgia, serif;">
+              Order Inspection
+            </h5>
+            <small class="text-white opacity-75" id="orderModalSubtitle"></small>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4" id="orderModalBody">
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <div class="mt-2 text-muted small">Loading order manifest...</div>
+          </div>
+        </div>
+        <div class="modal-footer bg-light d-flex justify-content-between">
+          <button type="button" class="btn-navy-outline" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn-navy" onclick="window.print()">
+            <i class="bi bi-printer"></i> Print Manifest
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar) sidebar.classList.toggle('show');
+      if (backdrop) backdrop.classList.toggle('show');
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.admin-tab-pane').forEach(el => el.classList.add('d-none'));
+      document.querySelectorAll('.admin-nav-item').forEach(el => el.classList.remove('active'));
+
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.remove('d-none');
+      }
+
+      document.querySelectorAll('.admin-nav-item').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId)) {
+          b.classList.add('active');
+        }
+      });
+
+      // Close mobile drawer if open
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar) sidebar.classList.remove('show');
+      if (backdrop) backdrop.classList.remove('show');
+
+      // Persist in URL query string
+      const url = new URL(window.location);
+      url.searchParams.set('tab', tabId);
+      window.history.replaceState({}, '', url);
+    }
+
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    // Quick Stock Refill (+5, +1, -1)
+    async function quickStockAdd(productId, delta) {
+      const fd = new FormData();
+      fd.append('delta', delta);
+
+      try {
+        const res = await fetch(`/admin-dashboard/product/${productId}/stock/`, {
+          method: 'POST',
+          headers: { 'X-CSRFToken': getCookie('csrftoken') },
+          body: fd,
+        });
+        const data = await res.json();
+        if (data.success) {
+          const el = document.getElementById(`prod-stock-${productId}`);
+          if (el) {
+            el.textContent = data.stock;
+            el.className = `stock-pill ${data.stock <= 5 ? 'stock-low' : 'stock-ok'}`;
+          }
+          alert(`Product stock updated to ${data.stock} units.`);
+        }
+      } catch (err) {
+        console.error("Error updating stock:", err);
+      }
+    }
+
+    // ========================================================================
+    // PRODUCT IMAGE UPLOAD & GALLERY PREVIEW SYSTEM
+    // ========================================================================
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function previewMainImage(input, prefix) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const ext = file.name.split('.').pop().toLowerCase();
+      
+      if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) {
+        alert("Invalid file format. Only JPG, JPEG, PNG, and WEBP images are supported.");
+        input.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const previewBox = document.getElementById(`${prefix}MainPreviewBox`);
+        const previewImg = document.getElementById(`${prefix}MainPreviewImg`);
+        const previewName = document.getElementById(`${prefix}MainPreviewName`);
+        const previewSize = document.getElementById(`${prefix}MainPreviewSize`);
+        
+        if (previewImg) previewImg.src = e.target.result;
+        if (previewName) previewName.textContent = file.name;
+        if (previewSize) previewSize.textContent = formatBytes(file.size);
+        if (previewBox) previewBox.classList.remove('d-none');
+
+        if (prefix === 'add') {
+          const dropzone = document.getElementById('addMainDropzone');
+          if (dropzone) dropzone.classList.add('d-none');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearMainImage(prefix) {
+      const input = document.getElementById(`${prefix}MainImageInput`);
+      if (input) input.value = '';
+      const previewBox = document.getElementById(`${prefix}MainPreviewBox`);
+      if (previewBox) previewBox.classList.add('d-none');
+      if (prefix === 'add') {
+        const dropzone = document.getElementById('addMainDropzone');
+        if (dropzone) dropzone.classList.remove('d-none');
+      }
+    }
+
+    function cancelMainImageReplacement() {
+      const input = document.getElementById('editMainImageInput');
+      if (input) input.value = '';
+      const previewBox = document.getElementById('editMainPreviewBox');
+      if (previewBox) previewBox.classList.add('d-none');
+    }
+
+    const selectedGalleryFiles = { add: [], edit: [] };
+
+    function previewGalleryImages(input, prefix) {
+      if (!input.files || input.files.length === 0) return;
+      const newFiles = Array.from(input.files);
+      const validExts = ['jpg', 'jpeg', 'png', 'webp'];
+
+      newFiles.forEach(f => {
+        const ext = f.name.split('.').pop().toLowerCase();
+        if (validExts.includes(ext)) {
+          selectedGalleryFiles[prefix].push(f);
+        }
+      });
+
+      syncGalleryInput(prefix);
+      renderGalleryPreviews(prefix);
+    }
+
+    function syncGalleryInput(prefix) {
+      const input = document.getElementById(`${prefix}GalleryImagesInput`);
+      if (!input) return;
+      const dt = new DataTransfer();
+      selectedGalleryFiles[prefix].forEach(f => dt.items.add(f));
+      input.files = dt.files;
+    }
+
+    function removeGalleryFile(prefix, index) {
+      selectedGalleryFiles[prefix].splice(index, 1);
+      syncGalleryInput(prefix);
+      renderGalleryPreviews(prefix);
+    }
+
+    function renderGalleryPreviews(prefix) {
+      const grid = document.getElementById(`${prefix}GalleryPreviewGrid`);
+      const badge = document.getElementById(`${prefix}GalleryCountBadge`);
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const files = selectedGalleryFiles[prefix];
+      if (badge && prefix === 'add') {
+        badge.textContent = `${files.length} selected`;
+      }
+
+      files.forEach((file, idx) => {
+        const item = document.createElement('div');
+        item.className = 'gallery-preview-item';
+
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.alt = file.name;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gallery-remove-btn';
+        btn.innerHTML = '&times;';
+        btn.title = `Remove ${file.name}`;
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          removeGalleryFile(prefix, idx);
+        };
+
+        item.appendChild(img);
+        item.appendChild(btn);
+        grid.appendChild(item);
+      });
+    }
+
+    async function deleteExistingGalleryImage(imageId) {
+      if (!confirm('Permanently remove this image from the product gallery?')) return;
+      try {
+        const res = await fetch(`/admin-dashboard/product/gallery-image/${imageId}/delete/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const el = document.getElementById(`existing-gal-${imageId}`);
+          if (el) el.remove();
+          const remaining = document.querySelectorAll('#editExistingGalleryGrid .gallery-preview-item').length;
+          const badge = document.getElementById('editGalleryCountBadge');
+          if (badge) badge.textContent = `${remaining} saved`;
+          if (remaining === 0) {
+            const sec = document.getElementById('editExistingGallerySection');
+            if (sec) sec.classList.add('d-none');
+          }
+        } else {
+          alert(data.error || 'Failed to remove image.');
+        }
+      } catch (err) {
+        console.error("Gallery deletion error:", err);
+        alert('Error removing gallery image.');
+      }
+    }
+
+    // Toggle Product Active / Deactivate
+    async function toggleProductActive(productId) {
+      const btn = document.getElementById(`btn-toggle-${productId}`);
+      const badge = document.getElementById(`prod-status-badge-${productId}`);
+      if (btn) btn.disabled = true;
+
+      try {
+        const res = await fetch(`/admin-dashboard/product/${productId}/toggle-active/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (badge) {
+            badge.className = `status-badge ${data.active ? 'status-confirmed' : 'status-cancelled'}`;
+            badge.textContent = data.active ? 'Active' : 'Hidden';
+          }
+          if (btn) {
+            btn.textContent = data.active ? 'Deactivate' : 'Activate';
+            btn.title = data.active ? 'Deactivate product from storefront' : 'Activate product on storefront';
+          }
+        } else {
+          alert(data.error || 'Failed to toggle product status.');
+        }
+      } catch (err) {
+        console.error("Error toggling product status:", err);
+        alert('Network error updating product status.');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    // Filter Subcategories by Selected Main Category
+    function filterSubcategories(mode, targetSubcatId) {
+      const catSelect = document.getElementById(`${mode}-category`);
+      const subcatSelect = document.getElementById(`${mode}-subcategory`);
+      if (!catSelect || !subcatSelect) return;
+
+      const selectedCatId = catSelect.value;
+      const options = subcatSelect.querySelectorAll('option');
+
+      options.forEach(opt => {
+        if (!opt.value) {
+          opt.style.display = '';
+          return;
+        }
+        const parentId = opt.getAttribute('data-parent');
+        if (!selectedCatId || parentId === selectedCatId) {
+          opt.style.display = '';
+        } else {
+          opt.style.display = 'none';
+        }
+      });
+
+      if (targetSubcatId !== undefined) {
+        subcatSelect.value = targetSubcatId || '';
+      } else {
+        const currentSelectedOpt = subcatSelect.options[subcatSelect.selectedIndex];
+        if (currentSelectedOpt && currentSelectedOpt.style.display === 'none') {
+          subcatSelect.value = '';
+        }
+      }
+    }
+
+    function handleSubcategoryChange(mode) {
+      const catSelect = document.getElementById(`${mode}-category`);
+      const subcatSelect = document.getElementById(`${mode}-subcategory`);
+      if (!catSelect || !subcatSelect) return;
+      const selectedOpt = subcatSelect.options[subcatSelect.selectedIndex];
+      if (selectedOpt && selectedOpt.value) {
+        const parentId = selectedOpt.getAttribute('data-parent');
+        if (parentId && !catSelect.value) {
+          catSelect.value = parentId;
+          filterSubcategories(mode, selectedOpt.value);
+        }
+      }
+    }
+
+    // Reset Add Product Modal Dropzones on Open
+    document.addEventListener('DOMContentLoaded', function() {
+      const addModalEl = document.getElementById('modalAddProduct');
+      if (addModalEl) {
+        addModalEl.addEventListener('show.bs.modal', function() {
+          clearMainImage('add');
+          selectedGalleryFiles['add'] = [];
+          renderGalleryPreviews('add');
+          filterSubcategories('add', '');
+        });
+      }
+
+      const addSubcat = document.getElementById('add-subcategory');
+      if (addSubcat) {
+        addSubcat.addEventListener('change', () => handleSubcategoryChange('add'));
+      }
+      const editSubcat = document.getElementById('edit-subcategory');
+      if (editSubcat) {
+        editSubcat.addEventListener('change', () => handleSubcategoryChange('edit'));
+      }
+    });
+
+    // Edit Product Modal Population
+    async function editProductModal(productId) {
+      try {
+        const res = await fetch(`/admin-dashboard/product/${productId}/edit/`);
+        const data = await res.json();
+        if (data.success) {
+          const p = data.product;
+          const form = document.getElementById('formEditProduct');
+          form.action = `/admin-dashboard/product/${productId}/edit/`;
+
+          document.getElementById('edit-name').value = p.name || '';
+          document.getElementById('edit-category').value = p.category_id || '';
+          filterSubcategories('edit', p.subcategory_id || '');
+          document.getElementById('edit-price').value = p.price || '';
+          document.getElementById('edit-sale-price').value = p.sale_price || '';
+          document.getElementById('edit-stock').value = p.stock ?? 10;
+          document.getElementById('edit-sku').value = p.sku || '';
+          document.getElementById('edit-material').value = p.material || '';
+          document.getElementById('edit-care').value = p.care_instructions || '';
+          document.getElementById('edit-description').value = p.description || '';
+          document.getElementById('edit-featured').checked = !!p.featured;
+          document.getElementById('edit-best').checked = !!p.best_seller;
+          document.getElementById('edit-new').checked = !!p.new_arrival;
+          document.getElementById('edit-active').checked = !!p.active;
+
+          // Reset new replacement previews
+          cancelMainImageReplacement();
+
+          // Main Image Current Box
+          const currBox = document.getElementById('editMainCurrentBox');
+          const currImg = document.getElementById('editMainCurrentImg');
+          if (p.image_url) {
+            currImg.src = p.image_url;
+            currBox.classList.remove('d-none');
+          } else {
+            currBox.classList.add('d-none');
+          }
+
+          // Existing Gallery Images
+          const exSection = document.getElementById('editExistingGallerySection');
+          const exGrid = document.getElementById('editExistingGalleryGrid');
+          const galBadge = document.getElementById('editGalleryCountBadge');
+          exGrid.innerHTML = '';
+          selectedGalleryFiles['edit'] = [];
+          renderGalleryPreviews('edit');
+
+          if (p.gallery && p.gallery.length > 0) {
+            exSection.classList.remove('d-none');
+            galBadge.textContent = `${p.gallery.length} saved`;
+            p.gallery.forEach(gi => {
+              const div = document.createElement('div');
+              div.className = 'gallery-preview-item';
+              div.id = `existing-gal-${gi.id}`;
+              div.innerHTML = `
+                <img src="${gi.url}" alt="Gallery Item">
+                <button type="button" class="gallery-remove-btn" onclick="deleteExistingGalleryImage(${gi.id})" title="Delete gallery image">&times;</button>
+                <span class="existing-gallery-badge">Saved</span>
+              `;
+              exGrid.appendChild(div);
+            });
+          } else {
+            exSection.classList.add('d-none');
+            galBadge.textContent = '0 saved';
+          }
+
+          const modal = new bootstrap.Modal(document.getElementById('modalEditProduct'));
+          modal.show();
+        }
+      } catch (err) {
+        console.error("Error loading product details:", err);
+        alert("Failed to load product details.");
+      }
+    }
+
+    // Quick Order Status Handler
+    async function handleQuickStatus(event, orderId) {
+      event.preventDefault();
+      const form = event.target;
+      const select = form.querySelector('select[name="status"]');
+      const newStatus = select.value;
+
+      const fd = new FormData();
+      fd.append('status', newStatus);
+      fd.append('ajax', '1');
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: fd
+        });
+        const data = await res.json();
+        if (data.success) {
+          const b = document.getElementById(`order-status-badge-${orderId}`);
+          if (b) {
+            b.className = `status-badge status-${data.status}`;
+            b.textContent = data.status_display;
+          }
+          alert(data.message);
+        }
+      } catch (err) {
+        form.submit();
+      }
+      return false;
+    }
+
+    // Inspect Order Details Modal
+    async function inspectOrder(orderId) {
+      const modalEl = document.getElementById('modalOrderDetails');
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+
+      const titleEl = document.getElementById('orderModalTitle');
+      const subtitleEl = document.getElementById('orderModalSubtitle');
+      const bodyEl = document.getElementById('orderModalBody');
+
+      bodyEl.innerHTML = `
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+          <div class="mt-2 text-muted small">Loading order manifest...</div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`/admin-dashboard/order/${orderId}/details/`);
+        const data = await res.json();
+        if (data.success) {
+          const o = data.order;
+          titleEl.textContent = `Order #${o.order_number}`;
+          subtitleEl.textContent = `${o.created_at} • Payment: ${o.payment_method} (${o.payment_status})`;
+
+          let itemsHtml = '';
+          o.items.forEach(it => {
+            itemsHtml += `
+              <tr class="border-bottom">
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    ${it.image ? `<img src="${it.image}" class="table-thumb" style="width:38px;height:38px;">` : `<i class="bi bi-gem"></i>`}
+                    <div>
+                      <span class="fw-semibold small d-block">${it.name}</span>
+                      <small class="text-muted">SKU: ${it.sku}</small>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">₹${Math.round(it.price)}</td>
+                <td class="text-center">${it.quantity}</td>
+                <td class="text-end fw-bold">₹${Math.round(it.total_price)}</td>
+              </tr>
+            `;
+          });
+
+          bodyEl.innerHTML = `
+            <div class="row g-4 mb-4">
+              <div class="col-12 col-md-6">
+                <div class="p-3 bg-light rounded border">
+                  <span class="small fw-bold text-uppercase d-block mb-1 text-muted" style="font-size:11px;">Customer Information</span>
+                  <div class="fw-bold" style="color:var(--primary-navy);">${o.customer_name}</div>
+                  <div class="small text-muted"><i class="bi bi-envelope me-1"></i> ${o.email}</div>
+                  <div class="small text-muted"><i class="bi bi-telephone me-1"></i> ${o.phone}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="p-3 bg-light rounded border">
+                  <span class="small fw-bold text-uppercase d-block mb-1 text-muted" style="font-size:11px;">Delivery Destination</span>
+                  <div class="small fw-semibold">${o.address}</div>
+                  <div class="small text-muted">${o.city}, ${o.state} — ${o.postal_code}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h6 class="small fw-bold text-uppercase text-muted mb-2" style="font-size:11px;">Line Items</h6>
+              <div class="table-responsive">
+                <table class="table admin-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Item Description</th>
+                      <th class="text-center">Unit Price</th>
+                      <th class="text-center">Qty</th>
+                      <th class="text-end">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${itemsHtml}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <form method="post" action="/admin-dashboard/order/${o.id}/status/" class="p-3 bg-light rounded border">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="${getCookie('csrftoken')}">
+                  <span class="small fw-bold text-uppercase d-block mb-2 text-muted" style="font-size:11px;">Update Order Status</span>
+                  <div class="mb-2">
+                    <select name="status" class="form-select form-select-sm">
+                      <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
+                      <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                      <option value="processing" ${o.status === 'processing' ? 'selected' : ''}>Processing</option>
+                      <option value="shipped" ${o.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+                      <option value="out_for_delivery" ${o.status === 'out_for_delivery' ? 'selected' : ''}>Out for Delivery</option>
+                      <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+                      <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                    </select>
+                  </div>
+                  <div class="mb-2">
+                    <select name="payment_status" class="form-select form-select-sm">
+                      <option value="Pending" ${o.payment_status === 'Pending' ? 'selected' : ''}>Payment: Pending</option>
+                      <option value="Paid" ${o.payment_status === 'Paid' ? 'selected' : ''}>Payment: Paid</option>
+                      <option value="Failed" ${o.payment_status === 'Failed' ? 'selected' : ''}>Payment: Failed</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn-navy w-100 justify-content-center py-1">Update Status</button>
+                </form>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="p-3 bg-light rounded border">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Subtotal:</span>
+                    <span class="fw-semibold">₹${Math.round(o.subtotal)}</span>
+                  </div>
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Shipping Fee:</span>
+                    <span class="fw-semibold">₹${Math.round(o.shipping_fee)}</span>
+                  </div>
+                  <div class="d-flex justify-content-between border-top pt-2 mt-2">
+                    <span class="fw-bold" style="color:var(--primary-navy);">Grand Total:</span>
+                    <span class="fw-bold fs-5" style="color:var(--primary-navy);">₹${Math.round(o.total)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        bodyEl.innerHTML = `<div class="alert alert-danger py-2">Error retrieving order manifest.</div>`;
+      }
+    }
+
+    // Copy All Emails Helper
+    function copyAllSubscriberEmails() {
+      const emails = [];
+      document.querySelectorAll('#tab-subscribers tbody tr td:nth-child(2)').forEach(td => {
+        emails.push(td.textContent.trim());
+      });
+      if (emails.length === 0) {
+        alert("No subscriber emails available.");
+        return;
+      }
+      const str = emails.join(', ');
+      navigator.clipboard.writeText(str).then(() => {
+        alert(`Copied ${emails.length} subscriber emails to clipboard!`);
+      }).catch(() => {
+        prompt("Copy emails:", str);
+      });
+    }
+  </script>
+</body>
+</html>

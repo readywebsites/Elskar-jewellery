@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Store Locator &amp; Boutiques | Azure Jewels{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb & Page Banner -->
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1140px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Store Locator</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Boutiques &amp; Atelier Salons</h1>
+        <p class="text-muted small mb-0">Experience Haute Joaillerie, Diamond Certifications &amp; Private Bridal Consultations</p>
+      </div>
+      <div>
+        <a href="{% url 'contact' %}" class="btn-azure py-2 px-3 text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 6px;">
+          <i class="bi bi-calendar-event"></i> Book Atelier Appointment
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Boutique Locator & Filter Section -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-2" style="max-width: 1140px;">
+
+    <!-- Filter & Search Controls -->
+    <div class="p-3 p-md-4 rounded-1 mb-5" style="background-color: var(--off-white); border: 1px solid var(--border-light);">
+      <div class="row g-3 align-items-center justify-content-between">
+        <!-- City Pills -->
+        <div class="col-12 col-lg-8">
+          <div class="d-flex flex-wrap gap-2 align-items-center" id="cityFilterGroup">
+            <span class="text-uppercase fw-semibold me-1" style="font-size: 11px; letter-spacing: 1px; color: var(--primary-navy);">City:</span>
+            <button type="button" class="btn btn-sm azure-city-pill active" data-city="all" style="font-size: 12px; border-radius: 20px; padding: 4px 14px; font-weight: 500; border: 1px solid var(--primary-navy); background-color: var(--primary-navy); color: #FFFFFF;">
+              All ({{ all_boutiques|length }})
+            </button>
+            {% for c in cities %}
+            <button type="button" class="btn btn-sm azure-city-pill" data-city="{{ c|lower }}" style="font-size: 12px; border-radius: 20px; padding: 4px 14px; font-weight: 500; border: 1px solid var(--border-light); background-color: #FFFFFF; color: var(--primary-navy);">
+              {{ c }}
+            </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="col-12 col-lg-4">
+          <div class="position-relative">
+            <input type="text" id="boutiqueSearchInput" class="form-control" placeholder="Search by city, area, pincode..." value="{{ search_query|default:'' }}" style="font-size: 13px; padding-left: 36px; border-color: var(--border-light); border-radius: 4px;">
+            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 text-muted" style="font-size: 14px;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boutique Cards Grid -->
+    <div class="row g-4" id="boutiqueGrid">
+      {% for b in all_boutiques %}
+      <div class="col-12 col-md-6 col-lg-4 boutique-card-item" data-city="{{ b.city|lower }}" data-keywords="{{ b.name|lower }} {{ b.city|lower }} {{ b.area|lower }} {{ b.pincode }} {{ b.state|lower }}">
+        <div class="card h-100 border rounded-1 p-4 d-flex flex-column justify-content-between" style="border-color: var(--border-light) !important; background-color: #FFFFFF; transition: box-shadow 0.25s ease, transform 0.25s ease;">
+          <div>
+            <!-- Top Header & Badge -->
+            <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom" style="border-color: var(--border-light) !important;">
+              <span class="badge py-1 px-2 text-uppercase fw-semibold" style="font-size: 10px; letter-spacing: 0.8px; {% if b.is_flagship %}background-color: var(--primary-navy); color: #FFFFFF;{% else %}background-color: var(--off-white); color: var(--secondary-navy); border: 1px solid var(--border-light);{% endif %}">
+                {% if b.is_flagship %}Flagship Atelier{% else %}Luxury Salon{% endif %}
+              </span>
+              <span class="small fw-semibold" style="color: var(--secondary-navy); font-size: 12px; letter-spacing: 0.5px;">
+                {{ b.city|upper }}
+              </span>
+            </div>
+
+            <!-- Boutique Title -->
+            <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">{{ b.name }}</h3>
+            <p class="text-muted small mb-3" style="line-height: 1.6;">
+              <i class="bi bi-geo-alt me-1" style="color: var(--primary-navy);"></i> {{ b.address }}, {{ b.city }}, {{ b.state }} - {{ b.pincode }}
+            </p>
+
+            <!-- Hours & Contact Info -->
+            <div class="small mb-3 pt-2 border-top" style="border-color: var(--border-light) !important; font-size: 12.5px;">
+              <div class="d-flex align-items-center gap-2 mb-2 text-muted">
+                <i class="bi bi-clock" style="color: var(--primary-navy);"></i>
+                <span>{{ b.hours }}</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-telephone" style="color: var(--primary-navy);"></i>
+                <a href="tel:{{ b.phone }}" class="text-decoration-none" style="color: var(--primary-navy); font-weight: 500;">{{ b.phone }}</a>
+              </div>
+              <div class="d-flex align-items-center gap-2 text-muted">
+                <i class="bi bi-envelope" style="color: var(--primary-navy);"></i>
+                <a href="mailto:{{ b.email }}" class="text-muted text-decoration-none">{{ b.email }}</a>
+              </div>
+            </div>
+
+            <!-- Atelier Services -->
+            <div class="mb-4">
+              <span class="d-block text-uppercase fw-semibold mb-2" style="font-size: 10px; letter-spacing: 0.8px; color: var(--secondary-navy);">Boutique Services</span>
+              <div class="d-flex flex-wrap gap-1">
+                {% for s in b.services %}
+                <span class="badge py-1 px-2" style="background-color: var(--off-white); color: var(--primary-navy); border: 1px solid var(--border-light); font-size: 10.5px; font-weight: 500;">
+                  {{ s }}
+                </span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="pt-3 border-top d-flex gap-2" style="border-color: var(--border-light) !important;">
+            <a href="https://maps.google.com/?q={{ b.name|urlencode }}+{{ b.city|urlencode }}" target="_blank" rel="noopener" class="btn btn-sm w-50 py-2 border text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 0.8px; border-color: var(--border-light) !important; color: var(--primary-navy); background-color: var(--off-white);">
+              <i class="bi bi-compass me-1"></i> Directions
+            </a>
+            <a href="{% url 'contact' %}" class="btn-azure btn-sm w-50 py-2 text-center text-uppercase fw-semibold" style="font-size: 11px; letter-spacing: 0.8px;">
+              Book Visit
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Empty Results Fallback -->
+    <div id="noBoutiquesMsg" class="text-center py-5 d-none">
+      <div class="azure-feature-icon mx-auto mb-3" style="width: 50px; height: 50px; font-size: 24px;"><i class="bi bi-geo-alt-slash"></i></div>
+      <h4 class="azure-title fs-5" style="color: var(--primary-navy);">No Boutiques Found</h4>
+      <p class="text-muted small mb-3">We could not find an atelier matching your selected filters. Please try another city or contact Atelier Concierge for home appointments.</p>
+      <button type="button" id="resetBoutiqueFilter" class="btn-azure py-2 px-4 text-uppercase fw-semibold" style="font-size: 12px; letter-spacing: 1px;">
+        View All Boutiques
+      </button>
+    </div>
+
+    <!-- Atelier Privileges Banner -->
+    <div class="mt-5 pt-4 border-top" style="border-color: var(--border-light) !important;">
+      <div class="row g-4 text-center">
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-shield-check"></i></div>
+            <h3 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">Certified Gemmologists</h3>
+            <p class="text-muted small mb-0">Every salon features certified appraisal experts for natural diamonds, precious gemstones, and hallmark certifications.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-stars"></i></div>
+            <h3 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">Complimentary Jewellery Spa</h3>
+            <p class="text-muted small mb-0">Bring your Azure Jewels pieces anytime to any flagship boutique for complimentary ultrasonic cleaning and prong security checks.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-cup-hot"></i></div>
+            <h3 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">Private VIP Bridal Suite</h3>
+            <p class="text-muted small mb-0">Reserve a dedicated private salon suite with a dedicated bridal stylist for personal styling alongside family and bridal trousseau consultation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Filter Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const cityButtons = document.querySelectorAll('.azure-city-pill');
+  const searchInput = document.getElementById('boutiqueSearchInput');
+  const cards = document.querySelectorAll('.boutique-card-item');
+  const noMsg = document.getElementById('noBoutiquesMsg');
+  const resetBtn = document.getElementById('resetBoutiqueFilter');
+
+  let activeCity = 'all';
+
+  function filterBoutiques() {
+    const term = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardCity = card.getAttribute('data-city') || '';
+      const cardKeywords = card.getAttribute('data-keywords') || '';
+
+      const cityMatch = (activeCity === 'all') || (cardCity === activeCity);
+      const searchMatch = !term || cardKeywords.includes(term);
+
+      if (cityMatch && searchMatch) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (noMsg) {
+      if (visibleCount === 0) {
+        noMsg.classList.remove('d-none');
+      } else {
+        noMsg.classList.add('d-none');
+      }
+    }
+  }
+
+  cityButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      cityButtons.forEach(b => {
+        b.classList.remove('active');
+        b.style.backgroundColor = '#FFFFFF';
+        b.style.color = 'var(--primary-navy)';
+        b.style.borderColor = 'var(--border-light)';
+      });
+      this.classList.add('active');
+      this.style.backgroundColor = 'var(--primary-navy)';
+      this.style.color = '#FFFFFF';
+      this.style.borderColor = 'var(--primary-navy)';
+
+      activeCity = this.getAttribute('data-city');
+      filterBoutiques();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterBoutiques);
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      if (searchInput) searchInput.value = '';
+      const allBtn = document.querySelector('.azure-city-pill[data-city="all"]');
+      if (allBtn) allBtn.click();
+    });
+  }
+
+  // Pre-filter if query params
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramCity = urlParams.get('city');
+  if (paramCity) {
+    const matchBtn = document.querySelector(`.azure-city-pill[data-city="${paramCity.toLowerCase()}"]`);
+    if (matchBtn) matchBtn.click();
+  }
+});
+</script>
+{% endblock %}

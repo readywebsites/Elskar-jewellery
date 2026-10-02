@@ -1,0 +1,49 @@
+{% load static %}
+<div class="azure-account-sidebar mb-4">
+  <div class="azure-account-user-card">
+    <div class="azure-account-avatar">
+      {{ user.first_name|slice:":1"|default:user.username|slice:":1"|upper }}
+    </div>
+    <h3 class="azure-title fs-5 mb-1" style="color: var(--primary-navy);">{{ user.get_full_name|default:user.username }}</h3>
+    <small class="text-muted d-block">{{ user.email }}</small>
+  </div>
+  <ul class="azure-account-nav">
+    <li>
+      <a href="{% url 'account_dashboard' %}" class="{% if active_tab == 'dashboard' %}active{% endif %}">
+        <i class="bi bi-grid-fill"></i> Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'account_orders' %}" class="{% if active_tab == 'orders' %}active{% endif %}">
+        <i class="bi bi-box-seam"></i> My Orders
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'account_profile' %}" class="{% if active_tab == 'profile' %}active{% endif %}">
+        <i class="bi bi-person-fill"></i> Personal Profile
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'account_addresses' %}" class="{% if active_tab == 'addresses' %}active{% endif %}">
+        <i class="bi bi-geo-alt-fill"></i> Saved Addresses
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'wishlist' %}">
+        <i class="bi bi-heart-fill"></i> Saved Wishlist
+      </a>
+    </li>
+    {% if user.is_staff or user.is_superuser %}
+    <li>
+      <a href="{% url 'admin_dashboard' %}" style="color: var(--primary-navy); font-weight: 600;">
+        <i class="bi bi-speedometer2"></i> Atelier Admin Suite
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="{% url 'logout' %}" class="text-danger">
+        <i class="bi bi-box-arrow-right"></i> Sign Out
+      </a>
+    </li>
+  </ul>
+</div>

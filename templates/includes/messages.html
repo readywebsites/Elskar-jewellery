@@ -1,0 +1,19 @@
+{% if messages %}
+<div class="azure-messages-container" id="azureMessagesContainer">
+  {% for message in messages %}
+  <div class="azure-alert-toast azure-alert-{{ message.tags|default:'info' }}">
+    <div class="d-flex align-items-center gap-2">
+      {% if message.tags == 'error' %}
+      <i class="bi bi-exclamation-circle fs-5" style="color: var(--primary-navy);"></i>
+      {% elif message.tags == 'warning' %}
+      <i class="bi bi-exclamation-triangle fs-5" style="color: var(--secondary-navy);"></i>
+      {% else %}
+      <i class="bi bi-check-circle fs-5" style="color: var(--primary-navy);"></i>
+      {% endif %}
+      <span>{{ message }}</span>
+    </div>
+    <button type="button" class="azure-toast-close" aria-label="Close">&times;</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

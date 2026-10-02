@@ -1,0 +1,147 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Azure Jewels Admin Portal{% endblock %}
+
+{% block branding %}
+<div style="display: flex; align-items: center; gap: 14px;">
+    <a href="{% url 'admin:index' %}" style="display: flex; align-items: center; text-decoration: none; color: #FFFFFF;">
+        <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 19px; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF;">AZURE JEWELS</span>
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; margin-left: 10px; color: #D9E3EC; border-left: 1px solid #123B5D; padding-left: 10px;">Atelier Admin</span>
+    </a>
+</div>
+{% endblock %}
+
+{% block userlinks %}
+    <a href="{% url 'admin_dashboard' %}" style="background: #123B5D; color: #FFFFFF; font-weight: 600; padding: 6px 14px; border-radius: 4px; text-decoration: none; margin-right: 12px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2);">
+        Executive Dashboard &rarr;
+    </a>
+    <a href="{% url 'home' %}" target="_blank" style="margin-right: 14px; color: #D9E3EC; font-size: 12px; text-decoration: none;">View Storefront &rarr;</a>
+    {{ block.super }}
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Azure Jewels Strict Navy + White Professional Admin Palette (NO GOLD) */
+    :root {
+        --primary-navy: #071A2D;
+        --secondary-navy: #0B2A45;
+        --accent-navy: #123B5D;
+        --border-navy: #D9E3EC;
+        --soft-white: #F6F8FA;
+    }
+    html, body {
+        background: #F6F8FA !important;
+        color: #071A2D !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+    #container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        background: #F6F8FA !important;
+    }
+    #header {
+        background: #071A2D !important;
+        border-bottom: 2px solid #123B5D !important;
+        color: #FFFFFF !important;
+        padding: 14px 28px !important;
+        height: auto !important;
+    }
+    #header a:link, #header a:visited {
+        color: #FFFFFF;
+    }
+    div.breadcrumbs {
+        background: #0B2A45 !important;
+        color: #D9E3EC !important;
+        font-size: 13px !important;
+        border-bottom: 1px solid #123B5D !important;
+        padding: 10px 28px !important;
+    }
+    div.breadcrumbs a {
+        color: #FFFFFF !important;
+        font-weight: 500 !important;
+    }
+    #content {
+        padding: 28px 32px !important;
+        background: #F6F8FA !important;
+    }
+    .module {
+        background: #FFFFFF !important;
+        border: 1px solid #D9E3EC !important;
+        border-radius: 8px !important;
+        box-shadow: 0 1px 3px rgba(7,26,45,0.03) !important;
+        margin-bottom: 24px !important;
+        overflow: hidden !important;
+    }
+    .module h2, .module caption, .inline-group h2 {
+        background: #071A2D !important;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.04em !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+    }
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {
+        background: #071A2D !important;
+        border-color: #071A2D !important;
+        color: #FFFFFF !important;
+        border-radius: 4px !important;
+        font-weight: 600 !important;
+        padding: 8px 16px !important;
+        transition: all 0.2s ease !important;
+    }
+    .button.default, input[type=submit].default, .submit-row input.default {
+        background: #123B5D !important;
+        border-color: #123B5D !important;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+    }
+    .button:hover, input[type=submit]:hover, input[type=button]:hover {
+        background: #0B2A45 !important;
+    }
+    .button.default:hover, input[type=submit].default:hover {
+        background: #071A2D !important;
+    }
+    #changelist-filter {
+        background: #FFFFFF !important;
+        border-left: 1px solid #D9E3EC !important;
+    }
+    #changelist-filter h2 {
+        background: #071A2D !important;
+        color: #FFFFFF !important;
+    }
+    #changelist-filter li.selected a {
+        color: #071A2D !important;
+        font-weight: 700 !important;
+    }
+    .object-tools a:link, .object-tools a:visited {
+        background: #071A2D !important;
+        border-radius: 4px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+    }
+    .object-tools a:hover {
+        background: #123B5D !important;
+    }
+    #result_list {
+        border: 1px solid #D9E3EC !important;
+        width: 100% !important;
+    }
+    #result_list th {
+        background: #F6F8FA !important;
+        color: #071A2D !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        border-bottom: 1px solid #D9E3EC !important;
+        padding: 10px 14px !important;
+    }
+    #result_list td {
+        padding: 10px 14px !important;
+        font-size: 13px !important;
+        border-bottom: 1px solid #D9E3EC !important;
+    }
+</style>
+{% endblock %}

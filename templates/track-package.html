@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Track Package &amp; Consignment | Azure Jewels{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb & Header Banner -->
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Track Package</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Consignment &amp; Order Tracking</h1>
+    <p class="text-muted small mb-0">Real-Time Transit Milestones for Armored &amp; Insured Deliveries</p>
+  </div>
+</section>
+
+<!-- Tracking Query & Results Section -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-2" style="max-width: 1000px;">
+
+    <!-- Tracking Lookup Form -->
+    <div class="p-4 p-md-5 border rounded-1 mb-5" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-5 mb-4 mb-lg-0">
+          <span class="azure-section-subtitle d-block mb-1" style="color: var(--secondary-navy); letter-spacing: 0.15em; font-size: 11px;">LIVE DISPATCH STATUS</span>
+          <h2 class="azure-title fs-4 mb-2" style="color: var(--primary-navy);">Track Your Consignment</h2>
+          <p class="text-muted small mb-0" style="line-height: 1.6;">
+            Enter your Order Number (from your receipt or SMS notification) along with your email or phone to view live checkpoint updates.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-7">
+          <form action="{% url 'track_package' %}" method="get" class="bg-white p-3 p-md-4 border rounded-1" style="border-color: var(--border-light) !important;">
+            <div class="row g-3">
+              <div class="col-12 col-sm-7">
+                <label for="order_number" class="form-label" style="font-size: 12px; font-weight: 500; color: var(--primary-navy);">
+                  Order Number *
+                </label>
+                <input
+                  type="text"
+                  name="order_number"
+                  id="order_number"
+                  class="form-control"
+                  placeholder="e.g. ORD-2026-XXXX"
+                  value="{{ order_number|default:'' }}"
+                  required
+                  style="font-size: 13.5px; padding: 9px 12px; border-color: var(--border-light);"
+                >
+              </div>
+
+              <div class="col-12 col-sm-5">
+                <label for="identifier" class="form-label" style="font-size: 12px; font-weight: 500; color: var(--primary-navy);">
+                  Email / Phone <small class="text-muted">(Optional)</small>
+                </label>
+                <input
+                  type="text"
+                  name="identifier"
+                  id="identifier"
+                  class="form-control"
+                  placeholder="Email or phone"
+                  value="{{ identifier|default:'' }}"
+                  style="font-size: 13.5px; padding: 9px 12px; border-color: var(--border-light);"
+                >
+              </div>
+
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn-azure py-2 px-4 w-100 text-uppercase fw-semibold" style="font-size: 12px; letter-spacing: 1px;">
+                  <i class="bi bi-search me-1"></i> Track Consignment &rarr;
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error / Not Found Message -->
+    {% if error_message %}
+    <div class="alert p-4 rounded-1 mb-5" style="background-color: var(--off-white); border: 1px solid var(--border-light); color: var(--text-dark);">
+      <div class="d-flex align-items-start gap-3">
+        <i class="bi bi-exclamation-circle-fill fs-5 mt-1"></i>
+        <div>
+          <strong class="d-block mb-1" style="font-size: 14px;">Consignment Not Located</strong>
+          <p class="small mb-2">{{ error_message }}</p>
+          <div class="small">
+            <span>Need assistance? Reach our concierge at </span>
+            <a href="tel:+919876543210" class="fw-semibold text-decoration-underline" style="color: inherit;">+91 98765 43210</a>
+            <span> or </span>
+            <a href="{% url 'contact' %}" class="fw-semibold text-decoration-underline" style="color: inherit;">Contact Atelier Support</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Order Tracking Result -->
+    {% if order %}
+    <div class="border rounded-1 mb-5 p-4 p-md-5" style="border-color: var(--border-light) !important; background-color: #FFFFFF; box-shadow: 0 4px 20px rgba(7, 26, 45, 0.04);">
+      
+      <!-- Top Order Info Bar -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center pb-4 mb-4 border-bottom gap-3" style="border-color: var(--border-light) !important;">
+        <div>
+          <span class="azure-section-subtitle d-block mb-1" style="color: var(--secondary-navy); font-size: 11px;">CONSIGNMENT DETAILS</span>
+          <h3 class="azure-title fs-4 mb-1" style="color: var(--primary-navy);">Order #{{ order.order_number }}</h3>
+          <small class="text-muted">Order Placed: {{ order.created_at|date:"d F Y, h:i A" }}</small>
+        </div>
+        <div>
+          <span class="badge py-2 px-3 text-uppercase fw-semibold" style="background-color: var(--primary-navy); color: #FFFFFF; font-size: 12px; letter-spacing: 0.8px;">
+            Status: {{ order.get_status_display }}
+          </span>
+        </div>
+      </div>
+
+      <!-- 4-Step Visual Progress Stepper -->
+      <div class="py-3 px-2 mb-5 rounded-1" style="background-color: var(--off-white); border: 1px solid var(--border-light);">
+        <h6 class="text-uppercase fw-semibold text-center mb-4 pt-2" style="font-size: 11px; letter-spacing: 1.5px; color: var(--secondary-navy);">
+          Insured Transit Milestones
+        </h6>
+
+        <div class="d-flex justify-content-between position-relative px-2 px-md-4" style="max-width: 760px; margin: 0 auto;">
+          <!-- Step 1: Placed -->
+          <div class="text-center flex-fill position-relative">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2 fw-semibold" style="width: 36px; height: 36px; font-size: 13px; background-color: var(--primary-navy); color: #FFFFFF;">
+              ✓
+            </div>
+            <strong class="d-block" style="font-size: 11.5px; color: var(--primary-navy);">Order Placed</strong>
+            <small class="text-muted d-block" style="font-size: 10px;">{{ order.created_at|date:"d M" }}</small>
+          </div>
+
+          <!-- Step 2: Quality Inspection -->
+          <div class="text-center flex-fill position-relative">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2 fw-semibold" style="width: 36px; height: 36px; font-size: 13px; {% if order.status == 'processing' or order.status == 'shipped' or order.status == 'out_for_delivery' or order.status == 'delivered' %}background-color: var(--primary-navy); color: #FFFFFF;{% else %}background-color: var(--border-light); color: var(--primary-navy);{% endif %}">
+              {% if order.status == 'shipped' or order.status == 'out_for_delivery' or order.status == 'delivered' %}✓{% else %}2{% endif %}
+            </div>
+            <strong class="d-block" style="font-size: 11.5px; color: var(--primary-navy);">Inspection &amp; Hallmark</strong>
+            <small class="text-muted d-block" style="font-size: 10px;">Atelier Sealed</small>
+          </div>
+
+          <!-- Step 3: In Transit -->
+          <div class="text-center flex-fill position-relative">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2 fw-semibold" style="width: 36px; height: 36px; font-size: 13px; {% if order.status == 'shipped' or order.status == 'out_for_delivery' or order.status == 'delivered' %}background-color: var(--primary-navy); color: #FFFFFF;{% else %}background-color: var(--border-light); color: var(--primary-navy);{% endif %}">
+              {% if order.status == 'out_for_delivery' or order.status == 'delivered' %}✓{% else %}3{% endif %}
+            </div>
+            <strong class="d-block" style="font-size: 11.5px; color: var(--primary-navy);">Armored Transit</strong>
+            <small class="text-muted d-block" style="font-size: 10px;">Blue Dart / Sequel</small>
+          </div>
+
+          <!-- Step 4: Delivered -->
+          <div class="text-center flex-fill position-relative">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-2 fw-semibold" style="width: 36px; height: 36px; font-size: 13px; {% if order.status == 'delivered' %}background-color: var(--primary-navy); color: #FFFFFF;{% else %}background-color: var(--border-light); color: var(--primary-navy);{% endif %}">
+              {% if order.status == 'delivered' %}✓{% else %}4{% endif %}
+            </div>
+            <strong class="d-block" style="font-size: 11.5px; color: var(--primary-navy);">Delivered</strong>
+            <small class="text-muted d-block" style="font-size: 10px;">Doorstep Handover</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consignment Metadata & Delivery Address Grid -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <span class="d-block text-uppercase fw-semibold mb-2" style="font-size: 10px; letter-spacing: 0.8px; color: var(--secondary-navy);">Shipping Address</span>
+            <strong class="d-block mb-1" style="color: var(--primary-navy); font-size: 14px;">{{ order.full_name }}</strong>
+            <p class="text-muted small mb-1" style="line-height: 1.5;">
+              {{ order.address }}<br>
+              {{ order.city }}{% if order.state %}, {{ order.state }}{% endif %} - {{ order.postal_code }}
+            </p>
+            <small class="text-muted d-block"><i class="bi bi-telephone me-1" style="color: var(--primary-navy);"></i> {{ masked_phone|default:order.phone }}</small>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="p-3 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <span class="d-block text-uppercase fw-semibold mb-2" style="font-size: 10px; letter-spacing: 0.8px; color: var(--secondary-navy);">Courier &amp; Logistics</span>
+            <div class="small mb-1"><span class="text-muted">Carrier:</span> <strong style="color: var(--primary-navy);">Sequel Secure Logistics (Armored Transit)</strong></div>
+            <div class="small mb-1"><span class="text-muted">AWB Code:</span> <strong style="color: var(--primary-navy);">AJ-AWB-{{ order.order_number|slice:"-6:" }}</strong></div>
+            <div class="small mb-1"><span class="text-muted">Payment Mode:</span> <strong style="color: var(--primary-navy);">{{ order.payment_method }}</strong></div>
+            <div class="small"><span class="text-muted">Total Amount:</span> <strong style="color: var(--primary-navy);">₹{{ order.total|floatformat:0 }}</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items List -->
+      {% if order_items %}
+      <div class="pt-3 border-top" style="border-color: var(--border-light) !important;">
+        <h5 class="azure-title fs-6 mb-3" style="color: var(--primary-navy);">Package Contents ({{ order_items|length }} item{% if order_items|length != 1 %}s{% endif %})</h5>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <tbody>
+              {% for item in order_items %}
+              <tr style="border-color: var(--border-light) !important;">
+                <td style="width: 55px;">
+                  {% if item.product and item.product.image %}
+                  <img src="{{ item.product.image.url }}" alt="{{ item.name }}" width="45" height="45" class="rounded-1 border" style="object-fit: cover; border-color: var(--border-light) !important;">
+                  {% else %}
+                  <img src="{% static 'assets/images/featured-products/01.webp' %}" alt="{{ item.name }}" width="45" height="45" class="rounded-1 border" style="object-fit: cover; border-color: var(--border-light) !important;">
+                  {% endif %}
+                </td>
+                <td>
+                  <strong class="d-block" style="color: var(--primary-navy); font-size: 13.5px;">{{ item.name }}</strong>
+                  <small class="text-muted">Qty: {{ item.quantity }} &times; ₹{{ item.price|floatformat:0 }}</small>
+                </td>
+                <td class="text-end fw-semibold azure-serif" style="color: var(--primary-navy); font-size: 14px;">
+                  ₹{{ item.total_price|floatformat:0 }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    {% endif %}
+
+    <!-- Authenticated User Recent Orders (Quick Track) -->
+    {% if user_orders %}
+    <div class="p-4 border rounded-1 mb-5" style="border-color: var(--border-light) !important; background-color: var(--off-white);">
+      <h4 class="azure-title fs-5 mb-3" style="color: var(--primary-navy);">Your Recent Orders</h4>
+      <p class="text-muted small mb-3">Select any of your recent orders below to instantly track consignment progress:</p>
+      
+      <div class="table-responsive bg-white rounded-1 border" style="border-color: var(--border-light) !important;">
+        <table class="table align-middle mb-0" style="font-size: 13px;">
+          <thead style="background-color: var(--off-white);">
+            <tr style="border-color: var(--border-light) !important;">
+              <th class="py-2 px-3 fw-semibold" style="color: var(--primary-navy);">Order Number</th>
+              <th class="py-2 px-3 fw-semibold" style="color: var(--primary-navy);">Date</th>
+              <th class="py-2 px-3 fw-semibold" style="color: var(--primary-navy);">Status</th>
+              <th class="py-2 px-3 fw-semibold" style="color: var(--primary-navy);">Total</th>
+              <th class="py-2 px-3 text-end fw-semibold" style="color: var(--primary-navy);">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for uo in user_orders %}
+            <tr style="border-color: var(--border-light) !important;">
+              <td class="px-3 fw-medium" style="color: var(--primary-navy);">#{{ uo.order_number }}</td>
+              <td class="px-3 text-muted">{{ uo.created_at|date:"d M Y" }}</td>
+              <td class="px-3">
+                <span class="badge py-1 px-2 text-uppercase" style="background-color: var(--off-white); color: var(--primary-navy); border: 1px solid var(--border-light); font-size: 11px;">
+                  {{ uo.get_status_display }}
+                </span>
+              </td>
+              <td class="px-3 fw-semibold azure-serif" style="color: var(--primary-navy);">₹{{ uo.total|floatformat:0 }}</td>
+              <td class="px-3 text-end">
+                <a href="{% url 'track_package' %}?order_number={{ uo.order_number }}" class="btn btn-sm btn-azure py-1 px-2" style="font-size: 11px;">
+                  Track &rarr;
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Insured Transit Guarantees -->
+    <div class="mt-5 pt-4 border-top" style="border-color: var(--border-light) !important;">
+      <h3 class="azure-title fs-5 text-center mb-4" style="color: var(--primary-navy);">The Azure Jewels Transit Assurance</h3>
+      <div class="row g-4 text-center">
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-shield-lock"></i></div>
+            <h4 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">100% Insured Armored Transit</h4>
+            <p class="text-muted small mb-0">Every shipment travels under comprehensive transit insurance via dedicated secured logistics partners with GPS-tracked armored vehicles.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-box-seam"></i></div>
+            <h4 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">Tamper-Evident Security Seal</h4>
+            <p class="text-muted small mb-0">Jewellery packages are secured with serialized tamper-evident holographic seals at the atelier. Never accept any parcel with broken seals.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-phone"></i></div>
+            <h4 class="azure-title fs-6 mb-2" style="color: var(--primary-navy);">Secure OTP Verification</h4>
+            <p class="text-muted small mb-0">Final doorstep handover requires SMS-based One-Time Password verification sent directly to the registered patron's mobile number.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

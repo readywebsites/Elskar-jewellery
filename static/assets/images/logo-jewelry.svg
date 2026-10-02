@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="100" viewBox="0 0 360 100">
+<rect width="360" height="100" rx="14" fill="#ffffff"/>
+<g fill="#0b4f8a"><circle cx="42" cy="50" r="26" fill="none" stroke="#0b4f8a" stroke-width="6"/><path d="M42 18l10 14-10 18-10-18z"/><circle cx="42" cy="50" r="5" fill="#75bde9"/></g>
+<text x="84" y="46" font-family="Georgia, serif" font-size="30" font-weight="700" fill="#0b4f8a" letter-spacing="2">AZURE</text>
+<text x="86" y="74" font-family="Arial, sans-serif" font-size="14" fill="#6d8fa8" letter-spacing="6">JEWELS</text>
+</svg>

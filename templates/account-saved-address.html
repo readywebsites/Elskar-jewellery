@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Saved Addresses | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'account_dashboard' %}" class="text-muted">Account</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Saved Addresses</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-0" style="font-size: 32px; color: var(--primary-navy);">Delivery Address Book</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-lg-3">
+        {% include "includes/account-sidebar.html" with active_tab="addresses" %}
+      </div>
+
+      <div class="col-12 col-lg-9">
+        
+        <!-- Existing Addresses Grid -->
+        <h5 class="azure-title mb-3 fs-5" style="color: var(--primary-navy);">Saved Addresses</h5>
+        <div class="row g-3 mb-5">
+          {% for addr in addresses %}
+          <div class="col-12 col-md-6">
+            <div class="p-4 border rounded-1 position-relative h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+              {% if addr.is_default %}
+              <span class="badge position-absolute top-0 end-0 m-3 py-1 px-2 text-uppercase" style="background-color: var(--primary-navy); color: #FFFFFF; font-size: 10px; letter-spacing: 0.05em;">DEFAULT</span>
+              {% endif %}
+              <strong class="d-block mb-1" style="color: var(--primary-navy);">{{ addr.full_name }}</strong>
+              <p class="text-muted small mb-1">{{ addr.address_line1 }}{% if addr.address_line2 %}, {{ addr.address_line2 }}{% endif %}</p>
+              <p class="text-muted small mb-1">{{ addr.city }}, {{ addr.state }} - {{ addr.postal_code }}</p>
+              <small class="text-muted"><i class="bi bi-telephone me-1" style="color: var(--primary-navy);"></i> {{ addr.phone }}</small>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12">
+            <p class="text-muted small">No saved addresses yet.</p>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Add Address Form -->
+        <div class="p-4 p-md-5 border rounded-1" style="border-color: var(--border-light) !important;">
+          <h5 class="azure-title mb-4 fs-4" style="color: var(--primary-navy);">Add New Address</h5>
+          <form action="{% url 'account_addresses' %}" method="post">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Full Name *</label>
+                <input type="text" name="full_name" class="form-control" required placeholder="Recipient name">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Contact Phone *</label>
+                <input type="tel" name="phone" class="form-control" required placeholder="+91 98201 23456">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Address Line 1 *</label>
+                <input type="text" name="address_line1" class="form-control" required placeholder="Flat/House No., Building, Street">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Address Line 2 (Optional)</label>
+                <input type="text" name="address_line2" class="form-control" placeholder="Landmark, Area">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">City *</label>
+                <input type="text" name="city" class="form-control" required placeholder="e.g. Mumbai">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">State *</label>
+                <input type="text" name="state" class="form-control" required placeholder="e.g. Maharashtra">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">PIN Code *</label>
+                <input type="text" name="postal_code" class="form-control" required placeholder="400050">
+              </div>
+
+              <div class="col-12">
+                <div class="form-check mt-2">
+                  <input type="checkbox" name="is_default" value="1" id="defaultCheck" class="form-check-input">
+                  <label for="defaultCheck" class="form-check-label small text-muted">Set as my default shipping address</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top" style="border-color: var(--border-light) !important;">
+              <button type="submit" class="btn-azure py-3">SAVE ADDRESS &rarr;</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

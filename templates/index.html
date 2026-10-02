@@ -1,0 +1,422 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Azure Jewels | Luxury Handcrafted Fine Jewellery Atelier{% endblock %}
+{% block meta_description %}Azure Jewels — Handcrafted luxury fine jewellery, solitaire diamonds, kundan, polki, and royal bridal couture atelier.{% endblock %}
+
+{% block content %}
+<!-- ==========================================================================
+     3. HERO SECTION
+     - Full-width editorial hero section immediately below navigation
+     - Theme: Dark Navy Blue (#071A2D) + White (#FFFFFF)
+     - Desktop: Split/editorial layout (min-height: 650px)
+     - Left: Eyebrow (Azure Jewels), Headline ("Timeless Jewellery, Designed to Adore"),
+             Description ("Discover refined jewellery designed to celebrate every moment."),
+             Buttons (SHOP NOW, EXPLORE COLLECTION)
+     - Right: High-quality jewellery image framed in luxury dark navy
+     ========================================================================== -->
+<section class="azure-hero-section">
+  <div class="container-xl position-relative" style="z-index: 2;">
+    <div class="row align-items-center g-4 g-lg-5">
+      
+      <!-- LEFT EDITORIAL CONTENT -->
+      <div class="col-12 col-lg-6 order-2 order-lg-1">
+        <div class="azure-hero-content pe-xl-4 text-center text-lg-start">
+          
+          <div class="azure-hero-eyebrow justify-content-center justify-content-lg-start">
+            <span class="azure-eyebrow-monogram">❖</span> Azure Jewels Atelier
+          </div>
+          
+          <h1 class="azure-hero-title">
+            Timeless Jewellery,<br class="d-none d-sm-inline">Designed to Adore
+          </h1>
+          
+          <p class="azure-hero-desc mx-auto mx-lg-0">
+            Discover refined fine jewellery designed to celebrate life's most precious milestones with uncompromising artistry.
+          </p>
+          
+          <div class="azure-hero-actions justify-content-center justify-content-lg-start">
+            <a href="{% url 'shop' %}" class="azure-hero-btn-primary">
+              <span>SHOP NOW</span>
+              <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+            <a href="{% url 'shop' %}?featured=1" class="azure-hero-btn-secondary">
+              <span>EXPLORE COLLECTION</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT EDITORIAL IMAGE -->
+      <div class="col-12 col-lg-6 order-1 order-lg-2">
+        <div class="azure-hero-visual-frame">
+          <div class="azure-hero-img-box">
+            <img src="{% static 'assets/images/sliders/s_1.webp' %}" alt="Azure Jewels Royal Diamond &amp; Fine Jewellery Collection" class="azure-hero-editorial-img" loading="eager">
+            <div class="azure-hero-vignette"></div>
+            <div class="azure-hero-floating-tag d-none d-sm-block">
+              <div class="azure-floating-eyebrow">HAUTE JOAILLERIE</div>
+              <div class="azure-floating-title">Bespoke Atelier Collection</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4. CATEGORY SHOWCASE
+     - Database-driven category cards with real uploaded images from DB
+     - Large images, minimal text, subtle image zoom on hover
+     ========================================================================== -->
+<section class="azure-category-section py-5">
+  <div class="container py-lg-4">
+    <div class="azure-section-header">
+      <span class="azure-section-subtitle">CURATED HIGH JEWELLERY</span>
+      <h2 class="azure-section-title">Shop by Category</h2>
+      <p class="azure-section-desc">Discover our thoughtfully curated silhouettes, handcrafted for everyday splendour and life's grandest milestones.</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-4 row-cols-xl-7 g-3 g-xl-4 justify-content-center">
+      {% for cat in curated_categories %}
+      <div class="col">
+        <a href="{{ cat.get_absolute_url }}" class="azure-category-card">
+          <div class="azure-cat-img-wrap">
+            {% if cat.image %}
+            <img src="{{ cat.image.url }}" alt="{{ cat.name }}" loading="lazy" onerror="this.onerror=null; this.src='{% static 'assets/images/placeholder.svg' %}';">
+            {% else %}
+            <img src="{% static 'assets/images/placeholder.svg' %}" alt="{{ cat.name }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="azure-cat-overlay">
+            <h3 class="azure-cat-name">{{ cat.name }}</h3>
+            <span class="azure-cat-action">Explore &rarr;</span>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-4">
+        <p class="text-muted">Categories loading from atelier catalogue.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5. NEW ARRIVALS
+     - Real Django products from database (new_arrival=True, active=True)
+     - Clean 4-column desktop grid
+     ========================================================================== -->
+<section class="azure-new-arrivals-section py-5" style="background-color: var(--soft-white); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <div class="container py-lg-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+      <div>
+        <span class="azure-section-subtitle">JUST UNVEILED</span>
+        <h2 class="azure-section-title mb-0">New Arrivals</h2>
+      </div>
+      <a href="{% url 'shop' %}?new=1" class="btn-azure-outline btn-azure-sm mt-3 mt-md-0">VIEW ALL NEW ARRIVALS &rarr;</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
+      {% for product in new_arrivals %}
+      <div class="col">
+        {% include "includes/product-card.html" with product=product %}
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">New arrivals will be live shortly.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     6. FEATURED COLLECTION
+     - Large editorial dark navy section (#071A2D)
+     - Left: Luxury heading & narrative
+     - Right: Large jewellery image
+     ========================================================================== -->
+<section class="azure-editorial-banner">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-6 order-lg-2 text-center">
+        <img src="{% static 'assets/images/best-sellar/01.webp' %}" alt="Royal Rajputana &amp; Polki Edit" class="img-fluid rounded-1" style="max-height: 440px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.16); box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45);">
+      </div>
+      <div class="col-12 col-lg-6 order-lg-1">
+        <span class="azure-section-subtitle azure-section-subtitle-light">HERITAGE ATELIER</span>
+        <h2 class="azure-editorial-title">The Royal Rajputana &amp; Polki Edit</h2>
+        <p class="azure-editorial-desc">
+          Rooted in royal heritage, each piece in our Heritage Collection is shaped by master artisans. Featuring uncut polki gemstones, natural cultured pearls, and raw gemstone symmetry.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'shop' %}?featured=1" class="azure-hero-btn-primary">EXPLORE COLLECTION &rarr;</a>
+          <a href="{% url 'about' %}" class="azure-hero-btn-secondary">OUR CRAFTSMANSHIP</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     7. BEST SELLERS
+     - Real Django products from database (best_seller=True, active=True)
+     - Clean 4-column desktop grid
+     ========================================================================== -->
+<section class="azure-best-sellers-section py-5 bg-white">
+  <div class="container py-lg-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+      <div>
+        <span class="azure-section-subtitle">TIMELESS ICONS</span>
+        <h2 class="azure-section-title mb-0">Best Sellers</h2>
+      </div>
+      <a href="{% url 'shop' %}?best=1" class="btn-azure-outline btn-azure-sm mt-3 mt-md-0">VIEW ALL BEST SELLERS &rarr;</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
+      {% for product in best_sellers %}
+      <div class="col">
+        {% include "includes/product-card.html" with product=product %}
+      </div>
+      {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">Best seller items will be displayed here.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     8. BRIDAL COLLECTION
+     - Premium visual bridal showcase
+     - Dark navy (#071A2D) + white typography
+     ========================================================================== -->
+<section class="azure-bridal-section py-5">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-5 text-center">
+        <img src="{% static 'assets/images/special-offer/02.webp' %}" alt="Regal Bridal Choker Set" class="img-fluid rounded-1" style="max-height: 460px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.16); box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45);">
+      </div>
+      <div class="col-12 col-lg-7">
+        <div class="ps-lg-4">
+          <span class="azure-section-subtitle azure-section-subtitle-light">THE BRIDAL SUITE</span>
+          <h2 class="azure-section-title azure-section-title-light">Heirlooms For Your Auspicious Day</h2>
+          <p style="line-height: 1.8; font-size: 16px; color: rgba(255, 255, 255, 0.85);">
+            A bride's adornment is a tapestry of family heritage, sacred vows, and personal majesty. Azure Jewels designs bespoke bridal sets, chokers, matha pattis, and hathphools that are treasured for generations to come.
+          </p>
+          <div class="row g-3 my-4">
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2 azure-check-item">
+                <i class="bi bi-check2-circle fs-5"></i>
+                <span class="fw-semibold">Custom Atelier Sizing</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2 azure-check-item">
+                <i class="bi bi-check2-circle fs-5"></i>
+                <span class="fw-semibold">Insured Armored Transit</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2 azure-check-item">
+                <i class="bi bi-check2-circle fs-5"></i>
+                <span class="fw-semibold">Private Suite Consultation</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2 azure-check-item">
+                <i class="bi bi-check2-circle fs-5"></i>
+                <span class="fw-semibold">Complimentary Lifetime Care</span>
+              </div>
+            </div>
+          </div>
+          <a href="{% url 'shop' %}?category=bridal-collection" class="azure-hero-btn-primary mt-2">EXPLORE BRIDAL &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     9. PROMOTIONAL SECTION
+     - Bespoke Atelier Concierge Experience
+     - Editorial White Surface with Navy Typography
+     ========================================================================== -->
+<section class="py-5" style="background-color: var(--soft-white); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-6">
+        <span class="azure-section-subtitle">PRIVATE SALON PRIVILEGES</span>
+        <h2 class="azure-section-title mb-3" style="font-size: clamp(26px, 3.5vw, 38px);">Bespoke Atelier Concierge</h2>
+        <p class="text-muted mb-4" style="line-height: 1.8; font-size: 15px;">
+          Whether commissioning a custom engagement solitaire, matching bespoke jewellery to wedding ensembles, or seeking rare gemmological advisory, our master designers provide confidential, personalized attention.
+        </p>
+        <div class="d-flex flex-column gap-3 mb-4">
+          <div class="d-flex align-items-start gap-3">
+            <div class="azure-feature-icon" style="flex-shrink: 0;"><i class="bi bi-gem"></i></div>
+            <div>
+              <h4 class="fw-bold mb-1" style="font-size: 15px; color: var(--primary-navy);">Certified Precious Stones</h4>
+              <p class="small text-muted mb-0">Every diamond, uncut polki, and cultured gemstone is individually hallmarked and graded.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start gap-3">
+            <div class="azure-feature-icon" style="flex-shrink: 0;"><i class="bi bi-pencil-square"></i></div>
+            <div>
+              <h4 class="fw-bold mb-1" style="font-size: 15px; color: var(--primary-navy);">Bespoke Sketch &amp; 3D Render</h4>
+              <p class="small text-muted mb-0">Experience preview sketches and precision CAD models before your piece is cast.</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'contact' %}" class="btn-azure">BOOK CONCIERGE CONSULT &rarr;</a>
+          <a href="{% url 'store_locator' %}" class="btn-azure-outline">VISIT FLAGSHIP STORES</a>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6 text-center">
+        <div class="position-relative d-inline-block">
+          <img src="{% static 'assets/images/special-offer/01.webp' %}" alt="Azure Jewels Atelier Bespoke Craftsmanship" class="img-fluid rounded-1 border shadow-sm" style="max-height: 420px; object-fit: cover; border-color: var(--border-color) !important;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     10. TESTIMONIALS
+     - Clean editorial patron reflections
+     - White background, Deep Navy text (#071A2D)
+     ========================================================================== -->
+<section class="azure-testimonials-section py-5 bg-white">
+  <div class="container py-lg-4">
+    <div class="azure-section-header">
+      <span class="azure-section-subtitle">VOICES OF DEVOTION</span>
+      <h2 class="azure-section-title">Kind Words From Our Patrons</h2>
+      <p class="azure-section-desc">Reflections of delight from clients who wear Azure Jewels for life's most precious occasions.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-4">
+        <div class="azure-testimonial-card">
+          <div class="azure-testimonial-stars">★★★★★</div>
+          <p class="azure-testimonial-text">
+            "The Aditi Kundan Choker exceeded all my bridal expectations. The craftsmanship and finishing caught everyone's eye during my wedding reception."
+          </p>
+          <div class="azure-testimonial-meta">
+            <div class="azure-testimonial-author">Radhika Singhania</div>
+            <div class="azure-testimonial-city">Delhi, India</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="azure-testimonial-card">
+          <div class="azure-testimonial-stars">★★★★★</div>
+          <p class="azure-testimonial-text">
+            "Finding authentic handcrafted polki jewellery online usually feels risky, but Azure Jewels provides unmatched finishing and certificate authenticity."
+          </p>
+          <div class="azure-testimonial-meta">
+            <div class="azure-testimonial-author">Meera Kapoor</div>
+            <div class="azure-testimonial-city">Mumbai, India</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="azure-testimonial-card">
+          <div class="azure-testimonial-stars">★★★★★</div>
+          <p class="azure-testimonial-text">
+            "The tennis bracelet has become my everyday signature piece. Delicate yet remarkably sturdy, with the brilliance of natural certified gemstones."
+          </p>
+          <div class="azure-testimonial-meta">
+            <div class="azure-testimonial-author">Ananya Sen</div>
+            <div class="azure-testimonial-city">Bengaluru, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     11. BENEFITS / TRUST SECTION
+     - 4 minimal features: Premium Quality, Secure Payments, Easy Returns, Fast Delivery
+     - Minimal navy line icons, clean borders
+     ========================================================================== -->
+<section class="azure-features-bar">
+  <div class="container">
+    <div class="row g-4 justify-content-between">
+      <div class="col-6 col-lg-3">
+        <div class="azure-feature-item">
+          <div class="azure-feature-icon"><i class="bi bi-gem"></i></div>
+          <div>
+            <h3 class="azure-feature-heading">Premium Quality</h3>
+            <p class="azure-feature-sub">100% Certified 22K Vermeil &amp; Gemstones</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="azure-feature-item">
+          <div class="azure-feature-icon"><i class="bi bi-shield-check"></i></div>
+          <div>
+            <h3 class="azure-feature-heading">Secure Payments</h3>
+            <p class="azure-feature-sub">256-Bit SSL Encrypted Checkout</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="azure-feature-item">
+          <div class="azure-feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+          <div>
+            <h3 class="azure-feature-heading">Easy Returns</h3>
+            <p class="azure-feature-sub">15-Day Complimentary Replacement</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="azure-feature-item">
+          <div class="azure-feature-icon"><i class="bi bi-box-seam"></i></div>
+          <div>
+            <h3 class="azure-feature-heading">Fast Delivery</h3>
+            <p class="azure-feature-sub">Complimentary Express Shipping over ₹999</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     12. NEWSLETTER
+     - Dark Navy background (#071A2D) + Pure White (#FFFFFF)
+     - Luxury heading: Cormorant Garamond
+     ========================================================================== -->
+<section class="azure-newsletter-section py-5">
+  <div class="container py-lg-4 text-center text-white" style="max-width: 780px;">
+    <div class="mb-3">
+      <span class="azure-eyebrow-monogram" style="color: #FFFFFF; font-size: 16px;">❖</span>
+    </div>
+    <span class="azure-section-subtitle" style="color: rgba(255, 255, 255, 0.75); letter-spacing: 0.2em;">PRIVATE CLIENT PRIVILEGES</span>
+    <h2 class="azure-title text-white mb-3" style="font-size: clamp(28px, 4vw, 40px);">Experience The Azure Circle</h2>
+    <p class="mx-auto mb-4" style="max-width: 560px; line-height: 1.8; font-size: 15px; color: rgba(255, 255, 255, 0.85);">
+      Receive bespoke invitations to private salon previews, new bridal archive unveilings, and complimentary gemmological consultations.
+    </p>
+
+    <form action="{% url 'newsletter_subscribe' %}" method="post" class="azure-newsletter-form mx-auto" style="max-width: 520px;">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="email" name="email" class="form-control" required placeholder="Enter your email address..." style="border-radius: 2px 0 0 2px; padding: 14px 18px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.95); color: #071A2D;">
+        <button type="submit" class="btn btn-light fw-bold px-4" style="border-radius: 0 2px 2px 0; letter-spacing: 0.1em; font-size: 13px; text-transform: uppercase; background-color: #FFFFFF; color: var(--primary-navy); border: 1px solid #FFFFFF;">
+          SUBSCRIBE
+        </button>
+      </div>
+      <small class="d-block mt-2 text-white-50" style="font-size: 11px;">
+        Strictly confidential. Unsubscribe at any time with one click.
+      </small>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

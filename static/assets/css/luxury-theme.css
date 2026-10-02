@@ -1,0 +1,2032 @@
+/* ==========================================================================
+   AZURE JEWELS - DARK NAVY BLUE & WHITE LUXURY DESIGN SYSTEM
+   Theme: Premium Dark Blue + White Fine Jewellery Luxury Theme
+   Palette:
+     --primary-navy:   #071A2D (Deep Navy Blue)
+     --secondary-navy: #0B2A45 (Primary Dark Blue)
+     --accent-navy:    #123B5D (Secondary Navy)
+     --white:          #FFFFFF (Pure White)
+     --off-white:      #F6F8FA (Soft White)
+     --text-dark:      #071A2D (Dark Navy Text)
+     --text-light:     #FFFFFF (White Text)
+     --border-light:   #D9E3EC (Light Blue Border)
+     --border-dark:    rgba(255, 255, 255, 0.15)
+   ========================================================================== */
+
+:root {
+  /* Global Primary Color Palette */
+  --primary-navy: #071A2D;
+  --secondary-navy: #0B2A45;
+  --accent-navy: #123B5D;
+
+  --white: #FFFFFF;
+  --off-white: #F6F8FA;
+
+  --text-dark: #071A2D;
+  --text-light: #FFFFFF;
+
+  --border-light: #D9E3EC;
+  --border-dark: rgba(255, 255, 255, 0.15);
+
+  /* AZURE JEWELS — PREMIUM BACKGROUND SYSTEM TOKENS */
+  --azure-primary-bg: #FFFFFF;
+  --azure-soft-bg: #F6F8FA;
+  --azure-dark-bg: #071A2D;
+  --azure-dark-secondary-bg: #0B2A45;
+  --azure-border-color: #D9E3EC;
+  --azure-main-text: #071A2D;
+  --azure-muted-text: #5F7182;
+
+  /* Semantic Design Tokens (Dark Navy + White Only) */
+  --azure-bg: var(--azure-primary-bg);
+  --azure-bg-white: var(--azure-primary-bg);
+  --azure-bg-soft: var(--azure-soft-bg);
+  --azure-ivory: var(--azure-soft-bg);
+  --azure-beige: var(--azure-soft-bg);
+  --azure-charcoal: var(--azure-dark-bg);
+  --azure-dark: var(--azure-dark-bg);
+  --azure-dark-bar: var(--azure-dark-bg);
+  --azure-text: var(--azure-main-text);
+  --azure-text-muted: var(--azure-muted-text);
+  --azure-border: var(--azure-border-color);
+  --azure-border-light: var(--azure-border-color);
+
+  /* Legacy Color Overrides */
+  --azure-gold: var(--primary-navy);
+  --azure-gold-hover: var(--secondary-navy);
+  --azure-gold-dark: var(--primary-navy);
+  --azure-gold-light: var(--accent-navy);
+  --azure-gold-soft: var(--off-white);
+  --azure-sale: var(--primary-navy);
+
+  /* Fonts */
+  --azure-font-serif: 'Cormorant Garamond', 'Playfair Display', 'Didot', Georgia, serif;
+  --azure-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadows & Curves */
+  --azure-shadow-sm: 0 2px 10px rgba(7, 26, 45, 0.05);
+  --azure-shadow-md: 0 8px 24px rgba(7, 26, 45, 0.08);
+  --azure-shadow-lg: 0 16px 40px rgba(7, 26, 45, 0.12);
+  --azure-radius: 2px;
+  --azure-transition: all 0.3s ease;
+}
+
+/* Base Document Styling */
+html, body {
+  background-color: var(--white);
+  color: var(--azure-text);
+  font-family: var(--azure-font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.azure-serif,
+.azure-title {
+  font-family: var(--azure-font-serif);
+  color: var(--text-dark);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: var(--azure-transition);
+}
+
+a:hover {
+  color: var(--secondary-navy);
+}
+
+p {
+  color: var(--azure-text);
+}
+
+.text-muted {
+  color: var(--azure-text-muted) !important;
+}
+
+/* Minimal Luxury Selection */
+::selection {
+  background-color: var(--secondary-navy);
+  color: var(--white);
+}
+
+/* ==========================================================================
+   AZURE JEWELS — PREMIUM BACKGROUND SYSTEM UTILITIES
+   Primary background:       #FFFFFF
+   Soft section background:  #F6F8FA
+   Premium dark sections:    #071A2D
+   Secondary dark sections:  #0B2A45
+   Borders:                  #D9E3EC
+   Main text:                #071A2D
+   Muted text:               #5F7182
+   ========================================================================== */
+.azure-bg-primary,
+.bg-azure-primary {
+  background-color: #FFFFFF !important;
+}
+
+.azure-bg-soft,
+.bg-azure-soft {
+  background-color: #F6F8FA !important;
+}
+
+.azure-bg-dark,
+.bg-azure-dark {
+  background-color: #071A2D !important;
+  color: #FFFFFF !important;
+}
+
+.azure-bg-dark-secondary,
+.bg-azure-dark-secondary {
+  background-color: #0B2A45 !important;
+  color: #FFFFFF !important;
+}
+
+.azure-border,
+.border-azure {
+  border-color: #D9E3EC !important;
+}
+
+.azure-border-top {
+  border-top: 1px solid #D9E3EC !important;
+}
+
+.azure-border-bottom {
+  border-bottom: 1px solid #D9E3EC !important;
+}
+
+.azure-text-main,
+.text-azure-main {
+  color: #071A2D !important;
+}
+
+.azure-text-muted,
+.text-azure-muted {
+  color: #5F7182 !important;
+}
+
+/* ==========================================================================
+   BUTTON DESIGN SYSTEM
+   - On Dark Background: White button, Dark Navy text. Hover: Navy/Transparent, White border, White text
+   - On White Background: Dark Navy button, White text. Hover: White bg, Dark Navy text, Dark Navy border
+   - Subtle border-radius: 2px (no pill shapes)
+   - Transition: all 0.3s ease
+   ========================================================================== */
+
+/* Button on White / Light Background */
+.btn-azure,
+.btn-azure-dark,
+.btn-azure-gold,
+.btn-primary {
+  background-color: var(--primary-navy) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--primary-navy) !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--azure-transition);
+  box-shadow: none;
+  text-decoration: none !important;
+}
+
+.btn-azure:hover,
+.btn-azure-dark:hover,
+.btn-azure-gold:hover,
+.btn-primary:hover {
+  background-color: var(--white) !important;
+  color: var(--primary-navy) !important;
+  border-color: var(--primary-navy) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(7, 26, 45, 0.15) !important;
+}
+
+/* Outline Button on White / Light Background */
+.btn-azure-outline,
+.btn-outline-dark,
+.btn-outline-primary {
+  background-color: transparent !important;
+  color: var(--primary-navy) !important;
+  border: 1px solid var(--primary-navy) !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--azure-transition);
+  text-decoration: none !important;
+}
+
+.btn-azure-outline:hover,
+.btn-outline-dark:hover,
+.btn-outline-primary:hover {
+  background-color: var(--primary-navy) !important;
+  border-color: var(--primary-navy) !important;
+  color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(7, 26, 45, 0.12) !important;
+}
+
+/* Button on Dark Navy Background */
+.btn-azure-light,
+.btn-azure-white,
+.btn-on-dark,
+.azure-hero-btn-primary {
+  background-color: var(--white) !important;
+  color: var(--primary-navy) !important;
+  border: 1px solid var(--white) !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--azure-transition);
+  text-decoration: none !important;
+}
+
+.btn-azure-light:hover,
+.btn-azure-white:hover,
+.btn-on-dark:hover,
+.azure-hero-btn-primary:hover {
+  background-color: transparent !important;
+  color: var(--white) !important;
+  border-color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Outline Button on Dark Navy Background */
+.btn-azure-outline-light,
+.btn-azure-outline-white,
+.azure-hero-btn-secondary {
+  background-color: transparent !important;
+  color: var(--white) !important;
+  border: 1px solid var(--white) !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--azure-transition);
+  text-decoration: none !important;
+}
+
+.btn-azure-outline-light:hover,
+.btn-azure-outline-white:hover,
+.azure-hero-btn-secondary:hover {
+  background-color: var(--white) !important;
+  color: var(--primary-navy) !important;
+  border-color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
+}
+
+.btn-azure-sm {
+  padding: 8px 18px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   - White background, Dark Navy Blue border, Dark Navy text
+   - Focus: Dark Navy border, soft subtle shadow
+   ========================================================================== */
+.form-control,
+.form-select {
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--azure-radius) !important;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text-dark) !important;
+  background-color: var(--white) !important;
+  transition: var(--azure-transition);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-navy) !important;
+  box-shadow: 0 0 0 3px rgba(7, 26, 45, 0.12) !important;
+  outline: none;
+  background-color: var(--white) !important;
+  color: var(--text-dark) !important;
+}
+
+.form-control::placeholder {
+  color: var(--azure-text-muted);
+  font-weight: 400;
+}
+
+.form-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Checkboxes & Radios */
+.form-check-input:checked {
+  background-color: var(--primary-navy) !important;
+  border-color: var(--primary-navy) !important;
+}
+
+.form-check-input:focus {
+  border-color: var(--primary-navy) !important;
+  box-shadow: 0 0 0 2px rgba(7, 26, 45, 0.12) !important;
+}
+
+/* ==========================================================================
+   PRODUCT CARDS
+   - White background, minimal dark navy borders, no colorful backgrounds
+   - Title: Dark Navy Blue
+   - Price: Dark Navy Blue
+   - Badges (SALE, NEW, BEST SELLER): Dark Navy background, White text
+   - Wishlist icon: Dark Navy outline, Hover: Dark Navy background, White icon
+   ========================================================================== */
+.azure-product-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--azure-radius);
+  overflow: hidden;
+  position: relative;
+  transition: var(--azure-transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.azure-product-card:hover {
+  border-color: var(--secondary-navy);
+  box-shadow: var(--azure-shadow-md);
+  transform: translateY(-3px);
+}
+
+.azure-product-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--off-white);
+  display: block;
+}
+
+.azure-product-img-wrap > a,
+.azure-product-img-wrap .azure-product-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.azure-product-img-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.azure-product-card:hover .azure-product-img-wrap img {
+  transform: scale(1.05);
+}
+
+.azure-placeholder-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--off-white);
+  color: var(--primary-navy);
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid var(--border-light);
+}
+
+.azure-placeholder-icon {
+  font-size: 24px;
+  color: var(--secondary-navy);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.azure-placeholder-brand {
+  font-family: var(--azure-font-serif);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--primary-navy);
+}
+
+.azure-placeholder-sub {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azure-text-muted);
+  margin-top: 3px;
+}
+
+.azure-product-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 2;
+}
+
+.azure-badge-discount,
+.azure-badge-new,
+.azure-badge-bestseller,
+.azure-badge-sale {
+  background-color: var(--primary-navy);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--azure-radius);
+}
+
+.azure-product-wish-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--azure-radius);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-light);
+  color: var(--primary-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: var(--azure-transition);
+  box-shadow: 0 2px 6px rgba(7, 26, 45, 0.06);
+}
+
+.azure-product-wish-btn:hover,
+.azure-product-wish-btn.active {
+  background: var(--primary-navy);
+  color: var(--white);
+  border-color: var(--primary-navy);
+}
+
+.azure-quick-add-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: var(--azure-transition);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  z-index: 2;
+}
+
+.azure-product-card:hover .azure-quick-add-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.azure-quick-add-btn:hover {
+  background-color: var(--secondary-navy);
+  color: var(--white);
+}
+
+.azure-product-info {
+  padding: 12px 14px 14px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+}
+
+.azure-product-category {
+  font-size: 10px;
+  color: var(--azure-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.azure-product-title {
+  font-family: var(--azure-font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+  height: 40px;
+}
+
+.azure-product-title a {
+  color: var(--text-dark);
+  transition: var(--azure-transition);
+}
+
+.azure-product-title a:hover {
+  color: var(--secondary-navy);
+}
+
+.azure-product-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.azure-current-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+
+.azure-original-price {
+  font-size: 13px;
+  color: var(--azure-text-muted);
+  text-decoration: line-through;
+}
+
+.azure-discount-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--secondary-navy);
+}
+
+/* ==========================================================================
+   ICONS & RATING STARS (DARK NAVY / WHITE ONLY)
+   ========================================================================== */
+.azure-rating-navy,
+.azure-stars {
+  color: var(--primary-navy) !important;
+}
+
+.azure-icon-navy {
+  color: var(--primary-navy) !important;
+}
+
+.azure-icon-white {
+  color: var(--white) !important;
+}
+
+/* ==========================================================================
+   CATEGORY CARDS
+   - White background, Dark Navy Blue text, Light Blue border
+   ========================================================================== */
+.azure-category-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--azure-radius);
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  transition: var(--azure-transition);
+}
+
+.azure-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--azure-shadow-md);
+  border-color: var(--primary-navy);
+}
+
+/* ==========================================================================
+   CATEGORY CARDS (5-CARD LUXURY SHOWCASE)
+   ========================================================================== */
+.azure-category-card {
+  display: block;
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--azure-radius);
+  overflow: hidden;
+  text-decoration: none !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+}
+
+.azure-category-card:hover {
+  border-color: var(--secondary-navy);
+  box-shadow: 0 14px 32px rgba(7, 26, 45, 0.12);
+  transform: translateY(-4px);
+}
+
+.azure-cat-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--off-white);
+  display: block;
+}
+
+.azure-cat-img-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.azure-category-card:hover .azure-cat-img-wrap img {
+  transform: scale(1.08);
+}
+
+.azure-cat-overlay {
+  padding: 14px 12px;
+  background: var(--white);
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+}
+
+.azure-cat-name {
+  font-family: var(--azure-font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--primary-navy);
+  margin-bottom: 3px;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+.azure-cat-action {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--secondary-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.azure-category-card:hover .azure-cat-action {
+  gap: 7px;
+  color: var(--primary-navy);
+}
+
+/* ==========================================================================
+   HERO SECTION - LUXURY SPLIT/EDITORIAL LAYOUT
+   Theme: Dark Navy Blue (#071A2D, #0B2A45) + White (#FFFFFF)
+   Height: Desktop min-height 650px; Large screens min-height 75vh; Mobile auto
+   ========================================================================== */
+.azure-hero-section {
+  position: relative;
+  background-color: #071A2D;
+  background: #071A2D;
+  color: #FFFFFF;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 40px 0;
+  width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .azure-hero-section {
+    min-height: 75vh;
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .azure-hero-section {
+    min-height: auto;
+    padding: 40px 0 50px;
+  }
+}
+
+/* Hero Ambient Subtle Glow Suppressed (No bright gradient or radial glow) */
+.azure-hero-ambient {
+  display: none !important;
+}
+
+/* Hero Content Animations */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroImageZoom {
+  0% {
+    transform: scale(1.06);
+    opacity: 0.92;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.azure-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.azure-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+}
+
+.azure-eyebrow-monogram {
+  font-size: 13px;
+  color: #FFFFFF;
+}
+
+.azure-hero-title {
+  font-family: var(--azure-font-serif);
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #FFFFFF !important;
+  letter-spacing: 0.01em;
+  margin-bottom: 20px;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards;
+}
+
+.azure-hero-desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 480px;
+  margin-bottom: 34px;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+}
+
+.azure-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s backwards;
+}
+
+.azure-hero-btn-primary {
+  background-color: #FFFFFF !important;
+  color: #071A2D !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+}
+
+.azure-hero-btn-primary:hover {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.azure-hero-btn-secondary {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  border-radius: var(--azure-radius) !important;
+  font-family: var(--azure-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+}
+
+.azure-hero-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 575.98px) {
+  .azure-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .azure-hero-btn-primary,
+  .azure-hero-btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Hero Right Side Editorial Image Frame */
+.azure-hero-visual-frame {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.azure-hero-img-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 520px;
+  overflow: hidden;
+  border-radius: var(--azure-radius);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: #071A2D;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 992px) {
+  .azure-hero-img-box {
+    aspect-ratio: 4 / 3;
+    height: 500px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .azure-hero-img-box {
+    height: 540px;
+  }
+}
+
+.azure-hero-editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 85% center;
+  display: block;
+  transform: scale(1.04);
+  animation: heroImageZoom 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.azure-hero-img-box:hover .azure-hero-editorial-img {
+  transform: scale(1.08);
+}
+
+.azure-hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.azure-hero-floating-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(7, 26, 45, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 18px;
+  border-radius: var(--azure-radius);
+  color: #FFFFFF;
+  pointer-events: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.azure-floating-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+.azure-floating-title {
+  font-family: var(--azure-font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+}
+
+.azure-section-header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.azure-section-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.azure-section-subtitle-light {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.azure-section-title {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.azure-section-title-light {
+  color: var(--white) !important;
+}
+
+.azure-section-desc {
+  font-size: 15px;
+  color: var(--azure-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   HOME PAGE BACKGROUND SYSTEM & SECTIONS
+   Strict Palette:
+     - Deep Navy:      #071A2D
+     - Secondary Navy: #0B2A45
+     - Accent Navy:    #123B5D
+     - White:          #FFFFFF
+     - Soft White:     #F6F8FA
+     - Border:         #D9E3EC
+   ========================================================================== */
+
+/* 1. SHOP BY CATEGORY (WHITE #FFFFFF) */
+.azure-category-section {
+  background-color: #FFFFFF;
+  width: 100%;
+}
+
+/* 2. NEW ARRIVALS (SOFT WHITE #F6F8FA) */
+.azure-new-arrivals-section {
+  background-color: #F6F8FA;
+  border-top: 1px solid #D9E3EC;
+  border-bottom: 1px solid #D9E3EC;
+  width: 100%;
+}
+
+/* 3. BEST SELLERS (WHITE #FFFFFF) */
+.azure-best-sellers-section {
+  background-color: #FFFFFF;
+  width: 100%;
+}
+
+/* 4. EDITORIAL FEATURED COLLECTION BANNER (DEEP NAVY #071A2D) */
+.azure-editorial-banner {
+  background-color: #071A2D;
+  background: #071A2D;
+  color: #FFFFFF;
+  padding: 70px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
+  width: 100%;
+}
+
+.azure-editorial-title {
+  font-size: clamp(30px, 4vw, 48px);
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+
+.azure-editorial-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 28px;
+}
+
+/* 5. BRIDAL COLLECTION BANNER (DEEP NAVY #071A2D) */
+.azure-bridal-section {
+  background-color: #071A2D;
+  background: #071A2D;
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  width: 100%;
+}
+
+.azure-bridal-section .azure-section-title,
+.azure-bridal-section h2 {
+  color: #FFFFFF !important;
+}
+
+.azure-bridal-section p {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.azure-bridal-section .azure-check-item {
+  color: #FFFFFF !important;
+}
+
+.azure-bridal-section .azure-check-item i {
+  color: #FFFFFF !important;
+}
+
+/* 6. WHY AZURE JEWELS / TRUST PILLARS (WHITE #FFFFFF) */
+.azure-features-bar {
+  background-color: #FFFFFF;
+  border-top: 1px solid #D9E3EC;
+  border-bottom: none;
+  padding: 50px 0;
+  width: 100%;
+}
+
+.azure-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  transition: var(--azure-transition);
+}
+
+.azure-feature-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--azure-radius);
+  background-color: #F6F8FA;
+  border: 1px solid #D9E3EC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #071A2D;
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: var(--azure-transition);
+}
+
+.azure-feature-item:hover .azure-feature-icon {
+  background-color: #071A2D;
+  color: #FFFFFF;
+  border-color: #071A2D;
+  transform: translateY(-2px);
+}
+
+.azure-feature-heading {
+  font-family: var(--azure-font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  color: #071A2D;
+}
+
+.azure-feature-sub {
+  font-size: 13px;
+  color: #5F7182;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 7. TESTIMONIALS SECTION (WHITE #FFFFFF, DARK NAVY TEXT) */
+.azure-testimonials-section {
+  background-color: #FFFFFF;
+  padding: 70px 0;
+  border-top: 1px solid #D9E3EC;
+  border-bottom: none;
+  width: 100%;
+}
+
+.azure-testimonial-card {
+  padding: 32px 28px;
+  height: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #D9E3EC;
+  border-radius: var(--azure-radius);
+  transition: var(--azure-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.azure-testimonial-card:hover {
+  border-color: #0B2A45;
+  box-shadow: 0 10px 26px rgba(7, 26, 45, 0.06);
+  transform: translateY(-3px);
+}
+
+.azure-testimonial-stars {
+  color: #071A2D;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.azure-testimonial-text {
+  font-family: var(--azure-font-serif);
+  font-style: italic;
+  color: #071A2D;
+  line-height: 1.7;
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.azure-testimonial-meta {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #D9E3EC;
+}
+
+.azure-testimonial-author {
+  font-family: var(--azure-font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #071A2D;
+}
+
+.azure-testimonial-city {
+  font-size: 11px;
+  color: #5F7182;
+}
+
+/* ==========================================================================
+   8. NEWSLETTER SECTION (DARK NAVY BACKGROUND #071A2D, WHITE TEXT)
+   ========================================================================== */
+.azure-newsletter-section {
+  background-color: #071A2D;
+  color: #FFFFFF;
+  padding: 76px 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.azure-newsletter-box {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.azure-newsletter-title {
+  font-family: var(--azure-font-serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 500;
+  color: #FFFFFF !important;
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+}
+
+.azure-newsletter-desc {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.azure-newsletter-form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+  .azure-newsletter-form-wrap {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.azure-newsletter-input-luxury {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF !important;
+  padding: 14px 20px;
+  font-size: 13px;
+  border-radius: var(--azure-radius);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 576px) {
+  .azure-newsletter-input-luxury {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+}
+
+.azure-newsletter-input-luxury:focus {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #FFFFFF;
+}
+
+.azure-newsletter-input-luxury::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.azure-newsletter-btn-luxury {
+  background-color: #FFFFFF !important;
+  color: #071A2D !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: var(--azure-radius);
+  padding: 14px 32px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 576px) {
+  .azure-newsletter-btn-luxury {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.azure-newsletter-btn-luxury:hover {
+  background-color: #0B2A45 !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   COMPACT LUXURY FOOTER
+   - Dark Navy #071A2D, Secondary Navy #0B2A45, White #FFFFFF, Soft White #F6F8FA
+   - Desktop height target: 180px - 260px
+   - Clean 5-column layout with mobile accordion
+   ========================================================================== */
+.azure-footer {
+  background-color: #071A2D;
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.azure-footer-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 24px 10px 24px;
+}
+
+.azure-footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px 28px;
+}
+
+/* Col 1: Brand */
+.azure-footer-col-brand {
+  flex: 1 1 240px;
+  max-width: 320px;
+}
+
+.azure-footer-brand-title {
+  font-family: var(--azure-font-serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.azure-footer-brand-desc {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 0;
+}
+
+/* Columns 2-5: Nav columns */
+.azure-footer-col {
+  flex: 1 1 135px;
+}
+
+.azure-footer-heading {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.azure-footer-acc-toggle {
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 5px;
+  cursor: default;
+  text-align: left;
+  width: 100%;
+}
+
+.azure-footer-acc-icon {
+  display: none;
+}
+
+.azure-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.azure-footer-links li {
+  margin-bottom: 3.5px;
+}
+
+.azure-footer-links li:last-child {
+  margin-bottom: 0;
+}
+
+.azure-footer-links a {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.35;
+}
+
+.azure-footer-links a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Bottom Bar (Height: 35px - 45px) */
+.azure-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0B2A45;
+  width: 100%;
+}
+
+.azure-footer-bottom-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  min-height: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.azure-footer-copyright {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.azure-footer-legal-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.azure-footer-legal-links a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 11px;
+  transition: color 0.18s ease;
+}
+
+.azure-footer-legal-links a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.azure-footer-divider {
+  opacity: 0.3;
+  font-size: 10px;
+}
+
+.azure-footer-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.azure-footer-badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile Accordion View (< 768px) */
+@media (max-width: 767.98px) {
+  .azure-footer-container {
+    padding: 16px 16px 8px 16px;
+  }
+
+  .azure-footer-main {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .azure-footer-col-brand {
+    max-width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .azure-footer-col {
+    flex: 1 1 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+  }
+
+  .azure-footer-col:last-child {
+    border-bottom: none;
+  }
+
+  .azure-footer-acc-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 9px 0;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+
+  .azure-footer-acc-icon {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .azure-footer-col-content {
+    display: none;
+    padding: 2px 0 10px 0;
+  }
+
+  .azure-footer-col.is-open .azure-footer-col-content {
+    display: block;
+  }
+
+  .azure-footer-col.is-open .azure-footer-acc-icon {
+    transform: rotate(45deg);
+  }
+
+  .azure-footer-bottom-container {
+    padding: 8px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .azure-footer-legal-links {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+
+/* ==========================================================================
+   CART & CHECKOUT
+   ========================================================================== */
+.azure-order-summary-card {
+  background-color: var(--off-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--azure-radius);
+  padding: 24px;
+}
+
+.azure-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.azure-summary-total {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.azure-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  border-radius: var(--azure-radius);
+}
+
+.azure-qty-btn {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--azure-transition);
+}
+
+.azure-qty-btn:hover {
+  background-color: var(--off-white);
+  color: var(--primary-navy);
+}
+
+.azure-qty-val {
+  width: 36px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ==========================================================================
+   USER DASHBOARD & SIDEBAR
+   ========================================================================== */
+.azure-account-sidebar {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--azure-radius);
+  overflow: hidden;
+}
+
+.azure-account-user-card {
+  padding: 24px;
+  background-color: var(--off-white);
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.azure-account-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  font-size: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-family: var(--azure-font-serif);
+}
+
+.azure-account-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.azure-account-nav li {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.azure-account-nav li:last-child {
+  border-bottom: none;
+}
+
+.azure-account-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: var(--azure-transition);
+}
+
+.azure-account-nav a:hover,
+.azure-account-nav a.active {
+  background-color: var(--primary-navy);
+  color: var(--white) !important;
+  font-weight: 600;
+}
+
+.azure-account-nav a i {
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   TOAST / MESSAGES SYSTEM
+   ========================================================================== */
+.azure-messages-container {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  pointer-events: none;
+}
+
+.azure-alert-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--primary-navy);
+  box-shadow: var(--azure-shadow-md);
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--text-dark);
+  border-radius: var(--azure-radius);
+  animation: azureSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.azure-alert-toast.azure-alert-success {
+  border-left-color: var(--primary-navy);
+}
+
+.azure-alert-toast.azure-alert-error {
+  border-left-color: var(--accent-navy);
+}
+
+.azure-alert-toast.azure-alert-warning {
+  border-left-color: var(--secondary-navy);
+}
+
+@keyframes azureSlideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.azure-toast-close {
+  background: none;
+  border: none;
+  color: var(--azure-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   TABLES & BREADCRUMBS
+   ========================================================================== */
+.table {
+  border-color: var(--border-light) !important;
+}
+
+.table > :not(caption) > * > * {
+  border-bottom-color: var(--border-light) !important;
+}
+
+.breadcrumb-item a {
+  color: var(--azure-text-muted);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--primary-navy);
+}
+
+.breadcrumb-item.active {
+  color: var(--primary-navy) !important;
+}
+
+/* Badge System */
+.badge.bg-dark {
+  background-color: var(--primary-navy) !important;
+  color: var(--white) !important;
+}
+
+.badge.bg-light {
+  background-color: var(--off-white) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-light) !important;
+}
+
+/* ==========================================================================
+   THEME UTILITIES (DARK NAVY & WHITE ONLY)
+   ========================================================================== */
+.azure-rating-navy {
+  color: var(--primary-navy) !important;
+  letter-spacing: 2px;
+}
+
+.azure-icon-navy {
+  color: var(--primary-navy) !important;
+}
+
+.azure-text-navy {
+  color: var(--primary-navy) !important;
+}
+
+.azure-bg-navy {
+  background-color: var(--primary-navy) !important;
+  color: var(--white) !important;
+}
+
+.azure-bg-offwhite {
+  background-color: var(--off-white) !important;
+}
+
+.azure-border-light {
+  border-color: var(--border-light) !important;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & LARGE SCREEN / LED OPTIMIZATIONS
+   ========================================================================== */
+
+/* Prevent horizontal page scroll globally */
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Large Screens (1400px - 1600px) */
+@media (min-width: 1400px) {
+  .container,
+  .container-xl,
+  .container-xxl {
+    max-width: 1380px;
+  }
+}
+
+/* Full HD & Desktop (1600px - 1920px) */
+@media (min-width: 1600px) {
+  .container,
+  .container-xl,
+  .container-xxl {
+    max-width: 1540px;
+  }
+  .azure-hero-section {
+    min-height: 680px;
+  }
+  .azure-hero-editorial-img {
+    max-height: 580px;
+  }
+}
+
+/* Ultra-Wide Displays & 4K/LED Displays (1920px, 2560px, 3840px) */
+@media (min-width: 1920px) {
+  .container,
+  .container-xl,
+  .container-xxl {
+    max-width: 1680px;
+  }
+  .azure-hero-section {
+    min-height: 720px;
+  }
+  .azure-hero-title {
+    font-size: 58px;
+    line-height: 1.15;
+  }
+  .azure-product-card {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023.98px) {
+  .azure-hero-section {
+    padding: 40px 0;
+  }
+  .azure-hero-title {
+    font-size: 38px;
+  }
+}
+
+/* Mobile Devices (360px, 375px, 390px, 414px) */
+@media (max-width: 767.98px) {
+  .azure-hero-section {
+    padding: 30px 0 40px;
+    min-height: auto;
+  }
+  .azure-hero-title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+  .azure-hero-desc {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .azure-hero-actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .azure-hero-btn-primary,
+  .azure-hero-btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+  }
+  .azure-hero-editorial-img {
+    max-height: 360px;
+    object-fit: cover;
+  }
+  
+  /* 2-column mobile grid for product cards */
+  .azure-product-card {
+    border-radius: var(--azure-radius);
+  }
+  .azure-product-info {
+    padding: 10px 8px 12px;
+  }
+  .azure-product-title {
+    font-size: 13px !important;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
+  }
+  .azure-current-price {
+    font-size: 14px !important;
+  }
+  .azure-original-price {
+    font-size: 12px !important;
+  }
+  .azure-discount-text {
+    font-size: 10px !important;
+  }
+  .azure-quick-add-btn {
+    transform: translateY(0);
+    opacity: 1;
+    position: static;
+    margin-top: 8px;
+    padding: 8px 6px;
+    font-size: 10px;
+    border-radius: var(--azure-radius);
+    min-height: 36px;
+  }
+  .azure-product-wish-btn {
+    width: 34px;
+    height: 34px;
+    top: 6px;
+    right: 6px;
+  }
+  .azure-product-badges {
+    top: 6px;
+    left: 6px;
+  }
+  .azure-badge-discount,
+  .azure-badge-new,
+  .azure-badge-bestseller {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+
+  /* Checkout and account mobile ergonomics */
+  .azure-order-summary-card {
+    margin-top: 24px;
+  }
+  .azure-messages-container {
+    top: 70px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}
+
+/* Small mobile (360px) extra polish */
+@media (max-width: 365px) {
+  .azure-hero-title {
+    font-size: 26px;
+  }
+  .azure-brand-text {
+    font-size: 15px !important;
+    letter-spacing: 0.12em !important;
+  }
+  .azure-product-title {
+    font-size: 12px !important;
+  }
+}
+
+/* ==========================================================================

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if subcategory %}{{ subcategory.name }} — {{ category.name }}{% else %}{{ category.name }}{% endif %} | Azure Jewels Luxury Atelier{% endblock %}
+{% block meta_description %}{% if subcategory %}{{ subcategory.description|default:category.description }}{% else %}{{ category.description|default:"Discover handcrafted fine jewellery creations in the Azure Jewels royal collection." }}{% endif %}{% endblock %}
+
+{% block content %}
+<!-- Luxury Breadcrumbs (Soft White #F6F8FA) -->
+<section class="py-3 border-bottom" style="background-color: var(--soft-white); border-color: var(--border-color) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'shop' %}" class="text-muted">Shop</a></li>
+        <li class="breadcrumb-item {% if not subcategory %}active text-dark fw-semibold{% else %}text-muted{% endif %}">
+          {% if subcategory %}
+          <a href="{{ category.get_absolute_url }}" class="text-muted">{{ category.name }}</a>
+          {% else %}
+          {{ category.name }}
+          {% endif %}
+        </li>
+        {% if subcategory %}
+        <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">{{ subcategory.name }}</li>
+        {% endif %}
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Category Editorial Header / Banner Section -->
+<section class="py-5" style="background: linear-gradient(180deg, #FFFFFF 0%, var(--soft-white) 100%); border-bottom: 1px solid var(--border-color);">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-12 {% if category.image %}col-lg-8{% endif %}">
+        <span class="azure-section-subtitle mb-2 d-inline-block">HAUTE JOAILLERIE ATELIER</span>
+        <h1 class="azure-title mb-2" style="font-size: clamp(28px, 4vw, 42px);">
+          {% if subcategory %}{{ subcategory.name }}{% else %}{{ category.name }}{% endif %}
+        </h1>
+        <p class="text-muted mb-3" style="max-width: 640px; font-size: 15px; line-height: 1.7;">
+          {% if subcategory and subcategory.description %}
+            {{ subcategory.description }}
+          {% elif category.description %}
+            {{ category.description }}
+          {% else %}
+            Masterfully handcrafted with certified precious gemstones, immaculate settings, and royal heritage aesthetics.
+          {% endif %}
+        </p>
+        <div class="small text-muted">
+          Curated Showcase &bull; <strong class="text-dark">{{ total_count }}</strong> Creations
+        </div>
+      </div>
+
+      {% if category.image %}
+      <div class="col-12 col-lg-4 text-center text-lg-end">
+        <div class="d-inline-block p-2 bg-white border rounded-1 shadow-sm" style="border-color: var(--border-color) !important;">
+          <img src="{{ category.image.url }}" alt="{{ category.name }}" class="img-fluid rounded-1" style="max-height: 200px; width: 280px; object-fit: cover;">
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Subcategory Navigation Pills -->
+    {% if subcategories %}
+    <div class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span class="small fw-semibold text-uppercase me-2" style="font-size: 11px; letter-spacing: 0.1em; color: var(--primary-navy);">
+          EXPLORE STYLES:
+        </span>
+        <a href="{{ category.get_absolute_url }}" class="btn btn-sm {% if not subcategory %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 py-1" style="font-size: 12px; letter-spacing: 0.05em; {% if not subcategory %}background-color: var(--primary-navy); border-color: var(--primary-navy);{% else %}border-color: var(--border-color); color: var(--primary-navy);{% endif %}">
+          All {{ category.name }}
+        </a>
+        {% for sub in subcategories %}
+        <a href="{{ sub.get_absolute_url }}" class="btn btn-sm {% if subcategory == sub %}btn-dark{% else %}btn-outline-dark{% endif %} rounded-pill px-3 py-1" style="font-size: 12px; letter-spacing: 0.05em; {% if subcategory == sub %}background-color: var(--primary-navy); border-color: var(--primary-navy);{% else %}border-color: var(--border-color); color: var(--primary-navy);{% endif %}">
+          {{ sub.name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- Category Product Catalog Grid & Filters -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Desktop Sidebar / Mobile Collapsible Drawer -->
+      <aside class="col-12 col-lg-3">
+        <button type="button" class="btn btn-outline-dark w-100 d-lg-none mb-3 d-flex justify-content-between align-items-center py-2 px-3 rounded-1" data-bs-toggle="collapse" data-bs-target="#azureCategoryFilters" aria-expanded="false" aria-controls="azureCategoryFilters" style="border-color: var(--primary-navy); color: var(--primary-navy); font-size: 13px; letter-spacing: 0.5px;">
+          <span><i class="bi bi-sliders me-2"></i> FILTER &amp; REFINE</span>
+          <span class="small"><i class="bi bi-chevron-down"></i></span>
+        </button>
+
+        <div class="collapse d-lg-block" id="azureCategoryFilters">
+          <div class="p-4 border rounded-1 bg-white" style="border-color: var(--border-color) !important;">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom" style="border-color: var(--border-color) !important;">
+              <h5 class="azure-serif mb-0 fs-5" style="color: var(--primary-navy);">Filters</h5>
+              {% if subcategory or min_price or max_price or in_stock %}
+              <a href="{{ category.get_absolute_url }}" class="small text-muted fw-semibold text-decoration-underline">Reset</a>
+              {% endif %}
+            </div>
+
+            <!-- Subcategories Sidebar List -->
+            {% if subcategories %}
+            <div class="mb-4">
+              <h6 class="text-uppercase fw-bold mb-3" style="font-size: 12px; letter-spacing: 0.08em; color: var(--primary-navy);">Silhouettes</h6>
+              <ul class="list-unstyled mb-0" style="font-size: 13.5px;">
+                <li class="mb-2">
+                  <a href="{{ category.get_absolute_url }}" class="{% if not subcategory %}fw-bold text-dark text-decoration-underline{% else %}text-muted{% endif %}">
+                    All {{ category.name }}
+                  </a>
+                </li>
+                {% for sub in subcategories %}
+                <li class="mb-2">
+                  <a href="{{ sub.get_absolute_url }}" class="{% if subcategory == sub %}fw-bold text-dark text-decoration-underline{% else %}text-muted{% endif %}">
+                    {{ sub.name }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+
+            <!-- Price Range Filter Form -->
+            <div class="mb-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+              <h6 class="text-uppercase fw-bold mb-3" style="font-size: 12px; letter-spacing: 0.08em; color: var(--primary-navy);">Price Range</h6>
+              <form action="{% if subcategory %}{{ subcategory.get_absolute_url }}{% else %}{{ category.get_absolute_url }}{% endif %}" method="get">
+                {% if in_stock %}<input type="hidden" name="in_stock" value="{{ in_stock }}">{% endif %}
+                {% if sort_by %}<input type="hidden" name="sort" value="{{ sort_by }}">{% endif %}
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <input type="number" name="min_price" value="{{ min_price }}" placeholder="₹ Min" class="form-control form-control-sm" style="font-size: 13px;">
+                  <span class="text-muted">-</span>
+                  <input type="number" name="max_price" value="{{ max_price }}" placeholder="₹ Max" class="form-control form-control-sm" style="font-size: 13px;">
+                </div>
+                <button type="submit" class="btn-azure-outline btn-azure-sm w-100">Apply Filter</button>
+              </form>
+            </div>
+
+            <!-- Availability Filter -->
+            <div class="mb-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+              <h6 class="text-uppercase fw-bold mb-3" style="font-size: 12px; letter-spacing: 0.08em; color: var(--primary-navy);">Availability</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="availInStock" {% if in_stock == '1' %}checked{% endif %} onchange="location = '{% if subcategory %}{{ subcategory.get_absolute_url }}{% else %}{{ category.get_absolute_url }}{% endif %}?in_stock=' + (this.checked ? '1' : '0') + '{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}';">
+                <label class="form-check-label small text-muted" for="availInStock">
+                  In Stock Only
+                </label>
+              </div>
+            </div>
+
+            <!-- Curated Filters -->
+            <div class="pt-3 border-top" style="border-color: var(--border-color) !important;">
+              <h6 class="text-uppercase fw-bold mb-3" style="font-size: 12px; letter-spacing: 0.08em; color: var(--primary-navy);">Curated Edits</h6>
+              <div class="d-flex flex-column gap-2" style="font-size: 13px;">
+                <a href="{% url 'shop' %}?category={{ category.slug }}&new=1" class="text-muted"><i class="bi bi-stars me-2 text-dark"></i> New Additions</a>
+                <a href="{% url 'shop' %}?category={{ category.slug }}&best=1" class="text-muted"><i class="bi bi-trophy me-2 text-dark"></i> Best Sellers</a>
+                <a href="{% url 'shop' %}?category={{ category.slug }}&sale=1" class="text-muted"><i class="bi bi-tag me-2 text-dark"></i> Special Offers</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Product Grid & Controls -->
+      <main class="col-12 col-lg-9">
+        <!-- Controls Bar -->
+        <div class="p-3 border rounded-1 mb-4 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="border-color: var(--border-color) !important; background-color: var(--soft-white);">
+          <div class="small text-muted">
+            Displaying <strong class="text-dark">{{ products|length }}</strong> of {{ total_count }} creations
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <label for="sortCategorySelect" class="small text-uppercase fw-semibold mb-0" style="white-space: nowrap; font-size: 11px;">Sort By:</label>
+            <select id="sortCategorySelect" class="form-select form-select-sm" style="width: auto; min-width: 170px;" onchange="location = this.value;">
+              <option value="?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if in_stock %}in_stock={{ in_stock }}&{% endif %}sort=newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest Additions</option>
+              <option value="?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if in_stock %}in_stock={{ in_stock }}&{% endif %}sort=best_selling" {% if sort_by == 'best_selling' %}selected{% endif %}>Best Selling</option>
+              <option value="?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if in_stock %}in_stock={{ in_stock }}&{% endif %}sort=price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+              <option value="?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if in_stock %}in_stock={{ in_stock }}&{% endif %}sort=price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+              <option value="?{% if min_price %}min_price={{ min_price }}&{% endif %}{% if max_price %}max_price={{ max_price }}&{% endif %}{% if in_stock %}in_stock={{ in_stock }}&{% endif %}sort=name_asc" {% if sort_by == 'name_asc' %}selected{% endif %}>Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="row row-cols-2 row-cols-md-3 g-3 g-lg-4">
+          {% for product in products %}
+          <div class="col">
+            {% include "includes/product-card.html" with product=product %}
+          </div>
+          {% empty %}
+          <div class="col-12 py-5 text-center">
+            <div class="p-5 border rounded-1 bg-white" style="border-color: var(--border-color) !important;">
+              <i class="bi bi-gem text-muted" style="font-size: 48px;"></i>
+              <h3 class="azure-serif mt-3" style="color: var(--primary-navy);">No Pieces In This Selection</h3>
+              <p class="text-muted mx-auto" style="max-width: 480px;">
+                No creations match the selected filters. Please adjust your price range or explore all {{ category.name }}.
+              </p>
+              <a href="{{ category.get_absolute_url }}" class="btn-azure mt-3">VIEW ALL {{ category.name|upper }} &rarr;</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if products.has_other_pages %}
+        <nav class="mt-5" aria-label="Category pagination">
+          <ul class="pagination justify-content-center">
+            {% if products.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ products.previous_page_number }}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}{% if in_stock %}&in_stock={{ in_stock }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">&laquo; Prev</a>
+            </li>
+            {% endif %}
+
+            {% for p in products.paginator.page_range %}
+            <li class="page-item {% if products.number == p %}active{% endif %}">
+              <a class="page-link" href="?page={{ p }}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}{% if in_stock %}&in_stock={{ in_stock }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if products.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ products.next_page_number }}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}{% if in_stock %}&in_stock={{ in_stock }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">Next &raquo;</a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
+
+      </main>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

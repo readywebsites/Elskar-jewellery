@@ -1,0 +1,334 @@
+{% load static %}
+<!-- ==========================================================================
+     AZURE JEWELS - LUXURY 3-ROW EDITORIAL HEADER
+     Single Source of Truth Header
+     ========================================================================== -->
+
+<div class="azure-header-wrapper" id="azureHeaderWrapper">
+  <!-- ------------------------------------------------------------------------
+       ROW 1 — TOP ROTATING ANNOUNCEMENT BAR
+       - Height: 32px
+       - Background: #071A2D
+       - Font: 11px, letter-spacing 2px, white centered text
+       ------------------------------------------------------------------------ -->
+  <div class="azure-announcement-bar" id="azureAnnouncementBar" role="region" aria-label="Announcements">
+    <div class="azure-announcement-container">
+      <button type="button" class="azure-announcement-arrow azure-announcement-prev" id="azureAnnouncePrev" aria-label="Previous announcement">&#10094;</button>
+      <div class="azure-announcement-slider" id="azureAnnounceSlider">
+        <div class="azure-announcement-item active">
+          <span class="azure-announcement-text d-none d-sm-inline">
+            DISCOVER TIMELESS ELEGANCE &nbsp;&bull;&nbsp; NEW BRIDAL &amp; FESTIVE COLLECTION LIVE
+          </span>
+          <span class="azure-announcement-text d-inline d-sm-none">
+            DISCOVER TIMELESS ELEGANCE &nbsp;&bull;&nbsp; NEW BRIDAL LIVE
+          </span>
+        </div>
+        <div class="azure-announcement-item">
+          <span class="azure-announcement-text d-none d-sm-inline">
+            COMPLIMENTARY SHIPPING ON ORDERS ABOVE ₹999 &nbsp;&bull;&nbsp; HANDCRAFTED LUXURY
+          </span>
+          <span class="azure-announcement-text d-inline d-sm-none">
+            FREE SHIPPING ABOVE ₹999 &nbsp;&bull;&nbsp; HANDCRAFTED LUXURY
+          </span>
+        </div>
+        <div class="azure-announcement-item">
+          <span class="azure-announcement-text d-none d-sm-inline">
+            EASY 15-DAY RETURNS &nbsp;&bull;&nbsp; 100% CERTIFIED AUTHENTIC JEWELLERY
+          </span>
+          <span class="azure-announcement-text d-inline d-sm-none">
+            15-DAY RETURNS &nbsp;&bull;&nbsp; 100% CERTIFIED AUTHENTIC
+          </span>
+        </div>
+        <div class="azure-announcement-item">
+          <span class="azure-announcement-text d-none d-sm-inline">
+            SPECIAL FESTIVE OFFER: USE CODE <strong class="text-white fw-bold">AZURE10</strong> FOR 10% OFF
+          </span>
+          <span class="azure-announcement-text d-inline d-sm-none">
+            USE CODE <strong class="text-white fw-bold">AZURE10</strong> FOR 10% OFF
+          </span>
+        </div>
+      </div>
+      <button type="button" class="azure-announcement-arrow azure-announcement-next" id="azureAnnounceNext" aria-label="Next announcement">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------
+       ROW 2 — MAIN LOGO HEADER
+       - Height: 76–80px
+       - White background
+       - position: relative
+       - Left: ◇ BESPOKE CRAFTSMANSHIP (Desktop) / Hamburger toggle (Mobile/Tablet)
+       - Center: Mathematically centered REAL Azure Jewels image logo
+       - Right: Outline icons (Search, Account, Wishlist, Cart)
+       ------------------------------------------------------------------------ -->
+  <header class="azure-main-header" id="azureMainHeader" role="banner">
+    <div class="azure-header-container">
+
+      <!-- LEFT: Utility Links (Desktop >= 992px) & Hamburger Button (Mobile & Tablet < 992px) -->
+      <div class="azure-header-left">
+        <!-- Minimal luxury hamburger button for Mobile & Tablet (< 992px) -->
+        <button class="azure-mobile-toggle" id="azureMobileToggle" type="button" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="azureMobileDrawer">
+          <span class="azure-hamburger-box" aria-hidden="true">
+            <span class="azure-hamburger-bar"></span>
+            <span class="azure-hamburger-bar"></span>
+            <span class="azure-hamburger-bar"></span>
+          </span>
+        </button>
+
+        <!-- Desktop Utility Links (>= 992px) -->
+        <nav class="azure-header-utility-nav d-none d-lg-flex" aria-label="Top Utility Links">
+          <a href="{% url 'store_locator' %}" class="azure-utility-link">Store Locator</a>
+          <a href="{% url 'track_package' %}" class="azure-utility-link">Track Package</a>
+          <a href="{% url 'returns' %}" class="azure-utility-link">Return &amp; Exchange</a>
+          <a href="{% url 'contact' %}" class="azure-utility-link">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- CENTER: Perfectly centered relative to full viewport -->
+      <div class="azure-header-center">
+        <a href="{% url 'home' %}" class="azure-brand-logo" aria-label="Azure Jewels Home">
+          <img
+            src="{% static 'assets/images/logo-clean.webp' %}"
+            alt="Azure Jewels"
+            class="azure-logo-image"
+          >
+        </a>
+      </div>
+
+      <!-- RIGHT: Outline Icons (Search, Account, Wishlist, Cart) -->
+      <div class="azure-header-right">
+        <!-- Search Toggle Button -->
+        <button type="button" class="azure-icon-btn azure-search-toggle" id="azureSearchToggle" aria-label="Search catalogue" title="Search">
+          <svg class="azure-icon-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </button>
+
+        <!-- Account Dropdown (Desktop & Tablet) -->
+        <div class="azure-account-dropdown-wrap d-none d-md-inline-flex">
+          <a href="{% if user.is_authenticated %}{% url 'account_dashboard' %}{% else %}{% url 'login' %}{% endif %}" class="azure-icon-btn azure-account-btn" id="azureAccountBtn" aria-label="User Account" title="My Account">
+            <svg class="azure-icon-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          <div class="azure-dropdown-menu azure-account-menu" id="azureAccountMenu">
+            <div class="azure-account-menu-header">
+              {% if user.is_authenticated %}
+              <span class="azure-account-greeting">Namaste, {{ user.first_name|default:user.username }}</span>
+              {% else %}
+              <span class="azure-account-greeting">Welcome to Azure Jewels</span>
+              {% endif %}
+            </div>
+            <ul class="azure-account-list">
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'account_dashboard' %}"><i class="bi bi-grid me-2"></i> Dashboard</a></li>
+              <li><a href="{% url 'account_orders' %}"><i class="bi bi-box-seam me-2"></i> My Orders</a></li>
+              <li><a href="{% url 'account_profile' %}"><i class="bi bi-person me-2"></i> Profile &amp; Settings</a></li>
+              <li><a href="{% url 'account_addresses' %}"><i class="bi bi-geo-alt me-2"></i> Saved Addresses</a></li>
+              {% if user.is_staff or user.is_superuser %}
+              <li>
+                <a href="{% url 'admin_dashboard' %}" style="color: var(--primary-navy); font-weight: 600;">
+                  <i class="bi bi-speedometer2 me-2"></i> Admin Dashboard
+                </a>
+              </li>
+              {% endif %}
+              <li class="azure-divider"></li>
+              <li class="azure-auth-link">
+                <a href="{% url 'logout' %}" class="text-danger"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</a>
+              </li>
+              {% else %}
+              <li><a href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right me-2"></i> Sign In</a></li>
+              <li><a href="{% url 'register' %}"><i class="bi bi-person-plus me-2"></i> Create Account</a></li>
+              <li><a href="{% url 'wishlist' %}"><i class="bi bi-heart me-2"></i> Saved Wishlist</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Wishlist (Desktop & Tablet) -->
+        <a href="{% url 'wishlist' %}" class="azure-icon-btn azure-wishlist-btn d-none d-md-inline-flex" aria-label="Wishlist" title="Saved Wishlist">
+          <svg class="azure-icon-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="azure-badge wishlist-count" id="azureWishCount">{{ wishlist_count|default:"0" }}</span>
+        </a>
+
+        <!-- Cart (All Viewports) -->
+        <a href="{% url 'cart' %}" class="azure-icon-btn azure-cart-btn" aria-label="Shopping Bag" title="Shopping Bag">
+          <svg class="azure-icon-svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="azure-badge cart-badge" id="azureCartCount">{{ cart_count|default:"0" }}</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ------------------------------------------------------------------------
+       ROW 3 — CATEGORY NAVIGATION (Desktop only >= 992px)
+       - Height: 48–50px
+       - White background with subtle top & bottom borders (#D9E3EC)
+       - Center all items horizontally
+       - 10 categories with mega menu on hover
+       - White-space nowrap, no wrapping, fits 1366px and 1440px
+       ------------------------------------------------------------------------ -->
+  <nav class="azure-navbar d-none d-lg-block" id="azureNavbar" aria-label="Category Navigation">
+    <div class="azure-navbar-container">
+      <ul class="azure-nav-list">
+
+        <!-- 1. NEW ARRIVALS -->
+        <li class="azure-nav-item">
+          <a href="{% url 'shop' %}?new=1" class="azure-nav-link">
+            <span>NEW ARRIVALS</span>
+            <span class="azure-nav-pill-new">NEW</span>
+          </a>
+        </li>
+
+        <!-- DYNAMIC MAIN CATEGORIES WITH DATABASE-DRIVEN MEGA MENUS -->
+        {% for cat in global_categories %}
+        <li class="azure-nav-item azure-has-mega">
+          <a href="{{ cat.get_absolute_url }}" class="azure-nav-link" aria-haspopup="true" aria-expanded="false">
+            <span>{{ cat.name|upper }}</span>
+            <span class="azure-nav-caret">&#9662;</span>
+          </a>
+          <div class="azure-mega-dropdown">
+            <div class="azure-mega-container">
+              {% if cat.mega_groups %}
+                {% for group_name, sub_list in cat.mega_groups|slice:":2" %}
+                <div class="azure-mega-col">
+                  <h4 class="azure-mega-heading">{{ group_name|upper }}</h4>
+                  <ul class="azure-mega-links">
+                    {% for sub in sub_list %}
+                    <li><a href="{{ sub.get_absolute_url }}">{{ sub.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endfor %}
+                {% if cat.mega_groups|length < 2 %}
+                <div class="azure-mega-col">
+                  <h4 class="azure-mega-heading">POPULAR EDITS</h4>
+                  <ul class="azure-mega-links">
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&new=1">Latest Unveilings</a></li>
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&best=1">Most Loved Pieces</a></li>
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&sale=1">Festive Special Offers</a></li>
+                    <li><a href="{{ cat.get_absolute_url }}">Everyday Fine Essentials</a></li>
+                  </ul>
+                </div>
+                {% endif %}
+              {% else %}
+                <div class="azure-mega-col">
+                  <h4 class="azure-mega-heading">SHOP BY SILHOUETTE</h4>
+                  <ul class="azure-mega-links">
+                    {% for sub in cat.active_subcategories|slice:":7" %}
+                    <li><a href="{{ sub.get_absolute_url }}">{{ sub.name }}</a></li>
+                    {% empty %}
+                    <li><a href="{{ cat.get_absolute_url }}">All {{ cat.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <div class="azure-mega-col">
+                  <h4 class="azure-mega-heading">COLLECTIONS</h4>
+                  <ul class="azure-mega-links">
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&new=1">New Arrivals</a></li>
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&best=1">Best Sellers</a></li>
+                    <li><a href="{% url 'shop' %}?category={{ cat.slug }}&sale=1">Special Offers</a></li>
+                  </ul>
+                </div>
+              {% endif %}
+
+              <!-- Column 3: FEATURED -->
+              <div class="azure-mega-col">
+                <h4 class="azure-mega-heading">FEATURED</h4>
+                <ul class="azure-mega-links">
+                  <li><a href="{% url 'shop' %}?category={{ cat.slug }}&new=1">New {{ cat.name }} Arrivals</a></li>
+                  <li><a href="{% url 'shop' %}?category={{ cat.slug }}&best=1">Top Rated {{ cat.name }}</a></li>
+                  <li><a href="{% url 'shop' %}?category={{ cat.slug }}&featured=1">Atelier Curations</a></li>
+                  <li><a href="{{ cat.get_absolute_url }}" class="azure-view-all-link">Browse All {{ cat.name }} &rarr;</a></li>
+                </ul>
+              </div>
+
+              <!-- Column 4: Category Feature Card (Real image from DB) -->
+              <div class="azure-mega-feature-col">
+                <a href="{{ cat.get_absolute_url }}" class="azure-mega-feature-card">
+                  <div class="azure-feature-img-wrap">
+                    {% if cat.image %}
+                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}" loading="lazy">
+                    {% else %}
+                    <img src="{% static 'assets/images/placeholder.svg' %}" alt="{{ cat.name }}" loading="lazy">
+                    {% endif %}
+                    <span class="azure-feature-tag">ROYAL ATELIER</span>
+                  </div>
+                  <div class="azure-feature-info">
+                    <h5 class="azure-feature-title">{{ cat.name }}</h5>
+                    <p class="azure-feature-desc">{{ cat.description|default:"Artisan crafted silhouettes for festive allure and regal majesty."|truncatewords:9 }}</p>
+                    <span class="azure-feature-cta">Shop Collection &rarr;</span>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+
+        <!-- 9. BEST SELLERS -->
+        <li class="azure-nav-item">
+          <a href="{% url 'shop' %}?best=1" class="azure-nav-link">
+            <span>BEST SELLERS</span>
+          </a>
+        </li>
+
+        <!-- 10. SALE -->
+        <li class="azure-nav-item">
+          <a href="{% url 'shop' %}?sale=1" class="azure-nav-link azure-sale-link">
+            <span>SALE</span>
+            <span class="azure-nav-pill-sale">HOT</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ------------------------------------------------------------------------
+       EXPANDABLE SEARCH OVERLAY (DESKTOP & MOBILE)
+       ------------------------------------------------------------------------ -->
+  <div class="azure-search-overlay" id="azureSearchOverlay" aria-hidden="true">
+    <div class="azure-search-inner container">
+      <form action="{% url 'shop' %}" method="get" class="azure-search-form" id="azureSearchForm">
+        <div class="azure-search-input-wrap">
+          <svg class="azure-search-icon-inside" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="1.8" fill="none">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+          <input type="text" name="q" id="azureSearchInput" class="azure-search-input" placeholder="Search for necklaces, diamond rings, bridal sets, earrings..." autocomplete="off" />
+          <button type="submit" class="azure-search-btn-submit" aria-label="Submit search">
+            Search
+          </button>
+          <button type="button" class="azure-search-close" id="azureSearchClose" aria-label="Close search overlay">
+            &times;
+          </button>
+        </div>
+      </form>
+      <div class="azure-search-quick-tags">
+        <span class="azure-tags-label">Popular:</span>
+        <a href="{% url 'shop' %}?category=earrings&style=jhumka" class="azure-quick-tag">Jhumkas</a>
+        <a href="{% url 'shop' %}?category=rings&style=solitaire" class="azure-quick-tag">Solitaire Rings</a>
+        <a href="{% url 'shop' %}?category=necklaces&style=choker" class="azure-quick-tag">Chokers</a>
+        <a href="{% url 'shop' %}?category=bridal" class="azure-quick-tag">Bridal Sets</a>
+        <a href="{% url 'shop' %}?category=bracelets&style=tennis" class="azure-quick-tag">Tennis Bracelets</a>
+        <a href="{% url 'shop' %}?best=1" class="azure-quick-tag">Best Sellers</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------------------------
+     MOBILE & TABLET DRAWER NAVIGATION
+     ------------------------------------------------------------------------ -->
+{% include "includes/mobile-menu.html" %}

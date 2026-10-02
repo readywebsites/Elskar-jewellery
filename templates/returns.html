@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Returns &amp; Refunds Policy | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Returns &amp; Refunds</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Returns &amp; Refunds Policy</h1>
+    <p class="text-muted small mb-0">Our 15-Day Luxury Guarantee &amp; Seamless Replacements</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1000px; font-size: 14.5px; line-height: 1.8; color: var(--text-dark);">
+    
+    <div class="p-4 rounded-1 mb-5" style="background-color: var(--off-white); border-left: 3px solid var(--primary-navy);">
+      <p class="mb-0 fw-medium" style="color: var(--primary-navy);">
+        Every piece of Azure Jewels fine jewellery is individually inspected by our certified gemmologists prior to dispatch. If for any reason your selected creation does not meet your expectations, we offer a straightforward, insured 15-day return and exchange service.
+      </p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <!-- Card 1: Window -->
+      <div class="col-12 col-md-4">
+        <div class="p-4 border rounded-1 h-100 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-calendar-check"></i></div>
+          <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">15-Day Return Window</h3>
+          <p class="text-muted small mb-0">Initiate returns within 15 calendar days from the date of confirmed courier delivery.</p>
+        </div>
+      </div>
+      <!-- Card 2: Complimentary Pickup -->
+      <div class="col-12 col-md-4">
+        <div class="p-4 border rounded-1 h-100 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-truck"></i></div>
+          <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Insured Reverse Pickup</h3>
+          <p class="text-muted small mb-0">Complimentary armored courier pickup arranged directly from your doorstep.</p>
+        </div>
+      </div>
+      <!-- Card 3: 100% Refund -->
+      <div class="col-12 col-md-4">
+        <div class="p-4 border rounded-1 h-100 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 44px; height: 44px; font-size: 20px;"><i class="bi bi-arrow-repeat"></i></div>
+          <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Direct Bank Refund</h3>
+          <p class="text-muted small mb-0">Full refund to your original payment mode within 5–7 business days post-inspection.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: Return Eligibility -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">1. Return Eligibility Criteria</h2>
+      <p>To qualify for a full refund or exchange under our 15-Day Luxury Guarantee, items must satisfy the following conditions:</p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">The jewellery must be unworn, in pristine, unused condition, without scratches, dents, or signs of wear.</li>
+        <li class="mb-2">The original tamper-evident security seal tag must remain unbroken and firmly attached to the piece.</li>
+        <li class="mb-2">All accompanying certificates of authenticity, hallmarking documentation, and warranty cards must be returned intact.</li>
+        <li class="mb-0">The item must be returned in the original velvet packaging box, velvet pouch, and protective rigid carton.</li>
+      </ul>
+    </div>
+
+    <!-- Section 2: Return Window -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">2. Return Window &amp; Deadlines</h2>
+      <p>
+        Return requests must be submitted within <strong>15 calendar days</strong> of parcel receipt as confirmed by the courier tracking log. Requests submitted after 15 days cannot be processed for return or refund, but remain eligible for lifetime maintenance and replating services under our Atelier Care policy.
+      </p>
+    </div>
+
+    <!-- Section 3: Non-Returnable Items -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">3. Non-Returnable &amp; Final Sale Items</h2>
+      <p>The following categories are strictly non-returnable due to bespoke manufacturing and hygiene standards:</p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Customized &amp; Engraved Creations:</strong> Pieces personalized with initials, custom sizing modifications, or bespoke bridal suite commissions.</li>
+        <li class="mb-2"><strong>Pierced Earrings with Broken Hygiene Seals:</strong> Items whose hygienic protective wrappers have been compromised.</li>
+        <li class="mb-0"><strong>Archive Final Clearance Items:</strong> Pieces marked as "Final Sale" on promotional vaults.</li>
+      </ul>
+    </div>
+
+    <!-- Section 4: How to Request a Return -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">4. How to Request a Return</h2>
+      <ol class="ps-3 mb-0">
+        <li class="mb-2"><strong>Contact Concierge:</strong> Email <a href="mailto:concierge@azurejewels.com" class="fw-medium" style="color: var(--primary-navy);">concierge@azurejewels.com</a> or WhatsApp <a href="https://wa.me/919876543210" class="fw-medium" style="color: var(--primary-navy);">+91 98765 43210</a> with your Order Number (e.g. AZ-12345678) and reason for return.</li>
+        <li class="mb-2"><strong>Verification:</strong> Our team reviews your request within 24 hours and issues a Return Authorization (RA) number along with insured shipping label documents.</li>
+        <li class="mb-2"><strong>Secure Packing:</strong> Place the jewellery into its original velvet case with all certificates. Place inside the tamper-proof outer carton provided.</li>
+        <li class="mb-0"><strong>Doorstep Pickup:</strong> Our designated armored logistics specialist will arrive with a tamper-evident seal pouch to collect the parcel.</li>
+      </ol>
+    </div>
+
+    <!-- Section 5: Refund Process -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">5. Refund Processing &amp; Timelines</h2>
+      <p>
+        Upon receipt at our central atelier in Mumbai, our quality appraisal team inspects the piece within <strong>48 hours</strong>. Once approved:
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Prepaid Orders (Cards/Net Banking/UPI):</strong> Refunds are credited back to your original source account within 5 to 7 business days.</li>
+        <li class="mb-0"><strong>Cash on Delivery Orders:</strong> Refunds are transferred via NEFT/IMPS to your verified bank account upon confirmation of your IFSC details.</li>
+      </ul>
+    </div>
+
+    <!-- Section 6: Exchange Policy -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">6. Exchange Policy</h2>
+      <p>
+        If you wish to exchange a piece for a different ring size, chain length, or another design from our collections, we facilitate a one-time complimentary exchange. Any price differential will be charged or credited accordingly via store voucher or payment link.
+      </p>
+    </div>
+
+    <!-- Section 7: Damaged / Incorrect Product -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">7. Damaged, Defective or Incorrect Deliveries</h2>
+      <p>
+        All parcels are fully insured during transit. In the rare event that your package arrives visibly tampered or the creation contains a manufacturing flaw:
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">Notify our concierge within <strong>48 hours of delivery</strong> with clear unboxing photographs or video.</li>
+        <li class="mb-0">We will arrange an immediate priority pickup and dispatch an identical replacement or issue an unconditional 100% refund immediately.</li>
+      </ul>
+    </div>
+
+    <!-- Section 8: Contact Information -->
+    <div>
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">8. Concierge Contact Information</h2>
+      <p>Our dedicated customer care specialists are standing by to guide your return or exchange:</p>
+      <div class="p-4 rounded-1 border" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+        <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Azure Jewels Returns Concierge</h3>
+        <p class="mb-1"><i class="bi bi-envelope me-2" style="color: var(--primary-navy);"></i> Email: <a href="mailto:concierge@azurejewels.com" style="color: var(--primary-navy); font-weight: 500;">concierge@azurejewels.com</a></p>
+        <p class="mb-1"><i class="bi bi-telephone me-2" style="color: var(--primary-navy);"></i> Hotline: <a href="tel:+919876543210" style="color: var(--primary-navy); font-weight: 500;">+91 98765 43210</a></p>
+        <p class="mb-0"><i class="bi bi-clock me-2" style="color: var(--primary-navy);"></i> Operating Hours: Monday ? Saturday, 10:30 AM ? 8:00 PM IST</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

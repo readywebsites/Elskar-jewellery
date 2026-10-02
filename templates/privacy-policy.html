@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Privacy Policy & Client Data Protection | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Privacy Policy</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Privacy Policy</h1>
+    <p class="text-muted small mb-0">Effective Date: September 2026 | Last Updated: September 11, 2026</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1000px; font-size: 14.5px; line-height: 1.8; color: var(--text-dark);">
+    
+    <div class="p-4 rounded-1 mb-5" style="background-color: var(--off-white); border-left: 3px solid var(--primary-navy);">
+      <p class="mb-0 fw-medium" style="color: var(--primary-navy);">
+        At Azure Jewels Private Limited ("Azure Jewels", "we", "our", or "us"), safeguarding the confidentiality and security of our clients' personal information is fundamental to our heritage. This policy details how we collect, use, and protect your information when you browse our boutique, acquire jewellery, or interact with our concierge.
+      </p>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">1. Information We Collect</h2>
+      <p>We only collect personal information that is necessary to provide our bespoke jewellery services, fulfill transactions, and personalize your experience:</p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Personal Identification:</strong> Name, honorific, and date of birth (for celebratory privileges if provided).</li>
+        <li class="mb-2"><strong>Contact Details:</strong> Verified email address, telephone/mobile number, billing and physical shipping addresses.</li>
+        <li class="mb-2"><strong>Account Credentials:</strong> Username and securely encrypted password hashes (we never store plain-text passwords).</li>
+        <li class="mb-2"><strong>Transaction Records:</strong> Orders placed, invoices, payment reference IDs, and communication history with our concierge.</li>
+        <li class="mb-0"><strong>Device & Browsing Data:</strong> IP address, browser type, device operating system, and interaction logs collected via essential analytics cookies.</li>
+      </ul>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">2. How We Use Your Information</h2>
+      <p>We process your personal information for lawful business purposes, including:</p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">Processing, packaging, insuring, and delivering your fine jewellery orders.</li>
+        <li class="mb-2">Communicating real-time dispatch updates, delivery OTPs, and electronic invoices.</li>
+        <li class="mb-2">Responding to concierge inquiries, sizing customizations, and bespoke atelier appointments.</li>
+        <li class="mb-2">Maintaining your account dashboard, order history, and saved address book.</li>
+        <li class="mb-0">Transmitting private preview invitations and newsletter updates (only where explicitly opted in).</li>
+      </ul>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">3. Cookies & Tracking Technologies</h2>
+      <p>We utilize cookies and lightweight browser storage mechanisms to enhance boutique functionality:</p>
+      <ul class="ps-3 mb-3">
+        <li class="mb-2"><strong>Essential Cookies:</strong> Required to maintain your authenticated session, CSRF security tokens, and shopping cart contents.</li>
+        <li class="mb-0"><strong>Analytical Cookies:</strong> Help us measure aggregate boutique traffic patterns, page load speeds, and navigation usability without identifying individual users.</li>
+      </ul>
+      <p class="mb-0">You may configure your browser to decline non-essential cookies; however, certain interactive boutique features (such as real-time bag updates) may be impaired.</p>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">4. Payment Information Security</h2>
+      <p>
+        Azure Jewels operates with strict adherence to global payment industry standards. All electronic payments are processed through certified PCI-DSS Level 1 compliant payment gateways. <strong>Azure Jewels never stores, captures, or retains your raw credit card numbers, CVVs, debit card PINs, or UPI passwords</strong> on our servers.
+      </p>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">5. Data Security & Storage</h2>
+      <p>
+        We employ multi-layer security protocols including 256-bit SSL/TLS encryption for all data in transit, encrypted database volumes at rest, role-based access restrictions, and regular vulnerability audits. Access to personal client information is restricted strictly to authorized atelier personnel who require it to fulfill your orders.
+      </p>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">6. Third-Party Services</h2>
+      <p>
+        We never sell, rent, or trade your personal information to third parties for marketing purposes. We share strictly necessary data only with audited service partners who assist in our operations:
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Insured Logistics Partners:</strong> Armored courier and express parcel carriers (e.g. Blue Dart, Sequel, FedEx) to deliver your jewellery.</li>
+        <li class="mb-2"><strong>Payment Infrastructure:</strong> Licensed payment gateways and banking networks.</li>
+        <li class="mb-0"><strong>Regulatory Authorities:</strong> Law enforcement or government bodies only when compelled by valid statutory mandates or court orders.</li>
+      </ul>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">7. Your Rights</h2>
+      <p>As our valued patron, you retain full rights regarding your data:</p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Access &amp; Review:</strong> View all personal data linked to your account via your <a href="{% url 'account_profile' %}" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">Account Profile</a>.</li>
+        <li class="mb-2"><strong>Correction:</strong> Update or amend inaccurate contact, address, or billing details at any time.</li>
+        <li class="mb-2"><strong>Erasure:</strong> Request permanent deletion of your profile and personal data, subject to statutory tax and financial record retention laws.</li>
+        <li class="mb-0"><strong>Opt-Out:</strong> Unsubscribe from marketing communications instantly via the unsubscribe link in any newsletter email.</li>
+      </ul>
+    </div>
+
+    <!-- Section 8 -->
+    <div>
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">8. Contact Our Privacy Concierge</h2>
+      <p>For any inquiries, data access requests, or questions regarding this Privacy Policy, our Data Protection Officer is readily available:</p>
+      <div class="p-4 rounded-1 border" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+        <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Azure Jewels Privacy Desk</h3>
+        <p class="mb-1"><i class="bi bi-geo-alt me-2" style="color: var(--primary-navy);"></i> Flagship Atelier: Level 3, The Heritage Galleria, Linking Road, Bandra West, Mumbai 400050</p>
+        <p class="mb-1"><i class="bi bi-envelope me-2" style="color: var(--primary-navy);"></i> Email: <a href="mailto:privacy@azurejewels.com" style="color: var(--primary-navy); font-weight: 500;">privacy@azurejewels.com</a></p>
+        <p class="mb-0"><i class="bi bi-telephone me-2" style="color: var(--primary-navy);"></i> Concierge Phone: <a href="tel:+919876543210" style="color: var(--primary-navy); font-weight: 500;">+91 98765 43210</a></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

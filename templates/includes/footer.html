@@ -1,0 +1,133 @@
+{% load static %}
+<footer class="azure-footer" role="contentinfo">
+  <div class="azure-footer-container">
+    <div class="azure-footer-main">
+
+      <!-- Column 1: Brand & Atelier Overview -->
+      <div class="azure-footer-col-brand">
+        <div class="azure-footer-brand-title">❖ AZURE JEWELS</div>
+        <p class="azure-footer-brand-desc">
+          Bespoke haute joaillerie handcrafted to celebrate your most monumental moments. Timeless elegance, certified gemstones, and royal Indian artistry.
+        </p>
+        <div class="azure-footer-socials d-flex gap-3 mt-3">
+          <a href="https://instagram.com/azurejewels" target="_blank" rel="noopener" aria-label="Instagram" class="text-white opacity-75 hover-opacity-100 fs-5"><i class="bi bi-instagram"></i></a>
+          <a href="https://facebook.com/azurejewels" target="_blank" rel="noopener" aria-label="Facebook" class="text-white opacity-75 hover-opacity-100 fs-5"><i class="bi bi-facebook"></i></a>
+          <a href="https://pinterest.com/azurejewels" target="_blank" rel="noopener" aria-label="Pinterest" class="text-white opacity-75 hover-opacity-100 fs-5"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+
+      <!-- Column 2: SHOP -->
+      <div class="azure-footer-col">
+        <button type="button" class="azure-footer-heading azure-footer-acc-toggle" aria-expanded="false" aria-controls="footerColShop">
+          <span>SHOP</span>
+          <span class="azure-footer-acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="footerColShop" class="azure-footer-col-content">
+          <ul class="azure-footer-links">
+            <li><a href="{% url 'shop' %}?new=1">New Arrivals</a></li>
+            <li><a href="{% url 'shop' %}?category=earrings">Earrings</a></li>
+            <li><a href="{% url 'shop' %}?category=necklaces">Necklaces</a></li>
+            <li><a href="{% url 'shop' %}?category=rings">Rings</a></li>
+            <li><a href="{% url 'shop' %}?category=bracelets">Bracelets</a></li>
+            <li><a href="{% url 'shop' %}?category=bangles">Bangles</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 3: CUSTOMER CARE -->
+      <div class="azure-footer-col">
+        <button type="button" class="azure-footer-heading azure-footer-acc-toggle" aria-expanded="false" aria-controls="footerColCare">
+          <span>CUSTOMER CARE</span>
+          <span class="azure-footer-acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="footerColCare" class="azure-footer-col-content">
+          <ul class="azure-footer-links">
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><a href="{% url 'track_package' %}">Track Package</a></li>
+            <li><a href="{% url 'returns' %}">Returns &amp; Exchange</a></li>
+            <li><a href="{% url 'shipping_policy' %}">Shipping</a></li>
+            <li><a href="{% url 'faq' %}">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 4: ABOUT -->
+      <div class="azure-footer-col">
+        <button type="button" class="azure-footer-heading azure-footer-acc-toggle" aria-expanded="false" aria-controls="footerColAbout">
+          <span>ABOUT</span>
+          <span class="azure-footer-acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div id="footerColAbout" class="azure-footer-col-content">
+          <ul class="azure-footer-links">
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+            <li><a href="{% url 'terms' %}">Terms</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 5: NEWSLETTER -->
+      <div class="azure-footer-col azure-footer-col-newsletter">
+        <span class="azure-footer-heading d-block mb-3">NEWSLETTER</span>
+        <p class="azure-footer-brand-desc mb-3" style="font-size: 13px;">
+          Subscribe to receive private previews, bridal lookbooks, and exclusive atelier privileges.
+        </p>
+        <form action="{% url 'newsletter_subscribe' %}" method="post" class="azure-footer-newsletter-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="email" name="email" class="form-control form-control-sm" required placeholder="Enter your email" aria-label="Email address" style="background:#FFFFFF; border:1px solid #D9E3EC; color:#071A2D; font-size:13px; border-radius:2px 0 0 2px;">
+            <button type="submit" class="btn btn-light btn-sm fw-bold px-3" style="background:#FFFFFF; color:#071A2D; border:1px solid #D9E3EC; border-radius:0 2px 2px 0; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;">
+              Subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="azure-footer-bottom">
+    <div class="azure-footer-bottom-container">
+      <div class="azure-footer-copyright">
+        &copy; 2026 Azure Jewels. All Rights Reserved.
+      </div>
+      
+      <ul class="azure-footer-legal-links">
+        <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+        <li><span class="azure-footer-divider">|</span></li>
+        <li><a href="{% url 'terms' %}">Terms</a></li>
+        <li><span class="azure-footer-divider">|</span></li>
+        <li><a href="{% url 'returns' %}">Returns</a></li>
+      </ul>
+
+      <div class="azure-footer-badges">
+        <span class="azure-footer-badge-item"><i class="bi bi-shield-check"></i> 100% Certified</span>
+        <span class="azure-footer-badge-item"><i class="bi bi-truck"></i> Insured Delivery</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Footer Accordion Controller
+  (function () {
+    const accToggles = document.querySelectorAll('.azure-footer-acc-toggle');
+    accToggles.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (window.innerWidth >= 768) return; // Desktop view is always expanded
+        const col = btn.closest('.azure-footer-col');
+        const isOpen = col.classList.contains('is-open');
+        
+        if (isOpen) {
+          col.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          col.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>

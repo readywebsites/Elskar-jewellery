@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Saved Wishlist | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'shop' %}" class="text-muted">Shop</a></li>
+        <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Wishlist</li>
+      </ol>
+    </nav>
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="azure-title mb-0" style="font-size: 32px;">My Saved Wishlist</h1>
+      <span class="text-muted small">{{ products|length }} Pieces Saved</span>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    {% if products %}
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
+      {% for product in products %}
+      <div class="col">
+        <div class="azure-product-card">
+          <div class="azure-product-img-wrap">
+            <a href="{{ product.get_absolute_url }}">
+              {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+              {% else %}
+              <img src="{% static 'assets/images/featured-products/01.webp' %}" alt="{{ product.name }}" loading="lazy">
+              {% endif %}
+            </a>
+
+            <!-- Remove from Wishlist button -->
+            <a href="{% url 'wishlist_toggle' product.id %}" class="azure-product-wish-btn" title="Remove from Wishlist">
+              <i class="bi bi-trash text-dark"></i>
+            </a>
+          </div>
+
+          <div class="azure-product-info">
+            <span class="azure-product-category">{{ product.category.name|default:"Fine Jewellery" }}</span>
+            <h2 class="azure-product-title fs-6 mb-1">
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </h2>
+            
+            <div class="azure-product-prices mb-3">
+              <span class="azure-current-price">₹{{ product.current_price|floatformat:0 }}</span>
+              {% if product.sale_price and product.sale_price < product.price %}
+              <span class="azure-original-price">₹{{ product.price|floatformat:0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="mt-auto d-grid gap-2">
+              {% if product.is_in_stock %}
+              <a href="{% url 'wishlist_move_to_cart' product.id %}" class="btn-azure btn-azure-sm text-center">
+                <i class="bi bi-bag-plus me-1"></i> MOVE TO BAG
+              </a>
+              {% else %}
+              <button class="btn btn-secondary btn-sm disabled" disabled>OUT OF STOCK</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center py-5">
+      <div class="p-5 border rounded-1 mx-auto" style="border-color: var(--border-light) !important; background-color: var(--off-white); max-width: 600px;">
+        <i class="bi bi-heart text-muted" style="font-size: 56px;"></i>
+        <h2 class="azure-title mt-3">Your Wishlist is Empty</h2>
+        <p class="text-muted mx-auto mb-4" style="max-width: 440px;">
+          You haven't saved any jewellery pieces to your wishlist yet. Tap the heart icon on any piece to save your favourite creations for later.
+        </p>
+        <a href="{% url 'shop' %}" class="btn-azure">EXPLORE FINE JEWELLERY &rarr;</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

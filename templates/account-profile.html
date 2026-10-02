@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Personal Profile | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'account_dashboard' %}" class="text-muted">Account</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Profile</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-0" style="font-size: 32px; color: var(--primary-navy);">Personal Profile &amp; Settings</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-lg-3">
+        {% include "includes/account-sidebar.html" with active_tab="profile" %}
+      </div>
+
+      <div class="col-12 col-lg-9">
+        <div class="p-4 p-md-5 border rounded-1 bg-white" style="border-color: var(--border-light) !important;">
+          <h5 class="azure-title mb-4 fs-4" style="color: var(--primary-navy);">Update Profile Details</h5>
+
+          <form action="{% url 'account_profile' %}" method="post">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">First Name *</label>
+                <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control" required>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Last Name</label>
+                <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Username</label>
+                <input type="text" value="{{ user.username }}" class="form-control" style="background-color: var(--off-white); border-color: var(--border-light); color: var(--primary-navy);" disabled>
+                <small class="text-muted">Username cannot be altered.</small>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500;">Email Address *</label>
+                <input type="email" name="email" value="{{ user.email }}" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top" style="border-color: var(--border-light) !important;">
+              <button type="submit" class="btn-azure py-3">SAVE CHANGES &rarr;</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

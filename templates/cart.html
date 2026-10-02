@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shopping Bag | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'shop' %}" class="text-muted">Shop</a></li>
+        <li class="breadcrumb-item active text-dark fw-semibold" aria-current="page">Shopping Bag</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-0" style="font-size: 32px;">Your Shopping Bag ({{ cart.total_items }} Items)</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    {% if cart_items %}
+    
+    <!-- Free Shipping Progress Tracker -->
+    <div class="p-3 border rounded-1 mb-4 text-center" style="border-color: var(--border-light) !important; background-color: var(--off-white);">
+      {% if free_shipping_remaining > 0 %}
+      <span class="small text-dark">
+        <i class="bi bi-truck text-dark me-1"></i> Add <strong>₹{{ free_shipping_remaining|floatformat:0 }}</strong> more to unlock <strong>Complimentary Express Delivery</strong>!
+      </span>
+      {% else %}
+      <span class="small text-dark fw-bold">
+        <i class="bi bi-check-circle-fill me-1 text-dark"></i> Congratulations! You've unlocked Complimentary Express Delivery!
+      </span>
+      {% endif %}
+    </div>
+
+    <div class="row g-4">
+      
+      <!-- Cart Items List -->
+      <div class="col-12 col-lg-8">
+        <div class="border rounded-1 overflow-hidden" style="border-color: var(--border-light) !important;">
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead style="background-color: var(--off-white); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dark);">
+                <tr>
+                  <th class="py-3 px-4" style="min-width: 250px;">Jewellery Creation</th>
+                  <th class="py-3 text-center" style="width: 120px;">Price</th>
+                  <th class="py-3 text-center" style="width: 140px;">Quantity</th>
+                  <th class="py-3 text-end" style="width: 120px;">Total</th>
+                  <th class="py-3 text-center" style="width: 60px;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cart_items %}
+                <tr class="border-top" style="border-color: var(--border-light) !important;">
+                  <!-- Product Info -->
+                  <td class="py-4 px-4">
+                    <div class="d-flex align-items-center gap-3">
+                      <a href="{{ item.product.get_absolute_url }}" class="flex-shrink-0">
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="rounded-1 border" width="80" height="80" style="object-fit: cover; border-color: var(--border-light) !important;">
+                        {% else %}
+                        <img src="{% static 'assets/images/featured-products/01.webp' %}" alt="{{ item.product.name }}" class="rounded-1 border" width="80" height="80" style="object-fit: cover; border-color: var(--border-light) !important;">
+                        {% endif %}
+                      </a>
+                      <div>
+                        <span class="text-uppercase text-muted" style="font-size: 11px;">{{ item.product.category.name|default:"Fine Jewellery" }}</span>
+                        <h2 class="azure-title fs-6 mb-1">
+                          <a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a>
+                        </h2>
+                        <small class="text-muted d-block" style="font-size: 12px;">SKU: {{ item.product.sku }}</small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Unit Price -->
+                  <td class="text-center">
+                    <span class="fw-semibold text-dark">₹{{ item.product.current_price|floatformat:0 }}</span>
+                  </td>
+
+                  <!-- Quantity Controls -->
+                  <td class="text-center">
+                    <form action="{% url 'cart_update' item.id %}" method="post" class="d-inline-flex">
+                      {% csrf_token %}
+                      <div class="azure-qty-stepper mx-auto">
+                        <button type="submit" name="action" value="decrease" class="azure-qty-btn" aria-label="Decrease quantity">−</button>
+                        <span class="azure-qty-val">{{ item.quantity }}</span>
+                        <button type="submit" name="action" value="increase" class="azure-qty-btn" aria-label="Increase quantity">+</button>
+                      </div>
+                    </form>
+                  </td>
+
+                  <!-- Subtotal -->
+                  <td class="text-end fw-bold azure-serif fs-6" style="color: var(--primary-navy);">
+                    ₹{{ item.total_price|floatformat:0 }}
+                  </td>
+
+                  <!-- Remove Action -->
+                  <td class="text-center">
+                    <a href="{% url 'cart_remove' item.id %}" class="text-muted hover-danger" aria-label="Remove item" title="Remove from bag">
+                      <i class="bi bi-trash fs-5 text-dark"></i>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <a href="{% url 'shop' %}" class="btn-azure-outline btn-azure-sm">
+            &larr; Continue Shopping
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Order Summary Card -->
+      <div class="col-12 col-lg-4">
+        <div class="azure-order-summary-card">
+          <h5 class="azure-title pb-2 border-bottom mb-3 fs-5" style="border-color: var(--border-light) !important;">Order Summary</h5>
+          
+          <div class="azure-summary-row">
+            <span class="text-muted">Bag Subtotal</span>
+            <span class="fw-semibold text-dark">₹{{ cart.subtotal|floatformat:0 }}</span>
+          </div>
+
+          <div class="azure-summary-row">
+            <span class="text-muted">Insured Express Shipping</span>
+            {% if cart.shipping_fee == 0 %}
+            <span class="text-dark fw-bold">FREE</span>
+            {% else %}
+            <span class="text-dark">₹{{ cart.shipping_fee|floatformat:0 }}</span>
+            {% endif %}
+          </div>
+
+          <div class="azure-summary-row">
+            <span class="text-muted">GST &amp; Taxes</span>
+            <span class="text-muted">Included</span>
+          </div>
+
+          <div class="azure-summary-row azure-summary-total">
+            <span>Estimated Total</span>
+            <span class="azure-serif text-dark fs-5">₹{{ cart.total|floatformat:0 }}</span>
+          </div>
+
+          <!-- Promo Code Input -->
+          <div class="mt-4 mb-4">
+            <label class="form-label small">Have an Invitation Code?</label>
+            <div class="input-group">
+              <input type="text" placeholder="e.g. AZURE10" class="form-control form-control-sm text-uppercase" style="letter-spacing: 0.1em;">
+              <button class="btn-azure btn-azure-sm px-3" type="button">Apply</button>
+            </div>
+          </div>
+
+          <a href="{% url 'checkout' %}" class="btn-azure w-100 py-3">
+            PROCEED TO CHECKOUT &rarr;
+          </a>
+
+          <div class="text-center mt-3 pt-3 border-top" style="font-size: 12px; color: var(--azure-text-muted); border-color: var(--border-light) !important;">
+            <div class="mb-1"><i class="bi bi-shield-lock-fill text-dark me-1"></i> Bank-Grade 256-Bit SSL Encrypted</div>
+            <div>Complimentary 15-Day Replacements on All Orders</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {% else %}
+    <!-- Empty Cart State -->
+    <div class="text-center py-5">
+      <div class="p-5 border rounded-1 mx-auto" style="border-color: var(--border-light) !important; background-color: var(--off-white); max-width: 600px;">
+        <i class="bi bi-bag-x text-muted" style="font-size: 56px;"></i>
+        <h2 class="azure-title mt-3">Your Shopping Bag is Empty</h2>
+        <p class="text-muted mx-auto mb-4" style="max-width: 440px;">
+          You have not added any pieces to your shopping bag yet. Explore our handcrafted jewellery collections and find your signature heirloom.
+        </p>
+        <a href="{% url 'shop' %}" class="btn-azure">EXPLORE COLLECTIONS &rarr;</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

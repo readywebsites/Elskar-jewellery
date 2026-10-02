@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shipping &amp; Insured Delivery Policy | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Shipping Policy</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Shipping &amp; Delivery Policy</h1>
+    <p class="text-muted small mb-0">Insured Armored Logistics &amp; Pan-India Doorstep Delivery</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1000px; font-size: 14.5px; line-height: 1.8; color: var(--text-dark);">
+    
+    <div class="p-4 rounded-1 mb-5" style="background-color: var(--off-white); border-left: 3px solid var(--primary-navy);">
+      <p class="mb-0 fw-medium" style="color: var(--primary-navy);">
+        We consider the transit of precious jewellery an art form in itself. Every order dispatched from our atelier is transported in discreet, tamper-resistant packaging, backed by 100% comprehensive transit insurance until handed over with verified OTP authentication.
+      </p>
+    </div>
+
+    <!-- Section 1: Shipping Information -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">1. Insured Shipping Overview</h2>
+      <p>
+        All parcels are transported exclusively via specialized luxury and bullion logistics partners (Sequel Logistics, Blue Dart Apex, and BVC Logistics). Every shipment travels with comprehensive insurance against loss, damage, or theft during transit at zero extra cost to the patron.
+      </p>
+    </div>
+
+    <!-- Section 2: Processing Time -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">2. Order Processing Timelines</h2>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>In-Stock Creations:</strong> Undergo ultrasonic cleaning, gemmological audit, and velvet casing, dispatched within <strong>1 to 2 business days</strong>.</li>
+        <li class="mb-2"><strong>Custom Ring Sizes &amp; Chain Adjustments:</strong> Dispatched within <strong>3 to 5 business days</strong>.</li>
+        <li class="mb-0"><strong>Bespoke Bridal Suites &amp; Made-to-Order Compositions:</strong> Handcrafted to your specifications, typically requiring <strong>10 to 14 business days</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- Section 3: Delivery Time -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">3. Estimated Delivery Times</h2>
+      <div class="table-responsive mt-3 mb-2">
+        <table class="table table-bordered" style="font-size: 14px; border-color: var(--border-light);">
+          <thead style="background-color: var(--off-white); color: var(--primary-navy);">
+            <tr>
+              <th class="py-2">Destination Tier</th>
+              <th class="py-2">Courier Mode</th>
+              <th class="py-2">Estimated Transit Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-semibold">Mumbai, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata</td>
+              <td>Air Express Insured</td>
+              <td>2 to 3 Business Days</td>
+            </tr>
+            <tr>
+              <td class="fw-semibold">Tier 1 &amp; Tier 2 Cities Across India</td>
+              <td>Priority Express</td>
+              <td>3 to 5 Business Days</td>
+            </tr>
+            <tr>
+              <td class="fw-semibold">Regional &amp; Remote Pin Codes</td>
+              <td>Insured Surface / Air Feeder</td>
+              <td>5 to 7 Business Days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <small class="text-muted d-block">Note: Deliveries are conducted Monday through Saturday between 9:00 AM and 7:00 PM. No dispatches occur on national holidays.</small>
+    </div>
+
+    <!-- Section 4: Shipping Charges & Free Shipping -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">4. Shipping Charges &amp; Free Shipping Conditions</h2>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2"><strong>Complimentary Shipping:</strong> All domestic orders with an aggregate cart value of <strong>₹999 and above</strong> receive 100% Free Express Insured Shipping.</li>
+        <li class="mb-2"><strong>Orders Below ₹999:</strong> A nominal flat logistics fee of <strong>₹99</strong> is applied at checkout to cover insured transit packaging.</li>
+        <li class="mb-0"><strong>Cash on Delivery:</strong> Available for select pin codes on orders up to ₹25,000 with a nominal ₹100 handling fee.</li>
+      </ul>
+    </div>
+
+    <!-- Section 5: Order Tracking -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">5. Real-Time Consignment Tracking</h2>
+      <p>
+        As soon as your jewellery parcel departs our Mumbai vault, you will receive an automated dispatch confirmation email and SMS containing:
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">Designated logistics carrier name and Air Waybill (AWB) number.</li>
+        <li class="mb-2">Live tracking URL linking directly to real-time parcel checkpoint milestones.</li>
+        <li class="mb-0">A confidential 4-digit Delivery Confirmation OTP sent to your registered mobile number on the morning of delivery.</li>
+      </ul>
+    </div>
+
+    <!-- Section 6: Delayed Orders -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">6. Handling Delayed or Rerouted Orders</h2>
+      <p>
+        While 99% of deliveries arrive within the scheduled window, unforeseen weather conditions, transit airspace restrictions, or localized municipal disruptions may occasionally cause delays. In such circumstances:
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">Our concierge team proactively tracks delayed parcels and provides daily status reports.</li>
+        <li class="mb-0">If a parcel remains untraceable for more than 7 business days past estimated arrival, we initiate an immediate replacement or full refund under our transit insurance guarantee.</li>
+      </ul>
+    </div>
+
+    <!-- Section 7: International Shipping -->
+    <div class="mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">7. International Shipping &amp; Cross-Border Customs</h2>
+      <p>
+        Azure Jewels proudly fulfills bespoke commissions worldwide across the United States, United Kingdom, UAE, Singapore, Canada, and Europe via FedEx International Priority.
+      </p>
+      <ul class="ps-3 mb-0">
+        <li class="mb-2">International deliveries typically conclude within <strong>7 to 10 business days</strong>.</li>
+        <li class="mb-0">Please note: Destination customs duties, import tariffs, and local VAT vary by country and are the responsibility of the recipient upon parcel arrival.</li>
+      </ul>
+    </div>
+
+    <!-- Section 8: Contact Support -->
+    <div>
+      <h2 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">8. Concierge Logistics Support</h2>
+      <p>For urgent delivery requests, change of delivery date, or address modifications before dispatch:</p>
+      <div class="p-4 rounded-1 border" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+        <h3 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Azure Jewels Logistics Concierge</h3>
+        <p class="mb-1"><i class="bi bi-envelope me-2" style="color: var(--primary-navy);"></i> Email: <a href="mailto:shipping@azurejewels.com" style="color: var(--primary-navy); font-weight: 500;">shipping@azurejewels.com</a></p>
+        <p class="mb-1"><i class="bi bi-telephone me-2" style="color: var(--primary-navy);"></i> Dispatch Desk: <a href="tel:+919876543210" style="color: var(--primary-navy); font-weight: 500;">+91 98765 43210</a></p>
+        <p class="mb-0"><i class="bi bi-whatsapp me-2" style="color: var(--primary-navy);"></i> WhatsApp Live Tracking: <a href="https://wa.me/919876543210" style="color: var(--primary-navy); font-weight: 500;">+91 98765 43210</a></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

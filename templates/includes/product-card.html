@@ -1,0 +1,64 @@
+﻿{% load static %}
+<div class="azure-product-card">
+  <div class="azure-product-img-wrap">
+    <a href="{{ product.get_absolute_url }}" class="azure-product-link" aria-label="View {{ product.name }}">
+      {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="azure-product-img" loading="lazy" onerror="this.onerror=null; this.src='{% static 'assets/images/placeholder.svg' %}';">
+      {% else %}
+      <div class="azure-placeholder-wrap">
+        <span class="azure-placeholder-icon">❖</span>
+        <span class="azure-placeholder-brand">AZURE JEWELS</span>
+        <span class="azure-placeholder-sub">Fine Jewellery</span>
+      </div>
+      {% endif %}
+    </a>
+
+    <!-- Product Badges -->
+    <div class="azure-product-badges">
+      {% if product.new_arrival %}
+      <span class="azure-badge-new">NEW</span>
+      {% elif product.best_seller %}
+      <span class="azure-badge-bestseller">BEST SELLER</span>
+      {% endif %}
+
+      {% if product.discount_percent > 0 %}
+      <span class="azure-badge-discount">-{{ product.discount_percent }}%</span>
+      {% endif %}
+    </div>
+
+    <!-- Wishlist Button -->
+    <button type="button" class="azure-product-wish-btn" data-product-id="{{ product.id }}" aria-label="Save to Wishlist" title="Save to Wishlist">
+      <i class="bi bi-heart"></i>
+    </button>
+
+    <!-- Quick Add Button / Stock Status -->
+    {% if product.is_in_stock %}
+    <button type="button" class="azure-quick-add-btn btn-ajax-add-cart" data-product-id="{{ product.id }}" data-quantity="1" aria-label="Add {{ product.name }} to Bag">
+      <i class="bi bi-bag-plus me-1"></i> Add to Bag
+    </button>
+    {% else %}
+    <div class="azure-out-of-stock-overlay">
+      Out of Stock
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="azure-product-info">
+    <span class="azure-product-category">{{ product.category.name|default:"Fine Jewellery" }}</span>
+    <h3 class="azure-product-title">
+      <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+    </h3>
+    
+    <div class="d-flex align-items-center gap-1 mb-2 small azure-rating-navy">
+      ★★★★★ <span class="text-muted ms-1" style="font-size: 11px;">({{ product.review_count|default:"24" }})</span>
+    </div>
+
+    <div class="azure-product-prices">
+      <span class="azure-current-price">₹{{ product.current_price|floatformat:0 }}</span>
+      {% if product.sale_price and product.sale_price < product.price %}
+      <span class="azure-original-price">₹{{ product.price|floatformat:0 }}</span>
+      <span class="azure-discount-text">({{ product.discount_percent }}% OFF)</span>
+      {% endif %}
+    </div>
+  </div>
+</div>

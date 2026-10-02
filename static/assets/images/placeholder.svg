@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#EDF2F7"/>
+    </linearGradient>
+    <radialGradient id="shimmer" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F1F5F9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bgGrad)"/>
+  <circle cx="400" cy="460" r="320" fill="url(#shimmer)"/>
+  <rect x="30" y="30" width="740" height="940" fill="none" stroke="#D9E3EC" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+  <g transform="translate(400, 430)">
+    <polygon points="0,-70 70,0 0,70 -70,0" fill="none" stroke="#0B2A45" stroke-width="2.5" opacity="0.4"/>
+    <polygon points="0,-48 48,0 0,48 -48,0" fill="#071A2D" opacity="0.9"/>
+    <polygon points="0,-20 6,-6 20,0 6,6 0,20 -6,6 -20,0 -6,-6" fill="#FFFFFF"/>
+    <circle cx="0" cy="-84" r="3" fill="#0B2A45" opacity="0.5"/>
+    <circle cx="84" cy="0" r="3" fill="#0B2A45" opacity="0.5"/>
+    <circle cx="0" cy="84" r="3" fill="#0B2A45" opacity="0.5"/>
+    <circle cx="-84" cy="0" r="3" fill="#0B2A45" opacity="0.5"/>
+  </g>
+  <text x="400" y="570" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" letter-spacing="6" fill="#071A2D">AZURE JEWELS</text>
+  <text x="400" y="605" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="12" font-weight="500" letter-spacing="3" text-transform="uppercase" fill="#4A637D">FINE JEWELLERY</text>
+  <line x1="340" y1="635" x2="460" y2="635" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="400" y="660" text-anchor="middle" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="400" letter-spacing="2" text-transform="uppercase" fill="#8A9BA8">IMAGE COMING SOON</text>
+</svg>

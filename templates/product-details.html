@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }} | Azure Jewels{% endblock %}
+
+{% block content %}
+<!-- Breadcrumbs (Soft White Background #F6F8FA) -->
+<section class="py-3 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'shop' %}" class="text-muted">Shop</a></li>
+        {% if product.category %}
+        <li class="breadcrumb-item"><a href="{% url 'shop' %}?category={{ product.category.slug }}" class="text-muted">{{ product.category.name }}</a></li>
+        {% endif %}
+        <li class="breadcrumb-item active text-dark fw-semibold text-truncate" aria-current="page" style="max-width: 250px;">{{ product.name }}</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Product Detail Hero (White Background #FFFFFF) -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-3">
+    <div class="row g-5">
+      
+      <!-- LEFT: Image Showcase -->
+      <div class="col-12 col-lg-6">
+        <div class="position-sticky" style="top: 100px;">
+          <div class="border rounded-1 overflow-hidden bg-white text-center mb-3" style="border-color: var(--border-light) !important;">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" id="azureMainProductImg" class="img-fluid w-100" style="max-height: 520px; object-fit: cover;">
+            {% else %}
+            <img src="{% static 'assets/images/placeholder.svg' %}" alt="{{ product.name }}" id="azureMainProductImg" class="img-fluid w-100" style="max-height: 520px; object-fit: cover;">
+            {% endif %}
+          </div>
+          
+          {% if product.gallery_images.all %}
+          <!-- Gallery Additional Images Strip -->
+          <div class="d-flex gap-2 justify-content-center mt-2 mb-3 azure-gallery-thumbs flex-wrap">
+            {% if product.image %}
+            <button type="button" class="azure-thumb-btn active border p-1 rounded-1 bg-white" onclick="document.getElementById('azureMainProductImg').src='{{ product.image.url }}'; document.querySelectorAll('.azure-thumb-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="width:64px; height:64px; cursor:pointer;" title="Main View">
+              <img src="{{ product.image.url }}" class="w-100 h-100 rounded-1" style="object-fit:cover;">
+            </button>
+            {% endif %}
+            {% for gi in product.gallery_images.all %}
+            <button type="button" class="azure-thumb-btn border p-1 rounded-1 bg-white" onclick="document.getElementById('azureMainProductImg').src='{{ gi.image.url }}'; document.querySelectorAll('.azure-thumb-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');" style="width:64px; height:64px; cursor:pointer;" title="View {{ forloop.counter }}">
+              <img src="{{ gi.image.url }}" class="w-100 h-100 rounded-1" style="object-fit:cover;">
+            </button>
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+          <!-- Trust Badges Below Gallery (Dark Navy Icons #071A2D) -->
+          <div class="row g-2 text-center mt-3" style="font-size: 12px; color: var(--azure-text-muted);">
+            <div class="col-4">
+              <div class="p-2 border rounded-1" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+                <i class="bi bi-shield-check azure-icon-navy d-block fs-5 mb-1"></i>
+                <span class="text-dark">Certified Hallmarked</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 border rounded-1" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+                <i class="bi bi-truck azure-icon-navy d-block fs-5 mb-1"></i>
+                <span class="text-dark">Complimentary Shipping</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 border rounded-1" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+                <i class="bi bi-arrow-counterclockwise azure-icon-navy d-block fs-5 mb-1"></i>
+                <span class="text-dark">15-Day Replacements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Specifications & Ordering -->
+      <div class="col-12 col-lg-6">
+        <div class="azure-product-summary">
+          
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-uppercase fw-bold text-muted small" style="letter-spacing: 0.1em;">
+              {{ product.category.name|default:"Fine Jewellery" }}
+            </span>
+            <span class="badge border py-1 px-2 small" style="background-color: var(--off-white); color: var(--text-dark); border-color: var(--border-light) !important;">
+              SKU: {{ product.sku }}
+            </span>
+          </div>
+
+          <h1 class="azure-title mb-3" style="font-size: clamp(26px, 3vw, 36px); line-height: 1.25;">
+            {{ product.name }}
+          </h1>
+
+          <!-- Rating (Dark Navy Stars #071A2D) -->
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="azure-rating-navy small">★★★★★</div>
+            <span class="small fw-semibold text-dark">{{ product.rating }}</span>
+            <span class="text-muted small">({{ product.review_count }} Verified Patron Reviews)</span>
+          </div>
+
+          <!-- Pricing -->
+          <div class="d-flex align-items-baseline gap-3 mb-4 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+            <span class="azure-serif fw-bold fs-2" style="color: var(--primary-navy);">₹{{ product.current_price|floatformat:0 }}</span>
+            {% if product.sale_price and product.sale_price < product.price %}
+            <span class="text-muted text-decoration-line-through fs-5">₹{{ product.price|floatformat:0 }}</span>
+            <span class="azure-badge-discount">
+              Save {{ product.discount_percent }}%
+            </span>
+            {% endif %}
+            <small class="text-muted d-block ms-auto" style="font-size: 12px;">(Inclusive of all taxes)</small>
+          </div>
+
+          <!-- Stock Availability -->
+          <div class="mb-4">
+            {% if product.is_in_stock %}
+            <div class="d-flex align-items-center gap-2 text-dark small fw-semibold">
+              <span class="p-1 rounded-circle d-inline-block" style="background-color: var(--primary-navy); width: 8px; height: 8px;"></span>
+              <span>In Stock &amp; Ready for Express Dispatch ({{ product.stock }} pieces remaining)</span>
+            </div>
+            {% else %}
+            <div class="d-flex align-items-center gap-2 text-muted small fw-semibold">
+              <span class="p-1 bg-secondary rounded-circle d-inline-block" style="width: 8px; height: 8px;"></span>
+              <span>Currently Out of Stock (Special Made to Order Available)</span>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Description Excerpt -->
+          <div class="text-muted mb-4" style="line-height: 1.7; font-size: 15px;">
+            {{ product.description|default:"Masterfully crafted to embody timeless royal elegance. Hand-finished with precision stone setting and certified authenticity." }}
+          </div>
+
+          <!-- Material Highlight -->
+          <div class="p-3 border rounded-1 mb-4" style="border-color: var(--border-light) !important; background-color: var(--off-white); font-size: 14px;">
+            <div class="row g-2">
+              <div class="col-6">
+                <span class="text-muted d-block small">Primary Material</span>
+                <strong class="text-dark">{{ product.material|default:"22K Vermeil on Silver/Brass" }}</strong>
+              </div>
+              <div class="col-6">
+                <span class="text-muted d-block small">Craftsmanship</span>
+                <strong class="text-dark">Handcrafted Artisanal Setting</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add to Bag Form -->
+          <!-- Add to Bag & Buy Now Actions -->
+          {% if product.is_in_stock %}
+          <div class="mb-4">
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+              <div class="azure-qty-stepper">
+                <button type="button" class="azure-qty-btn" onclick="let q=document.getElementById('productQty'); if(parseInt(q.value)>1) { q.value=parseInt(q.value)-1; document.getElementById('cartFormQty').value=q.value; document.getElementById('buyNowQty').value=q.value; }">−</button>
+                <input type="number" id="productQty" name="quantity" value="1" min="1" max="{{ product.stock }}" class="azure-qty-val border-0 bg-transparent" readonly>
+                <button type="button" class="azure-qty-btn" onclick="let q=document.getElementById('productQty'); if(parseInt(q.value)<{{ product.stock }}) { q.value=parseInt(q.value)+1; document.getElementById('cartFormQty').value=q.value; document.getElementById('buyNowQty').value=q.value; }">+</button>
+              </div>
+
+              <form action="{% url 'cart_add' product.id %}" method="post" class="flex-grow-1" id="productAddCartForm" style="margin:0;">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" id="cartFormQty" value="1">
+                <button type="submit" class="btn-azure w-100 py-3" onclick="document.getElementById('cartFormQty').value = document.getElementById('productQty').value;">
+                  <i class="bi bi-bag-plus me-2"></i> ADD TO BAG
+                </button>
+              </form>
+
+              <form action="{% url 'buy_now' product.id %}" method="post" class="flex-grow-1" id="productBuyNowForm" style="margin:0;">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" id="buyNowQty" value="1">
+                <button type="submit" class="btn-azure-outline w-100 py-3 fw-bold" onclick="document.getElementById('buyNowQty').value = document.getElementById('productQty').value;" style="letter-spacing: 0.1em;">
+                  BUY NOW &rarr;
+                </button>
+              </form>
+
+              <button type="button" class="btn-azure-outline azure-product-wish-btn position-static p-3" data-product-id="{{ product.id }}" style="width: 52px; height: 52px;" aria-label="Wishlist" title="Save to Wishlist">
+                <i class="bi {% if in_wishlist %}bi-heart-fill text-dark{% else %}bi-heart{% endif %} fs-5"></i>
+              </button>
+            </div>
+          </div>
+          {% else %}
+          <div class="p-3 border rounded-1 mb-4" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            This piece is currently out of stock. <a href="{% url 'contact' %}" class="fw-bold text-dark text-decoration-underline">Contact our atelier</a> for bespoke orders.
+          </div>
+          {% endif %}
+
+          <!-- Accordion Information Tabs -->
+          <div class="accordion accordion-flush border-top" id="productAccordion" style="border-color: var(--border-light) !important;">
+            
+            <div class="accordion-item border-bottom" style="border-color: var(--border-light) !important;">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed px-0 py-3 bg-transparent text-uppercase fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" style="font-size: 13px; letter-spacing: 0.08em; color: var(--text-dark);">
+                  Artisan Story &amp; Details
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                <div class="accordion-body px-0 text-muted" style="line-height: 1.7; font-size: 14px;">
+                  <p>{{ product.description }}</p>
+                  <p class="mb-0">Designed in Mumbai and executed in collaboration with royal master artisans. Each jewel undergoes rigorous microscopic quality inspections.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border-bottom" style="border-color: var(--border-light) !important;">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed px-0 py-3 bg-transparent text-uppercase fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" style="font-size: 13px; letter-spacing: 0.08em; color: var(--text-dark);">
+                  Care &amp; Longevity Instructions
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                <div class="accordion-body px-0 text-muted" style="line-height: 1.7; font-size: 14px;">
+                  {{ product.care_instructions|default:"Store in an airtight luxury jewellery case. Avoid direct contact with perfume, hairspray, and harsh chemicals. Gently clean with a soft microfiber cloth." }}
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border-bottom" style="border-color: var(--border-light) !important;">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed px-0 py-3 bg-transparent text-uppercase fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" style="font-size: 13px; letter-spacing: 0.08em; color: var(--text-dark);">
+                  Complimentary Shipping &amp; Returns
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                <div class="accordion-body px-0 text-muted" style="line-height: 1.7; font-size: 14px;">
+                  <p class="mb-2"><strong>Express Delivery:</strong> Orders dispatched within 24-48 business hours with tamper-evident insured security packaging.</p>
+                  <p class="mb-2"><strong>Complimentary Shipping:</strong> Free express shipping across India on orders above ₹999.</p>
+                  <p class="mb-0"><strong>Hassle-Free 15-Day Returns:</strong> If you are not completely enchanted with your purchase, we offer complimentary pick-up and exchange.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Related Products Section (Soft White Background #F6F8FA) -->
+{% if related_products %}
+<section class="py-5" style="background-color: var(--off-white); border-top: 1px solid var(--border-light);">
+  <div class="container py-lg-4">
+    <div class="azure-section-header mb-4">
+      <span class="azure-section-subtitle">PERFECT PAIRINGS</span>
+      <h2 class="azure-section-title">Complete The Regal Look</h2>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 g-3 g-lg-4">
+      {% for rel in related_products %}
+      <div class="col">
+        {% include "includes/product-card.html" with product=rel %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

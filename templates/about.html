@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About The Azure Heritage | Azure Jewels{% endblock %}
+
+{% block content %}
+<!-- Editorial Hero -->
+<section class="py-5" style="background-color: var(--primary-navy); border-bottom: 1px solid var(--border-dark);">
+  <div class="container py-lg-4 text-center text-white" style="max-width: 900px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-center mb-2" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-white fw-semibold" aria-current="page">About Us</li>
+      </ol>
+    </nav>
+    <span class="azure-section-subtitle" style="color: #FFFFFF; opacity: 0.8; letter-spacing: 0.2em;">THE AZURE HERITAGE</span>
+    <h1 class="azure-title text-white mb-3" style="font-size: clamp(30px, 4.5vw, 48px);">Artisanal Purity, Royal Legacy</h1>
+    <p class="mx-auto fs-6" style="max-width: 680px; line-height: 1.8; color: rgba(255, 255, 255, 0.85);">
+      Handcrafting modern heirlooms by reviving centuries-old Indian goldsmithing techniques with uncompromising ethical standards.
+    </p>
+  </div>
+</section>
+
+<!-- 1. OUR STORY -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1100px;">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-6">
+        <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">SECTION 01</span>
+        <h2 class="azure-title fs-2 mb-3" style="color: var(--primary-navy);">Our Story</h2>
+        <p class="text-muted" style="line-height: 1.8; font-size: 15px;">
+          Azure Jewels was founded with a singular artistic ambition: to liberate the regal magnificence of historic Indian jewellery from display vaults and translate it into expressive, contemporary fine jewellery that women can wear with poise and joy.
+        </p>
+        <p class="text-muted" style="line-height: 1.8; font-size: 15px;">
+          Beginning in a small bespoke salon in Mumbai, our atelier has grown into an internationally respected fine jewellery house. Yet our commitment remains personal: every necklace, earring suite, and solitaire is brought to life by master craftsmen whose lineage spans multiple generations of royal court artisans.
+        </p>
+        <div class="d-flex gap-4 pt-2">
+          <div>
+            <div class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">100%</div>
+            <small class="text-muted text-uppercase fw-semibold" style="font-size: 11px;">Certified Hallmark</small>
+          </div>
+          <div class="border-start ps-4" style="border-color: var(--border-light) !important;">
+            <div class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">120+</div>
+            <small class="text-muted text-uppercase fw-semibold" style="font-size: 11px;">Artisan Hours per Suite</small>
+          </div>
+          <div class="border-start ps-4" style="border-color: var(--border-light) !important;">
+            <div class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">15-Day</div>
+            <small class="text-muted text-uppercase fw-semibold" style="font-size: 11px;">Luxury Guarantee</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 text-center">
+        <img src="{% static 'assets/images/extra-images/promo-large.webp' %}" alt="Azure Jewels Fine Jewellery Story" class="img-fluid rounded-1 shadow-sm border" style="border-color: var(--border-light) !important; max-height: 440px; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. OUR CRAFTSMANSHIP -->
+<section class="py-5" style="background-color: var(--off-white); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+  <div class="container py-lg-3" style="max-width: 1100px;">
+    <div class="text-center mb-5">
+      <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">SECTION 02</span>
+      <h2 class="azure-section-title" style="color: var(--primary-navy);">Our Craftsmanship</h2>
+      <p class="azure-section-desc" style="max-width: 650px; margin: 0 auto;">Preserving four monumental techniques of classic Indian goldsmithing.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="p-4 bg-white border rounded-1 h-100" style="border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mb-3"><i class="bi bi-gem"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Uncut Polki Jadau</h4>
+          <p class="text-muted small mb-0" style="line-height: 1.7;">
+            Master karigars encase luminous uncut stones within fine 24K gold foil frameworks, reflecting ambient light with moonlit warmth.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="p-4 bg-white border rounded-1 h-100" style="border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mb-3"><i class="bi bi-palette"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Varanasi Meenakari</h4>
+          <p class="text-muted small mb-0" style="line-height: 1.7;">
+            Intricate vitreous glass enamelling applied by fine squirrel-hair brushes and kiln-fused to create indelible reverse motifs.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="p-4 bg-white border rounded-1 h-100" style="border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mb-3"><i class="bi bi-circle"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Basra &amp; Seed Pearls</h4>
+          <p class="text-muted small mb-0" style="line-height: 1.7;">
+            Individually selected, calibrated cultured pearls strung on durable double silk braids with hand-twisted bullion links.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="p-4 bg-white border rounded-1 h-100" style="border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mb-3"><i class="bi bi-shield-check"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Micro-Prong Setting</h4>
+          <p class="text-muted small mb-0" style="line-height: 1.7;">
+            Contemporary microscope-assisted prong settings guaranteeing stone security while maximizing facet brilliance and light return.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. OUR PHILOSOPHY -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1100px;">
+    <div class="row align-items-center g-5 flex-lg-row-reverse">
+      <div class="col-12 col-lg-6">
+        <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">SECTION 03</span>
+        <h2 class="azure-title fs-2 mb-3" style="color: var(--primary-navy);">Our Philosophy</h2>
+        <p class="text-muted" style="line-height: 1.8; font-size: 15px;">
+          We believe true luxury should endure across lifetimes without inflicting harm on people or the planet. At Azure Jewels, our design philosophy rests on three immutable tenets:
+        </p>
+        <ul class="ps-3 text-muted" style="line-height: 1.8; font-size: 15px;">
+          <li class="mb-2"><strong>Ethical Atelier Sourcing:</strong> All precious metals are responsibly sourced from conflict-free refineries adhering to fair artisanal trade practices.</li>
+          <li class="mb-2"><strong>Heirloom Longevity:</strong> We eschew disposable fashion trends in favor of timeless geometries that look as breathtaking fifty years from now as they do today.</li>
+          <li class="mb-0"><strong>Honest Luxury:</strong> Eliminating distributor markups allows us to invest directly in artisan fair wages and museum-grade raw gemstones.</li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 text-center">
+        <img src="{% static 'assets/images/best-sellar/01.webp' %}" alt="Azure Jewels Philosophy" class="img-fluid rounded-1 shadow-sm border" style="border-color: var(--border-light) !important; max-height: 420px; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. QUALITY & AUTHENTICITY -->
+<section class="py-5" style="background-color: var(--off-white); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+  <div class="container py-lg-3" style="max-width: 1000px;">
+    <div class="text-center mb-5">
+      <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">SECTION 04</span>
+      <h2 class="azure-section-title" style="color: var(--primary-navy);">Quality &amp; Authenticity</h2>
+      <p class="azure-section-desc" style="max-width: 650px; margin: 0 auto;">Certified verification accompanying every creation that leaves our hands.</p>
+    </div>
+
+    <div class="p-4 p-md-5 bg-white border rounded-1 shadow-sm" style="border-color: var(--border-light) !important;">
+      <div class="row g-4 align-items-center">
+        <div class="col-12 col-md-6">
+          <h3 class="azure-title fs-4 mb-3" style="color: var(--primary-navy);">The Azure Certificate of Authenticity</h3>
+          <p class="text-muted" style="line-height: 1.8; font-size: 14.5px;">
+            Every acquisition includes an official Azure Certificate of Authenticity detailing:
+          </p>
+          <ul class="ps-3 text-muted mb-0" style="line-height: 1.8; font-size: 14.5px;">
+            <li>Exact precious metal purity and BIS Hallmarking verification.</li>
+            <li>Uncut polki stone grading, weight, and setting matrix.</li>
+            <li>Cultured pearl caliber and origin verification.</li>
+            <li>Atelier master artisan serial signature number.</li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="p-4 border rounded-1 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <i class="bi bi-award fs-1" style="color: var(--primary-navy);"></i>
+            <h4 class="azure-title fs-5 mt-2 mb-1" style="color: var(--primary-navy);">Lifetime Care Guarantee</h4>
+            <p class="text-muted small mb-0">
+              Enjoy complimentary annual ultrasonic cleaning, prong tightening, and replating maintenance at any Azure Jewels flagship boutique nationwide.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. WHY AZURE JEWELS -->
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1100px;">
+    <div class="text-center mb-5">
+      <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">SECTION 05</span>
+      <h2 class="azure-section-title" style="color: var(--primary-navy);">Why Choose Azure Jewels</h2>
+      <p class="azure-section-desc" style="max-width: 650px; margin: 0 auto;">Four distinguishing standards that define our client experience.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-3 text-center">
+        <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 48px; height: 48px; font-size: 22px;"><i class="bi bi-gem"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Master Karigars</h4>
+          <p class="text-muted small mb-0">Direct collaboration with generational artisan families across Jaipur, Varanasi, and Mumbai.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 text-center">
+        <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 48px; height: 48px; font-size: 22px;"><i class="bi bi-shield-check"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Certified Purity</h4>
+          <p class="text-muted small mb-0">Government-approved hallmarking and certified gemmological documentation with every order.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 text-center">
+        <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 48px; height: 48px; font-size: 22px;"><i class="bi bi-truck"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">Insured Delivery</h4>
+          <p class="text-muted small mb-0">Discreet, armored express logistics with 100% door-to-door insurance and OTP verification.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 text-center">
+        <div class="p-4 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <div class="azure-feature-icon mx-auto mb-3" style="width: 48px; height: 48px; font-size: 22px;"><i class="bi bi-heart"></i></div>
+          <h4 class="azure-title fs-5 mb-2" style="color: var(--primary-navy);">15-Day Guarantee</h4>
+          <p class="text-muted small mb-0">Complimentary doorstep return and exchange service if you are not entirely enchanted.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atelier Visit Callout -->
+    <div class="p-4 p-md-5 border rounded-1 mt-5 text-center" style="background-color: var(--primary-navy); color: #FFFFFF;">
+      <h3 class="azure-title text-white fs-3 mb-2">Experience the Atelier in Person</h3>
+      <p class="small mb-4 mx-auto" style="max-width: 540px; color: rgba(255, 255, 255, 0.8);">
+        We invite you to schedule a private bridal styling consultation at our flagship boutique in Bandra West, Mumbai.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'contact' %}" class="btn btn-light py-2 px-4 rounded-1 fw-semibold text-uppercase" style="color: var(--primary-navy); font-size: 13px;">BOOK CONSULTATION</a>
+        <a href="{% url 'shop' %}" class="btn btn-outline-light py-2 px-4 rounded-1 fw-semibold text-uppercase" style="font-size: 13px;">EXPLORE CATALOG</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

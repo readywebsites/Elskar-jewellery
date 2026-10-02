@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}System Error (500) | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-white text-center">
+  <div class="container py-lg-5">
+    <div class="p-5 border rounded-1 mx-auto" style="border-color: var(--border-light) !important; background-color: var(--off-white); max-width: 680px;">
+      <div class="azure-serif display-1 fw-bold mb-2" style="color: var(--primary-navy); letter-spacing: 2px;">
+        500
+      </div>
+      <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+        <span style="color: var(--primary-navy);">❖</span>
+        <span class="text-uppercase small fw-bold" style="letter-spacing: 2px; color: var(--primary-navy);">UNEXPECTED ATELIER INTERRUPTION</span>
+        <span style="color: var(--primary-navy);">❖</span>
+      </div>
+      <h2 class="azure-title mb-3" style="color: var(--primary-navy);">A Moment of Atelier Maintenance</h2>
+      <p class="text-muted mx-auto mb-4" style="max-width: 480px; font-size: 15px; line-height: 1.6;">
+        Our digital salon encountered an unexpected issue while preparing this display. Our engineers have been alerted. Please refresh the page or return to the main gallery.
+      </p>
+      
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'home' %}" class="btn-azure py-2 px-4">RETURN TO HOME</a>
+        <a href="{% url 'shop' %}" class="btn-azure-outline py-2 px-4">EXPLORE COLLECTIONS &rarr;</a>
+        <a href="{% url 'contact' %}" class="btn btn-link text-decoration-none" style="color: var(--primary-navy);">Contact Concierge</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,1382 @@
+/* ==========================================================================
+   AZURE JEWELS - LUXURY 3-ROW EDITORIAL HEADER STYLESHEET
+   Strict Palette:
+   - Deep Navy:      #071A2D
+   - Primary Navy:   #0B2A45
+   - Secondary Navy: #123B5D
+   - White:          #FFFFFF
+   - Soft White:     #F6F8FA
+   - Border:         #D9E3EC
+   NO gold, NO beige, NO brown, NO purple, NO colorful gradients.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Legacy Header Suppressions
+   -------------------------------------------------------------------------- */
+.top-header,
+.aj-announcement,
+.aj-header,
+.aj-mobile-panel {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. Scoped Design Tokens & Typography
+   -------------------------------------------------------------------------- */
+:root {
+  --deep-navy: #071A2D;
+  --primary-navy: #0B2A45;
+  --secondary-navy: #123B5D;
+
+  --white: #FFFFFF;
+  --soft-white: #F6F8FA;
+
+  --text-dark: #071A2D;
+  --text-muted: #5F7182;
+  --text-light: #FFFFFF;
+
+  --border-light: #D9E3EC;
+  --border-color: #D9E3EC;
+
+  --azure-font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --azure-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --azure-transition: all 0.25s ease;
+  --azure-shadow-sm: 0 4px 18px rgba(7, 26, 45, 0.06);
+  --azure-shadow-lg: 0 20px 45px rgba(7, 26, 45, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   2. Header Wrapper (.azure-header-wrapper)
+   -------------------------------------------------------------------------- */
+.azure-header-wrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1045;
+  background-color: var(--white);
+  width: 100%;
+  font-family: var(--azure-font-sans);
+  box-sizing: border-box;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.azure-header-wrapper *,
+.azure-header-wrapper *::before,
+.azure-header-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.azure-header-wrapper.is-scrolled {
+  box-shadow: 0 4px 20px rgba(7, 26, 45, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   3. ROW 1 — Top Rotating Announcement Bar
+   - Background: #071A2D
+   - Height: 32px
+   - White centered text, 11px, letter-spacing 2px
+   -------------------------------------------------------------------------- */
+.azure-announcement-bar {
+  background-color: var(--deep-navy);
+  color: var(--white);
+  height: 32px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.azure-announcement-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.azure-announcement-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.azure-announcement-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  text-align: center;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.azure-announcement-item.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.azure-announcement-text {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--white);
+  font-family: var(--azure-font-sans);
+}
+
+.azure-announcement-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.2s ease;
+  z-index: 2;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.azure-announcement-arrow:hover {
+  color: var(--white);
+}
+
+.azure-announcement-prev { left: 16px; }
+.azure-announcement-next { right: 16px; }
+
+/* --------------------------------------------------------------------------
+   4. ROW 2 — Main Logo Header
+   - Height: 76–80px (80px)
+   - White background
+   - position: relative
+   - Left: ◇ BESPOKE CRAFTSMANSHIP (~30px from left) / Mobile Hamburger
+   - Center: Mathematically centered REAL Azure Jewels image logo
+   - Right: Search, Account, Wishlist, Cart in one row (~35-40px right padding)
+   -------------------------------------------------------------------------- */
+.azure-main-header {
+  height: 80px;
+  background-color: var(--white);
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.azure-header-container {
+  width: 100%;
+  height: 100%;
+  padding-left: 36px;
+  padding-right: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Left Section */
+.azure-header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 5;
+  flex: 0 0 auto;
+}
+
+/* Desktop Utility Links (Left side of Logo Row)
+   - Store Locator, Track Package, Return & Exchange, Contact Us
+   - Font: 10–11px, Letter spacing: 1px, Color: #123B5D, Gap: 18–22px
+   -------------------------------------------------------------------------- */
+.azure-header-utility-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.azure-utility-link {
+  font-family: var(--azure-font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #123B5D !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  line-height: 1;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.azure-utility-link:hover {
+  color: #071A2D !important;
+  opacity: 0.75;
+}
+
+.azure-utility-link:focus-visible {
+  outline: 1px dashed #123B5D;
+  outline-offset: 2px;
+}
+
+/* Desktop Tagline: ◇ BESPOKE CRAFTSMANSHIP (Fallback/Alternative) */
+.azure-desktop-craftsmanship {
+  display: inline-flex;
+  align-items: center;
+}
+
+.azure-craftsmanship-badge {
+  font-family: var(--azure-font-sans);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--secondary-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1;
+}
+
+.azure-diamond-glyph {
+  font-size: 11px;
+  line-height: 1;
+  color: var(--secondary-navy);
+}
+
+/* Mobile & Tablet Hamburger Button (< 992px)
+   - 3 thin 1.5px lines, 24px x 18px
+   - 44px x 44px tap target
+   - NO grey browser appearance, NO square border
+   -------------------------------------------------------------------------- */
+.azure-mobile-toggle {
+  display: none;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: opacity 0.2s ease;
+}
+
+.azure-mobile-toggle:hover {
+  opacity: 0.65;
+}
+
+.azure-hamburger-box {
+  width: 24px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.azure-hamburger-bar {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--deep-navy);
+  border-radius: 1px;
+  transition: all 0.25s ease;
+}
+
+/* Center Section: Mathematically Centered REAL Azure Jewels Image Logo */
+.azure-header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  pointer-events: auto;
+  text-align: center;
+}
+
+.azure-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: opacity 0.2s ease;
+}
+
+.azure-brand-logo:hover {
+  opacity: 0.88;
+}
+
+.azure-logo-image {
+  display: block;
+  width: 160px;
+  height: 50px;
+  max-width: 165px;
+  max-height: 52px;
+  object-fit: contain;
+  object-position: center;
+  transition: height 0.2s ease, width 0.2s ease;
+}
+
+/* Right Section: Outline Icons (Search, Account, Wishlist, Cart) */
+.azure-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+  z-index: 5;
+  flex: 0 0 auto;
+}
+
+.azure-icon-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--deep-navy) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.azure-icon-btn:hover {
+  opacity: 0.65;
+  transform: translateY(-1px);
+}
+
+.azure-icon-svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  stroke: var(--deep-navy);
+}
+
+/* Badge Counters (Wishlist & Cart) */
+.azure-badge {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  font-family: var(--azure-font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border: 1.5px solid var(--white);
+  box-shadow: 0 2px 4px rgba(7, 26, 45, 0.15);
+  pointer-events: none;
+}
+
+/* Account Dropdown Menu */
+.azure-account-dropdown-wrap {
+  position: relative;
+}
+
+.azure-account-menu {
+  position: absolute;
+  top: 100%;
+  right: -10px;
+  width: 240px;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 16px 40px rgba(7, 26, 45, 0.12);
+  border-radius: 2px;
+  padding: 12px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  z-index: 1060;
+  pointer-events: none;
+}
+
+.azure-account-dropdown-wrap:hover .azure-account-menu,
+.azure-account-dropdown-wrap:focus-within .azure-account-menu,
+.azure-account-menu.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(2px);
+  pointer-events: auto;
+}
+
+.azure-account-menu-header {
+  padding: 8px 18px 10px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 6px;
+}
+
+.azure-account-greeting {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--deep-navy);
+  display: block;
+}
+
+.azure-account-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.azure-account-list li a {
+  display: flex;
+  align-items: center;
+  padding: 9px 18px;
+  font-size: 13px;
+  color: var(--deep-navy);
+  text-decoration: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.azure-account-list li a:hover {
+  background-color: var(--soft-white);
+  color: var(--primary-navy);
+}
+
+.azure-account-list .azure-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 6px 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. ROW 3 — Category Navigation Bar (Desktop Only)
+   - Height: 48–50px
+   - Background: #FFFFFF
+   - Border bottom: 1px solid #D9E3EC
+   - Center all items horizontally
+   - 10 categories with mega menus
+   - White-space nowrap, no wrapping, fits 1366px and 1440px
+   -------------------------------------------------------------------------- */
+.azure-navbar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  height: 49px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.azure-navbar-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.azure-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.azure-nav-item {
+  position: relative;
+}
+
+/* Make mega-menu parent static relative to navbar so mega dropdown spans full navbar */
+.azure-nav-item.azure-has-mega {
+  position: static;
+}
+
+.azure-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--deep-navy) !important;
+  text-decoration: none !important;
+  position: relative;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Subtle Underline Hover Animation */
+.azure-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-navy);
+  transition: width 0.25s ease;
+}
+
+.azure-nav-item:hover .azure-nav-link,
+.azure-nav-item.is-open .azure-nav-link {
+  color: var(--primary-navy) !important;
+}
+
+.azure-nav-item:hover .azure-nav-link::after,
+.azure-nav-item.is-open .azure-nav-link::after {
+  width: 100%;
+}
+
+.azure-nav-caret {
+  font-size: 9px;
+  margin-left: 5px;
+  color: var(--primary-navy);
+  transition: transform 0.2s ease;
+}
+
+.azure-nav-item:hover .azure-nav-caret,
+.azure-nav-item.is-open .azure-nav-caret {
+  transform: rotate(180deg);
+}
+
+.azure-nav-pill-new,
+.azure-nav-pill-sale {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-left: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Mega Menu Dropdown
+   - Stays 100% inside viewport width (no horizontal overflow, no clipping)
+   - Clean White background, Dark Navy text, Light borders
+   -------------------------------------------------------------------------- */
+.azure-mega-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: var(--white);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 16px 36px rgba(7, 26, 45, 0.1);
+  padding: 32px 0 36px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  pointer-events: none;
+  z-index: 1050;
+}
+
+.azure-nav-item.azure-has-mega:hover .azure-mega-dropdown,
+.azure-nav-item.azure-has-mega.is-open .azure-mega-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.azure-mega-container {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.3fr;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.azure-mega-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.azure-mega-heading {
+  font-family: var(--azure-font-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--deep-navy);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.azure-mega-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background-color: var(--primary-navy);
+}
+
+.azure-mega-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.azure-mega-links li a {
+  font-size: 13px;
+  color: var(--deep-navy);
+  text-decoration: none !important;
+  line-height: 1.4;
+  display: inline-block;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.azure-mega-links li a:hover {
+  color: var(--secondary-navy);
+  transform: translateX(4px);
+}
+
+/* Featured Promo Card Column */
+.azure-mega-feature-col {
+  display: flex;
+}
+
+.azure-mega-feature-card {
+  width: 100%;
+  background-color: var(--soft-white);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  padding: 16px;
+  text-decoration: none !important;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+
+.azure-mega-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(7, 26, 45, 0.08);
+  border-color: var(--primary-navy);
+}
+
+.azure-feature-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 165px;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: var(--white);
+}
+
+.azure-feature-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.azure-mega-feature-card:hover .azure-feature-img-wrap img {
+  transform: scale(1.05);
+}
+
+.azure-feature-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.azure-feature-info {
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.azure-feature-title {
+  font-family: var(--azure-font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  margin: 0 0 4px;
+}
+
+.azure-feature-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0 0 10px;
+}
+
+.azure-feature-cta {
+  margin-top: auto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--primary-navy);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.azure-mega-feature-card:hover .azure-feature-cta {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   7. Search Overlay
+   -------------------------------------------------------------------------- */
+.azure-search-overlay {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.99);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 15px 35px rgba(7, 26, 45, 0.1);
+  padding: 24px 0 28px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  z-index: 1055;
+}
+
+.azure-search-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.azure-search-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.azure-search-form {
+  margin: 0;
+}
+
+.azure-search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.azure-search-input-wrap:focus-within {
+  border-color: var(--primary-navy);
+  box-shadow: 0 0 0 3px rgba(7, 26, 45, 0.1);
+}
+
+.azure-search-icon-inside {
+  position: absolute;
+  left: 18px;
+  color: var(--primary-navy);
+  pointer-events: none;
+}
+
+.azure-search-input {
+  width: 100%;
+  padding: 14px 120px 14px 50px;
+  border: none;
+  outline: none;
+  font-family: var(--azure-font-sans);
+  font-size: 15px;
+  color: var(--deep-navy);
+  background: transparent;
+}
+
+.azure-search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.azure-search-btn-submit {
+  position: absolute;
+  right: 48px;
+  background-color: var(--primary-navy);
+  color: var(--white);
+  border: none;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.azure-search-btn-submit:hover {
+  background-color: var(--secondary-navy);
+}
+
+.azure-search-close {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--deep-navy);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.azure-search-close:hover {
+  color: var(--secondary-navy);
+}
+
+.azure-search-quick-tags {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.azure-tags-label {
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+.azure-quick-tag {
+  font-size: 12px;
+  color: var(--deep-navy);
+  text-decoration: none !important;
+  background-color: var(--soft-white);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.azure-quick-tag:hover {
+  background-color: var(--primary-navy);
+  border-color: var(--primary-navy);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   8. Mobile Drawer & Backdrop
+   -------------------------------------------------------------------------- */
+.azure-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(7, 26, 45, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.32s ease, visibility 0.32s ease;
+  z-index: 1090;
+}
+
+.azure-mobile-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.azure-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  max-width: 85vw;
+  background-color: var(--white);
+  box-shadow: 10px 0 35px rgba(7, 26, 45, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--azure-font-sans);
+}
+
+.azure-mobile-drawer.is-active {
+  transform: translateX(0);
+}
+
+.azure-drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+}
+
+.azure-drawer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.azure-drawer-logo {
+  display: block;
+  max-width: 120px;
+  height: 40px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.azure-drawer-close,
+.azure-mobile-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--deep-navy);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.azure-drawer-close:hover,
+.azure-mobile-close:hover {
+  color: var(--secondary-navy);
+}
+
+.azure-drawer-search-box {
+  padding: 14px 20px;
+  background-color: var(--soft-white);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.azure-drawer-search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.azure-drawer-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--primary-navy);
+  pointer-events: none;
+}
+
+.azure-drawer-search-input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  font-size: 13.5px;
+  background-color: var(--white);
+  color: var(--deep-navy);
+  outline: none;
+}
+
+.azure-drawer-search-input:focus {
+  border-color: var(--primary-navy);
+}
+
+.azure-mobile-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+}
+
+.azure-mobile-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.azure-mobile-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.azure-mobile-link {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--deep-navy) !important;
+  text-decoration: none !important;
+  flex: 1;
+}
+
+.azure-mobile-accordion .azure-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.azure-accordion-toggle {
+  background: none;
+  border: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.azure-accordion-toggle:hover {
+  color: var(--primary-navy);
+}
+
+.azure-mobile-accordion.is-open .azure-accordion-toggle {
+  transform: rotate(45deg);
+  color: var(--primary-navy);
+}
+
+.azure-accordion-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: var(--soft-white);
+}
+
+.azure-mobile-accordion.is-open .azure-accordion-collapse {
+  max-height: 1200px;
+}
+
+.azure-accordion-inner {
+  padding: 12px 20px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.azure-mobile-subheading {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--primary-navy);
+  margin-top: 6px;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.azure-accordion-inner a {
+  font-size: 13px;
+  color: var(--deep-navy);
+  text-decoration: none !important;
+  padding: 3px 0;
+  display: block;
+}
+
+.azure-accordion-inner a:hover {
+  color: var(--secondary-navy);
+}
+
+.azure-view-all-link {
+  font-weight: 700 !important;
+  color: var(--primary-navy) !important;
+  margin-top: 4px;
+}
+
+.azure-drawer-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--soft-white);
+}
+
+.azure-drawer-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.azure-drawer-foot-item {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--deep-navy);
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+}
+
+.azure-drawer-foot-item:hover {
+  color: var(--primary-navy);
+}
+
+.azure-drawer-help {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.azure-drawer-help a {
+  color: var(--primary-navy);
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive Breakpoints
+   Tested at: 1920px, 1440px, 1366px, 1024px, 768px, 414px, 390px, 375px, 360px
+   -------------------------------------------------------------------------- */
+
+/* Large Desktop (1200px to 1366px) */
+@media (max-width: 1366px) {
+  .azure-header-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .azure-nav-list {
+    gap: 14px;
+  }
+  .azure-nav-link {
+    font-size: 11.5px;
+    letter-spacing: 0.7px;
+    padding: 14px 2px;
+  }
+  .azure-mega-container {
+    gap: 20px;
+    padding: 0 24px;
+  }
+}
+
+/* Medium Desktop (992px to 1199px) */
+@media (max-width: 1199.98px) {
+  .azure-header-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .azure-header-utility-nav {
+    gap: 14px;
+  }
+  .azure-utility-link {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+  .azure-nav-list {
+    gap: 11px;
+  }
+  .azure-nav-link {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+  .azure-craftsmanship-badge {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+}
+
+/* Tablet (768px to 991.98px)
+   - Hide desktop category navbar
+   - Show hamburger toggle
+   - Center logo
+   - Search, Account, Wishlist, Cart in one row
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .azure-header-utility-nav {
+    display: none !important;
+  }
+  .azure-desktop-craftsmanship {
+    display: none !important;
+  }
+  .azure-mobile-toggle {
+    display: inline-flex !important;
+  }
+  .azure-navbar {
+    display: none !important;
+  }
+  .azure-main-header {
+    height: 72px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .azure-header-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .azure-logo-image {
+    width: auto;
+    height: 50px;
+    max-width: 140px;
+    max-height: 52px;
+  }
+  .azure-header-right {
+    gap: 18px;
+  }
+}
+
+/* Mobile Devices (< 768px: 414px, 390px, 375px, 360px)
+   - Row 1: small announcement bar
+   - Row 2: Hamburger | CENTER LOGO | Search & Cart
+   - Hide desktop navbar & extra icons
+   - No horizontal scrolling
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .azure-announcement-bar {
+    height: 30px;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .azure-announcement-container {
+    padding: 0 24px;
+  }
+  .azure-main-header {
+    height: 66px;
+  }
+  .azure-header-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .azure-logo-image {
+    width: auto;
+    height: 44px;
+    max-width: 125px;
+    max-height: 46px;
+  }
+  .azure-header-right {
+    gap: 14px;
+  }
+  .azure-icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .azure-icon-svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* Small Mobile (< 480px: 390px, 375px, 360px) */
+@media (max-width: 480px) {
+  .azure-announcement-bar {
+    font-size: 8.5px;
+    letter-spacing: 0.6px;
+  }
+  .azure-announcement-container {
+    padding: 0 16px;
+  }
+  .azure-announcement-arrow {
+    font-size: 9px;
+    padding: 2px 3px;
+  }
+  .azure-announcement-prev { left: 4px; }
+  .azure-announcement-next { right: 4px; }
+  .azure-main-header {
+    height: 62px;
+  }
+  .azure-header-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .azure-logo-image {
+    width: auto;
+    height: 42px;
+    max-width: 115px;
+    max-height: 44px;
+  }
+  .azure-header-right {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 365px) {
+  .azure-announcement-bar {
+    font-size: 7.5px;
+    letter-spacing: 0.3px;
+  }
+  .azure-announcement-arrow {
+    display: none !important;
+  }
+  .azure-announcement-container {
+    padding: 0 8px;
+  }
+}

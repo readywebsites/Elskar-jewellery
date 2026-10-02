@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign In | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color: var(--off-white); min-height: 70vh; display: flex; align-items: center;">
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-5">
+        <div class="p-4 p-md-5 border rounded-1 bg-white shadow-sm" style="border-color: var(--border-light) !important;">
+          
+          <div class="text-center mb-4">
+            <span class="azure-brand-monogram fs-3" style="color: var(--primary-navy);">❖</span>
+            <h1 class="azure-title fs-3 mt-2 mb-1">Welcome Back</h1>
+            <p class="text-muted small">Sign in to access your curated wishlist, addresses, and acquisition history.</p>
+          </div>
+
+          <form action="{% url 'login' %}{% if next %}?next={{ next }}{% endif %}" method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+              <label class="form-label">Username or Email Address *</label>
+              <input type="text" name="username" class="form-control" required placeholder="Enter your username or email" autofocus>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label class="form-label mb-0">Password *</label>
+                <a href="{% url 'password_reset' %}" class="small text-muted text-decoration-underline" style="font-size: 12px;">Forgot Password?</a>
+              </div>
+              <input type="password" name="password" class="form-control" required placeholder="Enter your password">
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn-azure py-3">SIGN IN &rarr;</button>
+            </div>
+          </form>
+
+          <div class="mt-4 pt-3 border-top text-center" style="font-size: 13px; border-color: var(--border-light) !important;">
+            <span class="text-muted">New to Azure Jewels?</span>
+            <a href="{% url 'register' %}" class="fw-semibold text-dark ms-1 text-decoration-underline">Create an Account &rarr;</a>
+          </div>
+
+          <div class="text-center mt-3 small text-muted">
+            <small>Demo Customer: <code>ananya</code> / <code>azurecustomer123</code></small><br>
+            <small>Store Admin: <code>admin</code> / <code>azureadmin123</code></small>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

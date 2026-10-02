@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Account Dashboard | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 13px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Account Dashboard</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-0" style="font-size: 32px; color: var(--primary-navy);">Client Atelier Dashboard</h1>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4">
+      
+      <div class="col-12 col-lg-3">
+        {% include "includes/account-sidebar.html" with active_tab="dashboard" %}
+      </div>
+
+      <div class="col-12 col-lg-9">
+        
+        <!-- Welcome Card -->
+        <div class="p-4 p-md-5 border rounded-1 mb-4" style="background: linear-gradient(135deg, var(--off-white) 0%, #FFFFFF 100%); border-color: var(--border-light) !important;">
+          <span class="text-uppercase small fw-bold" style="color: var(--primary-navy); letter-spacing: 0.12em;">PRIVATE PRIVILEGES PATRON</span>
+          <h2 class="azure-title fs-2 mt-1 mb-2" style="color: var(--primary-navy);">Namaste, {{ user.first_name|default:user.username }}</h2>
+          <p class="text-muted mb-0" style="max-width: 580px;">
+            Welcome to your dedicated Azure Jewels client suite. View your orders, inspect bespoke creation progress, manage addresses, and curate your personal high-jewellery wishlist.
+          </p>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="p-4 border rounded-1 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+              <span class="text-muted small text-uppercase fw-semibold d-block">Completed Acquisitions</span>
+              <span class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">{{ total_orders }}</span>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="p-4 border rounded-1 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+              <span class="text-muted small text-uppercase fw-semibold d-block">Saved in Wishlist</span>
+              <span class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">{{ wishlist_count }}</span>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="p-4 border rounded-1 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+              <span class="text-muted small text-uppercase fw-semibold d-block">Client Tier</span>
+              <span class="azure-serif fs-2 fw-bold" style="color: var(--primary-navy);">Sapphire Patron</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="p-4 border rounded-1 mb-4" style="border-color: var(--border-light) !important;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="azure-title mb-0 fs-5" style="color: var(--primary-navy);">Recent Acquisitions</h5>
+            <a href="{% url 'account_orders' %}" class="small fw-semibold" style="color: var(--primary-navy);">View All Orders &rarr;</a>
+          </div>
+
+          {% if orders %}
+          <div class="table-responsive">
+            <table class="table align-middle mb-0" style="font-size: 14px;">
+              <thead class="text-uppercase" style="background-color: var(--off-white); font-size: 11px; letter-spacing: 0.05em; color: var(--primary-navy);">
+                <tr>
+                  <th class="py-2">Order Reference</th>
+                  <th class="py-2">Date</th>
+                  <th class="py-2">Amount</th>
+                  <th class="py-2">Status</th>
+                  <th class="py-2 text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for o in orders %}
+                <tr class="border-top" style="border-color: var(--border-light) !important;">
+                  <td class="fw-bold azure-serif fs-6" style="color: var(--primary-navy);">{{ o.order_number }}</td>
+                  <td class="text-muted">{{ o.created_at|date:"d M Y" }}</td>
+                  <td class="fw-semibold" style="color: var(--primary-navy);">₹{{ o.total|floatformat:0 }}</td>
+                  <td>
+                    <span class="badge py-1 px-2 text-uppercase" style="background-color: var(--primary-navy); color: #FFFFFF; font-size: 11px; letter-spacing: 0.05em;">
+                      {{ o.get_status_display }}
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <a href="{% url 'order_detail' o.order_number %}" class="btn-azure-outline btn-azure-sm py-1 px-2" style="font-size: 11px;">
+                      Track Order &rarr;
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted py-3 mb-0 text-center">You have not placed any orders yet. Explore our <a href="{% url 'shop' %}" class="fw-semibold" style="color: var(--primary-navy);">fine jewellery collection</a>.</p>
+          {% endif %}
+        </div>
+
+        <!-- Default Address Preview -->
+        <div class="p-4 border rounded-1" style="border-color: var(--border-light) !important;">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="azure-title mb-0 fs-5" style="color: var(--primary-navy);">Primary Delivery Address</h5>
+            <a href="{% url 'account_addresses' %}" class="small fw-semibold" style="color: var(--primary-navy);">Manage Addresses &rarr;</a>
+          </div>
+
+          {% if default_address %}
+          <div class="p-3 border rounded-1" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+            <strong class="d-block" style="color: var(--primary-navy);">{{ default_address.full_name }}</strong>
+            <p class="text-muted small mb-1">{{ default_address.address_line1 }}{% if default_address.address_line2 %}, {{ default_address.address_line2 }}{% endif %}</p>
+            <p class="text-muted small mb-1">{{ default_address.city }}, {{ default_address.state }} - {{ default_address.postal_code }}</p>
+            <small class="text-muted"><i class="bi bi-telephone me-1" style="color: var(--primary-navy);"></i> {{ default_address.phone }}</small>
+          </div>
+          {% else %}
+          <p class="text-muted small mb-0">No default address saved yet. <a href="{% url 'account_addresses' %}" class="fw-semibold" style="color: var(--primary-navy);">Add a new delivery address</a>.</p>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

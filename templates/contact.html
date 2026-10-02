@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Concierge &amp; Flagship Boutique | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1100px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">Contact Us</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Contact Atelier Concierge</h1>
+    <p class="text-muted small mb-0">Direct Atelier Consultations, Bridal Appointments &amp; Order Guidance</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1100px;">
+    <div class="row g-5">
+      
+      <!-- LEFT: Contact Form (Django Database Connected) -->
+      <div class="col-12 col-lg-7">
+        <div class="p-4 p-md-5 border rounded-1 bg-white" style="border-color: var(--border-light) !important;">
+          <span class="azure-section-subtitle" style="color: var(--primary-navy); letter-spacing: 0.15em;">AT YOUR SERVICE</span>
+          <h2 class="azure-title fs-3 mb-2" style="color: var(--primary-navy);">Send Us an Inquiry</h2>
+          <p class="text-muted small mb-4">
+            Fill out the form below and our bespoke jewellery specialist will respond within 24 business hours.
+          </p>
+
+          <form action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500; font-size: 13px;">Full Name *</label>
+                <input type="text" name="name" class="form-control" required placeholder="e.g. Radhika Singhania" style="font-size: 14px; padding: 10px 14px;">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500; font-size: 13px;">Email Address *</label>
+                <input type="email" name="email" class="form-control" required placeholder="name@example.com" style="font-size: 14px; padding: 10px 14px;">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500; font-size: 13px;">Phone Number *</label>
+                <input type="tel" name="phone" class="form-control" placeholder="+91 98765 43210" style="font-size: 14px; padding: 10px 14px;">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500; font-size: 13px;">Subject *</label>
+                <select name="subject" class="form-select" required style="font-size: 14px; padding: 10px 14px;">
+                  <option value="Bespoke Bridal Consultation">Bespoke Bridal Consultation</option>
+                  <option value="Order Tracking &amp; Delivery">Order Tracking &amp; Delivery</option>
+                  <option value="Product Sizing &amp; Customization">Product Sizing &amp; Customization</option>
+                  <option value="Private Exhibition Invitation">Private Exhibition Invitation</option>
+                  <option value="General Inquiry" selected>General Inquiry</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" style="color: var(--primary-navy); font-weight: 500; font-size: 13px;">Your Message *</label>
+                <textarea name="message" rows="5" class="form-control" required placeholder="Describe your inquiry, event date, or creation of interest..." style="font-size: 14px; padding: 10px 14px;"></textarea>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-2">
+              <button type="submit" class="btn-azure py-3 px-4 w-100 w-md-auto text-uppercase fw-semibold" style="font-size: 13px; letter-spacing: 1px;">
+                SEND MESSAGE TO ATELIER &rarr;
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: Concierge Details & Flagship Boutique -->
+      <div class="col-12 col-lg-5">
+        <div class="p-4 p-md-5 border rounded-1 h-100" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+          <h3 class="azure-title fs-4 mb-4" style="color: var(--primary-navy);">Flagship Boutique</h3>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="azure-feature-icon flex-shrink-0" style="width: 40px; height: 40px; font-size: 18px;"><i class="bi bi-geo-alt"></i></div>
+            <div>
+              <strong class="d-block mb-1" style="color: var(--primary-navy); font-size: 15px;">Azure Jewels Boutique &amp; Salon</strong>
+              <p class="text-muted small mb-0" style="line-height: 1.6;">
+                Level 3, The Heritage Galleria,<br>
+                Linking Road, Bandra West,<br>
+                Mumbai, Maharashtra 400050, India
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="azure-feature-icon flex-shrink-0" style="width: 40px; height: 40px; font-size: 18px;"><i class="bi bi-telephone"></i></div>
+            <div>
+              <strong class="d-block mb-1" style="color: var(--primary-navy); font-size: 15px;">Concierge Hotline</strong>
+              <p class="text-muted small mb-1">
+                <a href="tel:+919876543210" class="text-muted text-decoration-none">+91 98765 43210</a>
+              </p>
+              <a href="https://wa.me/919876543210" class="fw-semibold text-decoration-none" style="color: var(--primary-navy); font-size: 13px;"><i class="bi bi-whatsapp me-1"></i> WhatsApp Concierge</a>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="azure-feature-icon flex-shrink-0" style="width: 40px; height: 40px; font-size: 18px;"><i class="bi bi-envelope"></i></div>
+            <div>
+              <strong class="d-block mb-1" style="color: var(--primary-navy); font-size: 15px;">Email Desk</strong>
+              <p class="text-muted small mb-0">
+                <a href="mailto:concierge@azurejewels.com" class="text-muted text-decoration-none">concierge@azurejewels.com</a><br>
+                <a href="mailto:bespoke@azurejewels.com" class="text-muted text-decoration-none">bespoke@azurejewels.com</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="azure-feature-icon flex-shrink-0" style="width: 40px; height: 40px; font-size: 18px;"><i class="bi bi-clock"></i></div>
+            <div>
+              <strong class="d-block mb-1" style="color: var(--primary-navy); font-size: 15px;">Salon Hours</strong>
+              <p class="text-muted small mb-0" style="line-height: 1.6;">
+                Monday ? Saturday: 10:30 AM ? 8:00 PM<br>
+                Sunday: 11:00 AM ? 6:00 PM IST
+              </p>
+            </div>
+          </div>
+
+          <div class="border-top pt-4 mt-4" style="border-color: var(--border-light) !important;">
+            <strong class="d-block mb-2" style="color: var(--primary-navy); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Connect With Us</strong>
+            <div class="d-flex gap-3 fs-5">
+              <a href="https://instagram.com/azurejewels" target="_blank" rel="noopener" aria-label="Instagram" style="color: var(--primary-navy);"><i class="bi bi-instagram"></i></a>
+              <a href="https://facebook.com/azurejewels" target="_blank" rel="noopener" aria-label="Facebook" style="color: var(--primary-navy);"><i class="bi bi-facebook"></i></a>
+              <a href="https://pinterest.com/azurejewels" target="_blank" rel="noopener" aria-label="Pinterest" style="color: var(--primary-navy);"><i class="bi bi-pinterest"></i></a>
+              <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp" style="color: var(--primary-navy);"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

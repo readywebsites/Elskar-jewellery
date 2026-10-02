@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Frequently Asked Questions | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-4 border-bottom" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+  <div class="container" style="max-width: 1000px;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1" style="font-size: 12px; letter-spacing: 0.5px;">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-muted text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active fw-semibold" style="color: var(--primary-navy);" aria-current="page">FAQ</li>
+      </ol>
+    </nav>
+    <h1 class="azure-title mb-1" style="font-size: clamp(26px, 3.5vw, 36px); color: var(--primary-navy);">Frequently Asked Questions</h1>
+    <p class="text-muted small mb-0">Atelier Guidance on Orders, Authenticity, Delivery &amp; Aftercare</p>
+  </div>
+</section>
+
+<section class="py-5 bg-white">
+  <div class="container py-lg-3" style="max-width: 1000px;">
+    
+    <!-- Category Filter Tabs -->
+    <div class="d-flex flex-wrap gap-2 mb-5 pb-3 border-bottom" style="border-color: var(--border-light) !important;">
+      <a href="#orders" class="btn btn-sm btn-outline-dark rounded-1 px-3 py-2 fw-semibold text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Orders</a>
+      <a href="#payments" class="btn btn-sm btn-outline-dark rounded-1 px-3 py-2 fw-semibold text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Payments</a>
+      <a href="#shipping" class="btn btn-sm btn-outline-dark rounded-1 px-3 py-2 fw-semibold text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Shipping</a>
+      <a href="#returns" class="btn btn-sm btn-outline-dark rounded-1 px-3 py-2 fw-semibold text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Returns</a>
+      <a href="#products" class="btn btn-sm btn-outline-dark rounded-1 px-3 py-2 fw-semibold text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Products &amp; Care</a>
+    </div>
+
+    <!-- CATEGORY 1: ORDERS -->
+    <div id="orders" class="mb-5">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-bag-check fs-4" style="color: var(--primary-navy);"></i>
+        <h2 class="azure-title fs-4 mb-0" style="color: var(--primary-navy); letter-spacing: 0.5px;">ORDERS</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordionOrders">
+        <!-- Q1 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingO1">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseO1" aria-expanded="false" aria-controls="collapseO1" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              How do I place an order?
+            </button>
+          </h3>
+          <div id="collapseO1" class="accordion-collapse collapse" aria-labelledby="headingO1" data-bs-parent="#faqAccordionOrders">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Placing an order at Azure Jewels is simple and secure. Browse our collections or category galleries, select your desired piece, choose any available size options, and click <strong>"ADD TO CART"</strong> or <strong>"BUY NOW"</strong> for expedited checkout. When ready, navigate to your Shopping Bag, review your items, and follow the checkout prompts to provide your delivery address and preferred secure payment method.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingO2">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseO2" aria-expanded="false" aria-controls="collapseO2" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              Can I cancel an order?
+            </button>
+          </h3>
+          <div id="collapseO2" class="accordion-collapse collapse" aria-labelledby="headingO2" data-bs-parent="#faqAccordionOrders">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Yes. Standard in-stock orders can be cancelled within <strong>4 hours</strong> of placement before the piece enters security dispatch inspection. To request cancellation, contact our concierge immediately via WhatsApp (<a href="https://wa.me/919876543210" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">+91 98765 43210</a>) or email <a href="mailto:concierge@azurejewels.com" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">concierge@azurejewels.com</a> with your order number. Bespoke commissions cannot be cancelled once atelier crafting has commenced.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingO3">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseO3" aria-expanded="false" aria-controls="collapseO3" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              Can I modify my order?
+            </button>
+          </h3>
+          <div id="collapseO3" class="accordion-collapse collapse" aria-labelledby="headingO3" data-bs-parent="#faqAccordionOrders">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              If your order has not yet departed our atelier, our concierge will gladly assist in updating your shipping address, ring sizing preference, or gift note. Please contact our team within 2 to 3 hours of order submission for immediate assistance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 2: PAYMENTS -->
+    <div id="payments" class="mb-5">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-credit-card fs-4" style="color: var(--primary-navy);"></i>
+        <h2 class="azure-title fs-4 mb-0" style="color: var(--primary-navy); letter-spacing: 0.5px;">PAYMENTS</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordionPayments">
+        <!-- Q4 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingP1">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseP1" aria-expanded="false" aria-controls="collapseP1" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              What payment methods are supported?
+            </button>
+          </h3>
+          <div id="collapseP1" class="accordion-collapse collapse" aria-labelledby="headingP1" data-bs-parent="#faqAccordionPayments">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              We support a comprehensive suite of secure payment options:
+              <ul class="ps-3 mb-0 mt-2">
+                <li>Major Credit &amp; Debit Cards (Visa, MasterCard, American Express, RuPay).</li>
+                <li>UPI Payments (Google Pay, PhonePe, Paytm, BHIM, and all banking UPI handles).</li>
+                <li>Net Banking across 50+ major Indian banks.</li>
+                <li>Cash on Delivery (COD) for eligible domestic pin codes up to ₹25,000.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingP2">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseP2" aria-expanded="false" aria-controls="collapseP2" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              Is payment secure?
+            </button>
+          </h3>
+          <div id="collapseP2" class="accordion-collapse collapse" aria-labelledby="headingP2" data-bs-parent="#faqAccordionPayments">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Uncompromisingly secure. All financial transactions are encrypted using 256-bit SSL technology and routed directly through certified PCI-DSS Level 1 compliant gateway partners. Azure Jewels never stores or retains your payment card numbers, CVVs, or bank credentials on our servers.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 3: SHIPPING -->
+    <div id="shipping" class="mb-5">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-truck fs-4" style="color: var(--primary-navy);"></i>
+        <h2 class="azure-title fs-4 mb-0" style="color: var(--primary-navy); letter-spacing: 0.5px;">SHIPPING</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordionShipping">
+        <!-- Q6 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingS1">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseS1" aria-expanded="false" aria-controls="collapseS1" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              How long does delivery take?
+            </button>
+          </h3>
+          <div id="collapseS1" class="accordion-collapse collapse" aria-labelledby="headingS1" data-bs-parent="#faqAccordionShipping">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Metropolitan centers (Mumbai, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata) typically receive deliveries within <strong>2 to 3 business days</strong> via express air courier. Tier-1 and Tier-2 destinations require <strong>3 to 5 business days</strong>. Bespoke and made-to-order creations involve additional artisan crafting time as specified on the product page.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingS2">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseS2" aria-expanded="false" aria-controls="collapseS2" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              How can I track my order?
+            </button>
+          </h3>
+          <div id="collapseS2" class="accordion-collapse collapse" aria-labelledby="headingS2" data-bs-parent="#faqAccordionShipping">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Once dispatched, you will receive an SMS and email notification with your Air Waybill (AWB) number and live tracking link. Authenticated patrons can also view order status in real time anytime by navigating to <a href="{% url 'account_orders' %}" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">My Orders</a> in your account dashboard.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 4: RETURNS -->
+    <div id="returns" class="mb-5">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-arrow-repeat fs-4" style="color: var(--primary-navy);"></i>
+        <h2 class="azure-title fs-4 mb-0" style="color: var(--primary-navy); letter-spacing: 0.5px;">RETURNS</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordionReturns">
+        <!-- Q8 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingR1">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseR1" aria-expanded="false" aria-controls="collapseR1" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              What is the return policy?
+            </button>
+          </h3>
+          <div id="collapseR1" class="accordion-collapse collapse" aria-labelledby="headingR1" data-bs-parent="#faqAccordionReturns">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              We provide a <strong>15-day luxury return guarantee</strong> on standard catalog pieces. Pieces must be unworn, in original velvet casing, with intact security seal tags and authenticity certificates. Custom engraved creations, altered sizes, and bespoke suites are non-returnable. Full details are available in our <a href="{% url 'returns' %}" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">Returns &amp; Refunds Policy</a>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingR2">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseR2" aria-expanded="false" aria-controls="collapseR2" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              How do I request a return?
+            </button>
+          </h3>
+          <div id="collapseR2" class="accordion-collapse collapse" aria-labelledby="headingR2" data-bs-parent="#faqAccordionReturns">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              Simply email <a href="mailto:concierge@azurejewels.com" class="fw-medium text-decoration-underline" style="color: var(--primary-navy);">concierge@azurejewels.com</a> or message our WhatsApp helpline with your order number and request. Our concierge will schedule a complimentary insured reverse pickup from your residence.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY 5: PRODUCTS -->
+    <div id="products" class="mb-5">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-gem fs-4" style="color: var(--primary-navy);"></i>
+        <h2 class="azure-title fs-4 mb-0" style="color: var(--primary-navy); letter-spacing: 0.5px;">PRODUCTS &amp; CARE</h2>
+      </div>
+
+      <div class="accordion" id="faqAccordionProducts">
+        <!-- Q10 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingPr1">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePr1" aria-expanded="false" aria-controls="collapsePr1" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              Are the products authentic?
+            </button>
+          </h3>
+          <div id="collapsePr1" class="accordion-collapse collapse" aria-labelledby="headingPr1" data-bs-parent="#faqAccordionProducts">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              100% certified authentic. Every creation crafted at Azure Jewels is accompanied by an official certificate of authenticity detailing metal purity, hallmarking registration, uncut polki specifications, and gemstone credentials. We stand behind every heirloom for a lifetime.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="accordion-item border rounded-1 mb-3" style="border-color: var(--border-light) !important; overflow: hidden;">
+          <h3 class="accordion-header" id="headingPr2">
+            <button class="accordion-button collapsed fw-semibold text-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePr2" aria-expanded="false" aria-controls="collapsePr2" style="background-color: var(--off-white); color: var(--primary-navy); font-size: 15px;">
+              How do I care for my jewellery?
+            </button>
+          </h3>
+          <div id="collapsePr2" class="accordion-collapse collapse" aria-labelledby="headingPr2" data-bs-parent="#faqAccordionProducts">
+            <div class="accordion-body bg-white text-muted" style="line-height: 1.8; font-size: 14.5px;">
+              To preserve the luster and prevent tarnishing:
+              <ul class="ps-3 mb-0 mt-2">
+                <li>Store each piece separately in its velvet Azure pouch away from humidity.</li>
+                <li>Avoid direct contact with perfumes, hairsprays, sanitizers, and chlorine water.</li>
+                <li>Wipe gently after wear with the complimentary microfiber polishing cloth provided with your order.</li>
+                <li>Avail of complimentary ultrasonic cleaning and repolishing at our flagship atelier anytime.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Still Have Questions Callout -->
+    <div class="p-4 p-md-5 border rounded-1 text-center" style="background-color: var(--off-white); border-color: var(--border-light) !important;">
+      <h3 class="azure-title fs-4 mb-2" style="color: var(--primary-navy);">Still Have Inquiries?</h3>
+      <p class="text-muted small mb-4" style="max-width: 500px; margin: 0 auto;">
+        Our jewellery specialists and bridal stylists are available daily to answer questions or arrange private showroom viewings.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'contact' %}" class="btn-azure py-2 px-4 text-decoration-none">CONTACT CONCIERGE</a>
+        <a href="https://wa.me/919876543210" class="btn btn-outline-dark py-2 px-4 rounded-1 text-decoration-none fw-semibold" style="font-size: 13px;"><i class="bi bi-whatsapp me-2"></i>WHATSAPP US</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Page Not Found (404) | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-white text-center">
+  <div class="container py-lg-5">
+    <div class="p-5 border rounded-1 mx-auto" style="border-color: var(--border-light) !important; background-color: var(--off-white); max-width: 680px;">
+      <div class="azure-serif display-1 fw-bold mb-2" style="color: var(--primary-navy); letter-spacing: 2px;">
+        404
+      </div>
+      <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+        <span style="color: var(--primary-navy);">❖</span>
+        <span class="text-uppercase small fw-bold" style="letter-spacing: 2px; color: var(--primary-navy);">CREATION NOT FOUND</span>
+        <span style="color: var(--primary-navy);">❖</span>
+      </div>
+      <h2 class="azure-title mb-3" style="color: var(--primary-navy);">The Page You Seek Is Beyond Our Vault</h2>
+      <p class="text-muted mx-auto mb-4" style="max-width: 480px; font-size: 15px; line-height: 1.6;">
+        The requested heirloom or URL may have been relocated, updated, or retired from our active salon. Allow our concierge to guide you back to our high jewellery collections.
+      </p>
+      
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="{% url 'home' %}" class="btn-azure py-2 px-4">RETURN TO HOME</a>
+        <a href="{% url 'shop' %}" class="btn-azure-outline py-2 px-4">EXPLORE SHOP &rarr;</a>
+        <a href="{% url 'contact' %}" class="btn btn-link text-decoration-none" style="color: var(--primary-navy);">Contact Concierge</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

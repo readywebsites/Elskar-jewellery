@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Order Confirmed | Azure Jewels{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-white">
+  <div class="container py-lg-4 text-center">
+    
+    <!-- Success Banner -->
+    <div class="mb-4">
+      <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 76px; height: 76px; background-color: var(--primary-navy); color: #FFFFFF;">
+        <i class="bi bi-check2" style="font-size: 44px;"></i>
+      </div>
+      <h1 class="azure-title" style="font-size: clamp(28px, 4vw, 42px); color: var(--primary-navy);">Thank You For Your Order</h1>
+      <p class="text-muted fs-6 mb-1">
+        Your acquisition has been confirmed and placed with our master atelier.
+      </p>
+      <p class="fw-bold mb-0" style="color: var(--primary-navy);">
+        Order Reference: <span class="azure-serif fs-5" style="color: var(--primary-navy);">{{ order.order_number }}</span>
+      </p>
+    </div>
+
+    <!-- Order Receipt Summary Card -->
+    <div class="p-4 p-lg-5 border rounded-1 mx-auto text-start mb-5" style="background-color: var(--off-white); border-color: var(--border-light) !important; max-width: 780px;">
+      <div class="row g-4 mb-4 pb-4 border-bottom" style="border-color: var(--border-light) !important;">
+        <div class="col-12 col-md-6">
+          <small class="text-uppercase text-muted fw-bold d-block mb-1">Customer Details</small>
+          <strong class="d-block" style="color: var(--primary-navy);">{{ order.full_name }}</strong>
+          <span class="text-muted d-block small">{{ order.email }}</span>
+          <span class="text-muted d-block small">{{ order.phone }}</span>
+        </div>
+        <div class="col-12 col-md-6">
+          <small class="text-uppercase text-muted fw-bold d-block mb-1">Shipping Destination</small>
+          <p class="text-muted small mb-0">{{ order.address }}<br>{{ order.city }}, {{ order.state }} - {{ order.postal_code }}</p>
+          <div class="mt-2">
+            <span class="badge py-1 px-2 text-uppercase fw-semibold" style="background-color: var(--primary-navy); color: #FFFFFF; font-size: 11px; letter-spacing: 0.05em;">
+              Status: {{ order.get_status_display }}
+            </span>
+            <span class="badge py-1 px-2 text-uppercase fw-semibold ms-1" style="background-color: var(--secondary-navy); color: #FFFFFF; font-size: 11px;">
+              {{ order.payment_method }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Itemized list -->
+      <h5 class="azure-title fs-6 mb-3 text-uppercase" style="letter-spacing: 0.08em; color: var(--primary-navy);">Acquisition Summary</h5>
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <tbody>
+            {% for item in order_items %}
+            <tr style="border-color: var(--border-light) !important;">
+              <td style="width: 60px;">
+                {% if item.product and item.product.image %}
+                <img src="{{ item.product.image.url }}" alt="{{ item.name }}" width="50" height="50" class="rounded-1 border" style="object-fit: cover; border-color: var(--border-light) !important;">
+                {% else %}
+                <img src="{% static 'assets/images/featured-products/01.webp' %}" alt="{{ item.name }}" width="50" height="50" class="rounded-1 border" style="object-fit: cover; border-color: var(--border-light) !important;">
+                {% endif %}
+              </td>
+              <td>
+                <strong class="d-block" style="font-size: 14px; color: var(--primary-navy);">{{ item.name }}</strong>
+                <small class="text-muted">Quantity: {{ item.quantity }}</small>
+              </td>
+              <td class="text-end fw-semibold azure-serif" style="color: var(--primary-navy);">
+                ₹{{ item.total_price|floatformat:0 }}
+              </td>
+            </tr>
+            {% endfor %}
+            <tr class="border-top" style="border-color: var(--border-light) !important;">
+              <td colspan="2" class="text-muted">Subtotal</td>
+              <td class="text-end fw-semibold" style="color: var(--primary-navy);">₹{{ order.subtotal|floatformat:0 }}</td>
+            </tr>
+            <tr style="border-color: var(--border-light) !important;">
+              <td colspan="2" class="text-muted">Insured Express Delivery</td>
+              <td class="text-end fw-semibold" style="color: var(--primary-navy);">{% if order.shipping_fee == 0 %}FREE{% else %}₹{{ order.shipping_fee|floatformat:0 }}{% endif %}</td>
+            </tr>
+            <tr class="border-top" style="border-color: var(--border-light) !important;">
+              <td colspan="2" class="fw-bold fs-6" style="color: var(--primary-navy);">Grand Total</td>
+              <td class="text-end fw-bold azure-serif fs-5" style="color: var(--primary-navy);">₹{{ order.total|floatformat:0 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="d-flex justify-content-center gap-3">
+      <a href="{% url 'shop' %}" class="btn-azure">CONTINUE EXPLORING &rarr;</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'account_orders' %}" class="btn-azure-outline">VIEW IN MY ORDERS</a>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
