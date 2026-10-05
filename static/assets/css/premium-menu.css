@@ -24,9 +24,14 @@
    1. Scoped Design Tokens & Typography
    -------------------------------------------------------------------------- */
 :root {
+  --primary-dark-navy: #071A2D;
   --deep-navy: #071A2D;
-  --primary-navy: #0B2A45;
-  --secondary-navy: #123B5D;
+  --secondary-navy: #0B2A45;
+  --primary-navy: #071A2D;
+  --royal-blue: #123B5D;
+  --deep-royal-blue: #164A73;
+  --soft-blue: #EAF2F8;
+  --light-blue: #F4F8FC;
 
   --white: #FFFFFF;
   --soft-white: #F6F8FA;
@@ -228,10 +233,10 @@
 
 .azure-utility-link {
   font-family: var(--azure-font-sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 1px;
-  color: #123B5D !important;
+  letter-spacing: 0.6px;
+  color: var(--text-dark) !important;
   text-decoration: none !important;
   white-space: nowrap;
   line-height: 1;
@@ -242,8 +247,8 @@
 }
 
 .azure-utility-link:hover {
-  color: #071A2D !important;
-  opacity: 0.75;
+  color: var(--royal-blue) !important;
+  opacity: 1;
 }
 
 .azure-utility-link:focus-visible {
@@ -390,7 +395,8 @@
 }
 
 .azure-icon-btn:hover {
-  opacity: 0.65;
+  opacity: 1;
+  color: var(--royal-blue) !important;
   transform: translateY(-1px);
 }
 
@@ -399,6 +405,11 @@
   height: 20px;
   display: block;
   stroke: var(--deep-navy);
+  transition: stroke 0.2s ease;
+}
+
+.azure-icon-btn:hover .azure-icon-svg {
+  stroke: var(--royal-blue);
 }
 
 /* Badge Counters (Wishlist & Cart) */
@@ -406,7 +417,7 @@
   position: absolute;
   top: 0px;
   right: -2px;
-  background-color: var(--primary-navy);
+  background-color: var(--royal-blue);
   color: var(--white);
   font-family: var(--azure-font-sans);
   font-size: 9.5px;
@@ -533,12 +544,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: nowrap;
+  width: 100%;
 }
 
 .azure-nav-item {
   position: relative;
+  flex: 0 0 auto;
 }
 
 /* Make mega-menu parent static relative to navbar so mega dropdown spans full navbar */
@@ -549,17 +562,28 @@
 .azure-nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 14px 4px;
+  padding: 14px 6px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.9px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--deep-navy) !important;
+  color: var(--primary-dark-navy) !important;
   text-decoration: none !important;
   position: relative;
   transition: color 0.2s ease;
   white-space: nowrap;
   line-height: 1;
+}
+
+@media (min-width: 992px) and (max-width: 1260px) {
+  .azure-nav-list {
+    gap: 10px;
+  }
+  .azure-nav-link {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    padding: 14px 3px;
+  }
 }
 
 /* Subtle Underline Hover Animation */
@@ -571,42 +595,55 @@
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background-color: var(--primary-navy);
+  background-color: var(--royal-blue);
   transition: width 0.25s ease;
 }
 
 .azure-nav-item:hover .azure-nav-link,
-.azure-nav-item.is-open .azure-nav-link {
-  color: var(--primary-navy) !important;
+.azure-nav-item.is-open .azure-nav-link,
+.azure-nav-link.active {
+  color: var(--royal-blue) !important;
 }
 
 .azure-nav-item:hover .azure-nav-link::after,
-.azure-nav-item.is-open .azure-nav-link::after {
+.azure-nav-item.is-open .azure-nav-link::after,
+.azure-nav-link.active::after {
   width: 100%;
 }
 
 .azure-nav-caret {
-  font-size: 9px;
-  margin-left: 5px;
-  color: var(--primary-navy);
+  font-size: 8.5px;
+  margin-left: 3px;
+  color: var(--royal-blue);
   transition: transform 0.2s ease;
 }
 
 .azure-nav-item:hover .azure-nav-caret,
 .azure-nav-item.is-open .azure-nav-caret {
   transform: rotate(180deg);
+  color: var(--royal-blue);
 }
 
-.azure-nav-pill-new,
-.azure-nav-pill-sale {
-  font-size: 8.5px;
+.azure-nav-pill-new {
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  background-color: var(--primary-navy);
+  background-color: var(--royal-blue);
   color: var(--white);
-  padding: 2px 6px;
+  padding: 2px 5px;
   border-radius: 2px;
-  margin-left: 5px;
+  margin-left: 3px;
+}
+
+.azure-nav-pill-sale {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: var(--secondary-navy);
+  color: var(--white);
+  padding: 2px 5px;
+  border-radius: 2px;
+  margin-left: 3px;
 }
 
 /* --------------------------------------------------------------------------
@@ -699,7 +736,7 @@
 }
 
 .azure-mega-links li a:hover {
-  color: var(--secondary-navy);
+  color: var(--royal-blue);
   transform: translateX(4px);
 }
 
@@ -789,7 +826,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.8px;
-  color: var(--primary-navy);
+  color: var(--royal-blue);
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
@@ -1220,9 +1257,9 @@
     gap: 14px;
   }
   .azure-nav-link {
-    font-size: 11.5px;
+    font-size: 12px;
     letter-spacing: 0.7px;
-    padding: 14px 2px;
+    padding: 14px 4px;
   }
   .azure-mega-container {
     gap: 20px;
@@ -1240,19 +1277,20 @@
     gap: 14px;
   }
   .azure-utility-link {
-    font-size: 10px;
-    letter-spacing: 0.8px;
-  }
-  .azure-nav-list {
-    gap: 11px;
-  }
-  .azure-nav-link {
     font-size: 11px;
     letter-spacing: 0.5px;
   }
+  .azure-nav-list {
+    gap: 10px;
+  }
+  .azure-nav-link {
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+    padding: 14px 2px;
+  }
   .azure-craftsmanship-badge {
-    font-size: 10px;
-    letter-spacing: 1.2px;
+    font-size: 11px;
+    letter-spacing: 1px;
   }
 }
 

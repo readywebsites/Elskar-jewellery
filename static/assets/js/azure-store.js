@@ -182,5 +182,52 @@
         }
       }, 4000);
     });
+
+    // Subtle Restrained Hero Image Parallax (Respects prefers-reduced-motion)
+    const heroSection = document.getElementById('azureHero');
+    const heroImg = heroSection ? heroSection.querySelector('.azure-hero-campaign-img') : null;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (heroSection && heroImg && !prefersReducedMotion) {
+      let isHovered = false;
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let rafId = null;
+
+      function updateParallax() {
+        if (!isHovered && Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05) {
+          heroImg.style.transform = 'scale(1.02) translate(0px, 0px)';
+          cancelAnimationFrame(rafId);
+          rafId = null;
+          return;
+        }
+
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        heroImg.style.transform = `scale(1.035) translate(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px)`;
+        rafId = requestAnimationFrame(updateParallax);
+      }
+
+      heroSection.addEventListener('mousemove', function (e) {
+        if (window.innerWidth < 992) return;
+        const rect = heroSection.getBoundingClientRect();
+        const normX = (e.clientX - rect.left) / rect.width - 0.5;
+        const normY = (e.clientY - rect.top) / rect.height - 0.5;
+        targetX = normX * -12; // Max +/- 6px subtle shift
+        targetY = normY * -8;
+        isHovered = true;
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateParallax);
+        }
+      });
+
+      heroSection.addEventListener('mouseleave', function () {
+        isHovered = false;
+        targetX = 0;
+        targetY = 0;
+      });
+    }
   });
 })();
